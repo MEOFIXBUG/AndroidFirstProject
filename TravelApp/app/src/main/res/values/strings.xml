@@ -8,4 +8,5 @@
     <string name="s_pref_email">sh_preference_email</string>
     <string name="s_pref_date">sh_preference_date</string>
     <string name="s_pref_token">sh_preference_token</string>
+    <string name="title_activity_tour">TourActivity</string>
 </resources>

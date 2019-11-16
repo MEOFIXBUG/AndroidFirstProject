@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
         registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //loginFromActivityListener.register();
+                loginFromActivityListener.register();
             }
         });
         return view;
@@ -100,6 +100,7 @@ public class LoginFragment extends Fragment {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful()){
                         loginFromActivityListener.login();
+                        MainActivity.appPreference.setToken(response.body().getUserId());
                         MainActivity.appPreference.setToken(response.body().getToken());
                         MainActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
 

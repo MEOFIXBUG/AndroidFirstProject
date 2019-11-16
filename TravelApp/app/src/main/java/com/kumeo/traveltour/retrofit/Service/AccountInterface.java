@@ -4,5 +4,5 @@ public interface AccountInterface {
     // for login
     void register();
     void login();
-    void logout();
+    void signIn();
 }

@@ -1,5 +1,6 @@
 package com.kumeo.traveltour.view.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,7 +21,6 @@ import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
 import com.kumeo.traveltour.view.Fragment.LoginFragment;
 import com.kumeo.traveltour.view.Fragment.RegisterFragment;
-import com.kumeo.traveltour.viewmodel.AccountViewModel;
 
 public class MainActivity extends AppCompatActivity implements AccountInterface {
 
@@ -37,28 +37,46 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
         Toolbar toolbar = findViewById(R.id.toolbar);
         accountApi = retrofitRequest.getRetrofitInstance().create(AccountService.class);
         container_layout = findViewById(R.id.fragment_container);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container, new LoginFragment())
-                .commit();
+        //check login status from sharedPreference
+        if (appPreference.getLoginStatus()){
+            //when true
+            Intent intent = new Intent(MainActivity.this, TourActivity.class);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            MainActivity.this.finish();
+        } else {
+            // when get false
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new LoginFragment())
+                    .commit();
+        }
+
         setSupportActionBar(toolbar);
     }
 
     @Override
     public void register() {
-
-    }
-
-    @Override
-    public void login() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new RegisterFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
     @Override
-    public void logout() {
+    public void login() {
+        Intent intent = new Intent(MainActivity.this, TourActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
 
+    @Override
+    public void signIn() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, new LoginFragment())
+                .commit();
     }
 }
