@@ -3,20 +3,14 @@ package com.kumeo.traveltour.view.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
 
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.extras.MyApplication;
-import com.kumeo.traveltour.model.Account;
-import com.kumeo.traveltour.retrofit.Service.Account.AccountService;
+import com.kumeo.traveltour.retrofit.Service.Account.AccountAPI;
 import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
 import com.kumeo.traveltour.view.Fragment.LoginFragment;
@@ -24,33 +18,25 @@ import com.kumeo.traveltour.view.Fragment.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity implements AccountInterface {
 
-    public static MyApplication appPreference;
+    //public static MyApplication appPreference;
    // public static AccountViewModel accountViewModel;
     FrameLayout container_layout;
-    public static AccountService accountApi;
+    public static AccountAPI accountApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //accountViewModel=ViewModelProviders.of(this).get(AccountViewModel.class);
-        appPreference = new MyApplication(this);
+        //appPreference = new MyApplication(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        accountApi = retrofitRequest.getRetrofitInstance().create(AccountService.class);
+        accountApi = retrofitRequest.getRetrofitInstance().create(AccountAPI.class);
         container_layout = findViewById(R.id.fragment_container);
         //check login status from sharedPreference
-        if (appPreference.getLoginStatus()){
-            //when true
-            Intent intent = new Intent(MainActivity.this, TourActivity.class);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            MainActivity.this.finish();
-        } else {
-            // when get false
-            getSupportFragmentManager()
+        // when get false
+        getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_container, new LoginFragment())
                     .commit();
-        }
 
         setSupportActionBar(toolbar);
     }
@@ -76,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
     public void signIn() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, new LoginFragment())
+                .replace(R.id.fragment_container, new LoginFragment())
+                .addToBackStack(null)
                 .commit();
     }
 }

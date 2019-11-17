@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,6 +21,7 @@ import com.kumeo.traveltour.model.Account;
 import com.kumeo.traveltour.response.RegisterResponse;
 import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.view.Activity.MainActivity;
+import com.kumeo.traveltour.view.Activity.SplashActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +32,8 @@ public class RegisterFragment extends Fragment {
 
     private EditText nameInput, emailInput, phoneInput, passwordInput;
     Button regBtn;
-
+    private TextView linkLogin;
+    private AccountInterface registerFromActivityListener;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -40,16 +43,23 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_register, container, false);
-        nameInput = view.findViewById(R.id.nameInput);
-        emailInput = view.findViewById(R.id.emailInput);
-        phoneInput = view.findViewById(R.id.phoneInput);
-        passwordInput = view.findViewById(R.id.passwordInput);
-        regBtn = view.findViewById(R.id.btnRegister);
+        nameInput = view.findViewById(R.id.usrName);
+        emailInput = view.findViewById(R.id.Email);
+        phoneInput = view.findViewById(R.id.PhoneNumber);
+        passwordInput = view.findViewById(R.id.usrPass);
+        regBtn = view.findViewById(R.id.register);
+        linkLogin=view.findViewById(R.id.linkLogin);
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUser();
                 Log.e("reg button", "clicked");
+            }
+        });
+        linkLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerFromActivityListener.signIn();
             }
         });
         return view;
@@ -61,15 +71,15 @@ public class RegisterFragment extends Fragment {
         String password = passwordInput.getText().toString();
 
         if (TextUtils.isEmpty(name)){
-            MainActivity.appPreference.showToast("Your name is required.");
+            SplashActivity.appPreference.showToast("Your name is required.");
         } else if (TextUtils.isEmpty(email)){
-            MainActivity.appPreference.showToast("Your email is required.");
+            SplashActivity.appPreference.showToast("Your email is required.");
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            MainActivity.appPreference.showToast("Invalid email");
+            SplashActivity.appPreference.showToast("Invalid email");
         } else if (TextUtils.isEmpty(password)){
-            MainActivity.appPreference.showToast("Password required");
+            SplashActivity.appPreference.showToast("Password required");
         } else if (password.length() < 6){
-            MainActivity.appPreference.showToast("Create a password at least 6 characters long.");
+            SplashActivity.appPreference.showToast("Create a password at least 6 characters long.");
         }
         else {
             Account user =new Account();
@@ -77,26 +87,33 @@ public class RegisterFragment extends Fragment {
             user.setPassword(password);
             user.setPhone(phone);
             user.setFullName(name);
-            Call<RegisterResponse> userCall = MainActivity.accountApi.register(user);
-            userCall.enqueue(new Callback<RegisterResponse>() {
-                @Override
-                public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                    if (response.isSuccessful()){
-                        MainActivity.appPreference.showToast("Registered Successfully");
 
+            Call<Account> userCall = MainActivity.accountApi.register(user);
+            userCall.enqueue(new Callback<Account>() {
+                @Override
+                public void onResponse(Call<Account> call, Response<Account> response) {
+                    if (response.isSuccessful()){
+                        SplashActivity.appPreference.showToast("Registered Successfully");
+                        registerFromActivityListener.signIn();
 
                     } else {
-                        MainActivity.appPreference.showToast("Oops! something went wrong.");
+                        SplashActivity.appPreference.showToast("Oops! something went wrong.");
+                        //registerFromActivityListener.signIn();
 
                     }
                 }
 
                 @Override
-                public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                public void onFailure(Call<Account> call, Throwable t) {
                 }
             });
         }
 
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = (Activity) context;
+        registerFromActivityListener = (AccountInterface) activity;
+    }
 }

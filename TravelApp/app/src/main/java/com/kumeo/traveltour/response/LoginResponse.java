@@ -7,16 +7,16 @@ import java.util.List;
 
 public class LoginResponse {
     @SerializedName("userId")
-    //@Expose
+    @Expose
     private String userId;
     @SerializedName("token")
-    //@Expose
+    @Expose
     private String token;
     @SerializedName("emailVerified")
-    //@Expose
+    @Expose
     private boolean emailVerified;
     @SerializedName("phoneVerified")
-    //@Expose
+    @Expose
     private boolean phoneVerified;
     public String getUserId() {
         return userId;

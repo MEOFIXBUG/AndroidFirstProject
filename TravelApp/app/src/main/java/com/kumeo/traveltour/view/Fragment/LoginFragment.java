@@ -18,6 +18,7 @@ import com.kumeo.traveltour.model.Account;
 import com.kumeo.traveltour.response.LoginResponse;
 import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.view.Activity.MainActivity;
+import com.kumeo.traveltour.view.Activity.SplashActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
     private AccountInterface loginFromActivityListener;
-    private TextView registerTV;
+    private Button registerBtn;
 
     private EditText emailInput, passwordInput;
     private Button loginBtn;
@@ -42,9 +43,9 @@ public class LoginFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
 
         // for login
-        emailInput = view.findViewById(R.id.emailInput);
-        passwordInput = view.findViewById(R.id.passwordInput);
-        loginBtn = view.findViewById(R.id.btnLogin);
+        emailInput = view.findViewById(R.id.inputUser);
+        passwordInput = view.findViewById(R.id.inputPassword);
+        loginBtn = view.findViewById(R.id.login_signIn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,8 +53,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        registerTV = view.findViewById(R.id.linkRegister);
-        registerTV.setOnClickListener(new View.OnClickListener() {
+        registerBtn = view.findViewById(R.id.signup);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginFromActivityListener.register();
@@ -66,30 +67,10 @@ public class LoginFragment extends Fragment {
         String Password = passwordInput.getText().toString();
 
         if (TextUtils.isEmpty(Email)){
-            MainActivity.appPreference.showToast("Your email is required.");
+            SplashActivity.appPreference.showToast("Your email is required.");
         } else if (TextUtils.isEmpty(Password)){
-            MainActivity.appPreference.showToast("Password required");
+            SplashActivity.appPreference.showToast("Password required");
         } else {
-//            Call<User> userCall = MainActivity.serviceApi.doLogin(Email, Password);
-//            userCall.enqueue(new Callback<User>() {
-//                @Override
-//                public void onResponse(Call<User> call, Response<User> response) {
-//                    if (response.body().getResponse().equals("data")){
-//                        MainActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
-//                        loginFromActivityListener.login(
-//                                response.body().getName(),
-//                                response.body().getEmail(),
-//                                response.body().getCreated_at());
-//                    } else if (response.body().getResponse().equals("login_failed")){
-//                        MainActivity.appPreference.showToast("Error. Login Failed");
-//                        emailInput.setText("");
-//                        passwordInput.setText("");
-//                    }
-//                }
-//                @Override
-//                public void onFailure(Call<User> call, Throwable t) {
-//                }
-//            });
             Account user =new Account();
             user.setEmailPhone(Email);
             user.setPassword(Password);
@@ -99,13 +80,14 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful()){
+                        SplashActivity.appPreference.showToast("Login Successful");
+                        SplashActivity.appPreference.setToken(response.body().getUserId());
+                        SplashActivity.appPreference.setToken(response.body().getToken());
+                        SplashActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
                         loginFromActivityListener.login();
-                        MainActivity.appPreference.setToken(response.body().getUserId());
-                        MainActivity.appPreference.setToken(response.body().getToken());
-                        MainActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
 
                     } else {
-                        MainActivity.appPreference.showToast("Error. Login Failed");
+                        SplashActivity.appPreference.showToast("Login Failed");
                         emailInput.setText("");
                         passwordInput.setText("");
                     }

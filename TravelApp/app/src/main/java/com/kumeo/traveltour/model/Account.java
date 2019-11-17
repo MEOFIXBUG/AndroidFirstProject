@@ -8,7 +8,7 @@ public class Account {
     @SerializedName("password")
     private String password;
     @SerializedName("fullName")
-    private String full_name;
+    private String fullName;
     @SerializedName("email")
     private String email;
     @SerializedName("phone")
@@ -29,7 +29,7 @@ public class Account {
     }
 
     public String getFullName() {
-        return full_name;
+        return fullName;
     }
 
     public String getEmail() {
@@ -65,7 +65,7 @@ public class Account {
     }
 
     public void setFullName( String FullName ) {
-        this.full_name=FullName;
+        this.fullName=FullName;
     }
 
     public String getEmailPhone() {

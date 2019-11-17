@@ -5,70 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_signup"
+    tools:context=".view.Activity.MainActivity"
     android:background="@drawable/img">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
-        <Button
-            android:layout_marginLeft = "60dp"
-            android:layout_marginRight = "60dp"
-            android:id="@+id/signin"
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:textSize="25dp"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:background ="@drawable/circle"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="45dp"
-            />
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "Dont have account, sign up?"
-            android:textSize="16dp"
-            android:textColor="#c4c5c9"
-            android:gravity="center"
-            android:layout_above="@id/signin"
-            android:paddingBottom="16dp"
-            />
+            android:layout_height="699dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="32dp">
 
-        <LinearLayout
-            android:id="@+id/circle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
-            android:background="@drawable/circleangle"
-            android:orientation="horizontal"
-
-            android:padding="16dp">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:padding="3dp"
-                    android:src="@drawable/icon" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="147dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:text="Sign Up"
-                android:textColor="#fff"
-                android:textSize="32dp" />
-        </LinearLayout>
+        </FrameLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
