@@ -14,7 +14,7 @@
         <activity
             android:name=".view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.Activity.MainActivity"
             android:label="@string/title_activity_main"
