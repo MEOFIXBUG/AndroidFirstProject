@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        registerBtn = view.findViewById(R.id.signup);
+        registerBtn = view.findViewById(R.id.sigup_reg);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

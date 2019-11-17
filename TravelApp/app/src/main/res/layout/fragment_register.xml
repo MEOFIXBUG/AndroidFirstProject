@@ -130,6 +130,7 @@
                 android:text="Already have an account? Login"
                 android:gravity="center"
                 android:layout_marginTop="30dp"
+                android:textColor="#c4c5c9"
                 android:textSize="16dp"/>
 
 

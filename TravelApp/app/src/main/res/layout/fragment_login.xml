@@ -128,7 +128,7 @@
                 android:textColor="#c4c5c9"
                 android:textSize="16dp" />
             <Button
-                android:id="@+id/sigup"
+                android:id="@+id/sigup_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle"
