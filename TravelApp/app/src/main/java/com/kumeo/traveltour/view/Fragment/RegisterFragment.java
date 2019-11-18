@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.model.Account;
 import com.kumeo.traveltour.response.RegisterResponse;
+import com.kumeo.traveltour.retrofit.Service.Account.AccountAPI;
 import com.kumeo.traveltour.retrofit.Service.AccountInterface;
+import com.kumeo.traveltour.retrofit.retrofitRequest;
 import com.kumeo.traveltour.view.Activity.MainActivity;
 import com.kumeo.traveltour.view.Activity.SplashActivity;
 
@@ -88,7 +90,8 @@ public class RegisterFragment extends Fragment {
             user.setPhone(phone);
             user.setFullName(name);
 
-            Call<Account> userCall = MainActivity.accountApi.register(user);
+            //AccountAPI accountApi = retrofitRequest.getRetrofitInstance().create(AccountAPI.class);
+            Call<Account> userCall =  MainActivity.accountApi.register(user);
             userCall.enqueue(new Callback<Account>() {
                 @Override
                 public void onResponse(Call<Account> call, Response<Account> response) {

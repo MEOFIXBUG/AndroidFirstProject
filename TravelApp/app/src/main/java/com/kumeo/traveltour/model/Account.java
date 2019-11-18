@@ -16,11 +16,11 @@ public class Account {
     @SerializedName("emailPhone")
     private String emailPhone;
     @SerializedName("gender")
-    private boolean gender; //0: Female, 1: Male
+    private int gender=0;//0: Female, 1: Male
     @SerializedName("dob")
     private String dob; //yyyy-mm-dd
 
-    public boolean getGender() {
+    public int getGender() {
         return gender;
     }
 
@@ -44,7 +44,7 @@ public class Account {
         return phone;
     }
 
-    public void setGender( boolean Gender ) {
+    public void setGender( int Gender ) {
         this.gender=Gender;
     }
 

@@ -10,18 +10,16 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface AccountAPI {
-    @Headers({
+   /* @Headers({
             "Accept: application/json",
             "Content-Type: application/json"
-    })
+    })*/
     @POST("user/login")
     Call<LoginResponse> login(@Body Account request);
-    @Headers({
+    /*@Headers({
             "Accept: application/json",
             "Content-Type: application/json"
-    })
-
-
-    @POST("user/register/")
+    })*/
+    @POST("user/register")
     Call<Account> register(@Body Account request);
 }
