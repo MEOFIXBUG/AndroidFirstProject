@@ -17,7 +17,7 @@ public class retrofitRequest {
         if (retrofit == null) {
             //OkHttpClient httpClient = new OkHttpClient.Builder().build();
             OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-            httpClientBuilder.addInterceptor(new Interceptor() {
+            /*httpClientBuilder.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request.Builder requestBuilder = chain.request().newBuilder();
@@ -25,7 +25,7 @@ public class retrofitRequest {
                     requestBuilder.header("Accept", "application/json");
                     return chain.proceed(requestBuilder.build());
                 }
-            });
+            });*/
             OkHttpClient httpClient = httpClientBuilder.build();
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)

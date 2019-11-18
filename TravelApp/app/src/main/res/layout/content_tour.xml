@@ -7,7 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.Activity.TourActivity"
     tools:showIn="@layout/activity_tour">
-    <include layout="@layout/item_list_tour" />
 
     <ListView
         android:id="@+id/tour_list"

@@ -107,17 +107,21 @@
                     android:id="@+id/ggSignin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft = "75dp"
+                    android:layout_marginLeft = "70dp"
                     android:layout_marginRight = "20dp"
-                    android:background ="@drawable/search"></ImageButton>
+                    android:background ="@drawable/search">
+
+                </ImageButton>
                 <ImageButton
                     android:gravity="center"
                     android:layout_marginLeft = "20dp"
-                    android:layout_marginRight = "75dp"
+                    android:layout_marginRight = "70dp"
                     android:id="@+id/fbSignin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background ="@drawable/facebook"></ImageButton>
+                    android:background ="@drawable/facebook">
+
+                </ImageButton>
             </LinearLayout>
             <TextView
                 android:id="@+id/tv1"
