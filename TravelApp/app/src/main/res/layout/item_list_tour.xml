@@ -12,6 +12,7 @@
     android:descendantFocusability="blocksDescendants">
 
     <ImageView
+        android:id="@+id/ImgPlace"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,6 +43,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
+                android:id="@+id/locationDescription"
                 android:text="Ho chi minh- Ha noi"/>
         </RelativeLayout>
 
@@ -63,6 +65,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
+                android:id="@+id/dateDescription"
                 android:text= "17/11/2019-20/11/2019"/>
         </RelativeLayout>
         <RelativeLayout
@@ -82,6 +85,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
+                android:id="@+id/peopleDescription"
                 android:text="2 adults"/>
         </RelativeLayout>
         <RelativeLayout
@@ -101,6 +105,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
+                android:id="@+id/moneyDescription"
                 android:text="1000000 - 2000000 VND"/>
         </RelativeLayout>
     </LinearLayout>

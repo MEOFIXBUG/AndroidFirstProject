@@ -33,7 +33,7 @@ public class TourActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
-        //getTour();
+        getTour();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +49,8 @@ public class TourActivity extends AppCompatActivity {
 
     private void getTour() {
        String auth= SplashActivity.appPreference.getToken();
-        LiveData<TourResponse> a= tourViewModel.getTourResponseLiveData(auth,1,1);
-        Log.d(TAG, "articles title pos 0:: " + a.getValue().getTotal());
+        Log.d(TAG, "articles title pos 0:: " + auth);
+        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData(auth,1,1);
     }
 
 }
