@@ -1,11 +1,16 @@
 package com.kumeo.traveltour.view.Activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Base64;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.kumeo.traveltour.R;
@@ -15,6 +20,9 @@ import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
 import com.kumeo.traveltour.view.Fragment.LoginFragment;
 import com.kumeo.traveltour.view.Fragment.RegisterFragment;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity implements AccountInterface {
 
@@ -39,6 +47,23 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
                     .commit();
 
         setSupportActionBar(toolbar);
+
+        try {
+            PackageManager z= getPackageManager();
+            PackageInfo info = z.getPackageInfo(
+                    "com.kumeo.traveltour",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
     }
 
     @Override
@@ -57,7 +82,13 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
         startActivity(intent);
         MainActivity.this.finish();
     }
-
+    //@Override
+    public void loginByFacebook() {
+        Intent intent = new Intent(MainActivity.this, TourActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
     @Override
     public void signIn() {
         getSupportFragmentManager()
@@ -66,4 +97,5 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
                 .addToBackStack(null)
                 .commit();
     }
+
 }

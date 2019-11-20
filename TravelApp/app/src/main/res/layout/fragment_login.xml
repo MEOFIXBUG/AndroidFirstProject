@@ -123,6 +123,15 @@
 
                 </ImageButton>
             </LinearLayout>
+            <com.facebook.login.widget.LoginButton
+                android:layout_marginTop="15dp"
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="105dp"
+                tools:layout_editor_absoluteY="159dp" />
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="match_parent"

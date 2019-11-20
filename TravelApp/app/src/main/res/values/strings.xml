@@ -9,4 +9,7 @@
     <string name="s_pref_date">sh_preference_date</string>
     <string name="s_pref_token">sh_preference_token</string>
     <string name="title_activity_tour">TourActivity</string>
+
+    <string name="facebook_app_id">423053111709310</string>
+    <string name="fb_login_protocol_scheme">fb423053111709310</string>
 </resources>
