@@ -1,5 +1,7 @@
 package com.kumeo.traveltour.retrofit;
 
+import com.kumeo.traveltour.view.Activity.SplashActivity;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -17,15 +19,16 @@ public class retrofitRequest {
         if (retrofit == null) {
             //OkHttpClient httpClient = new OkHttpClient.Builder().build();
             OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-            /*httpClientBuilder.addInterceptor(new Interceptor() {
+            httpClientBuilder.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request.Builder requestBuilder = chain.request().newBuilder();
                     requestBuilder.header("Content-Type", "application/json");
                     requestBuilder.header("Accept", "application/json");
+                    requestBuilder.header("Authorization", SplashActivity.appPreference.getToken());
                     return chain.proceed(requestBuilder.build());
                 }
-            });*/
+            });
             OkHttpClient httpClient = httpClientBuilder.build();
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)

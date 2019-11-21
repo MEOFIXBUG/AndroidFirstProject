@@ -16,8 +16,8 @@ public class TourViewModel extends AndroidViewModel {
         super(application);
         tourRepository = new TourRepository();
     }
-    public LiveData<TourResponse> getTourResponseLiveData(String Auth, long perPage, long page) {
-        this.tourResponseLiveData=tourRepository.getTours(Auth,perPage,page);
+    public LiveData<TourResponse> getTourResponseLiveData( long perPage, long page) {
+        this.tourResponseLiveData=tourRepository.getTours(perPage,page);
         return tourResponseLiveData;
     }
 }

@@ -78,11 +78,11 @@ public class TourAdapter extends BaseAdapter {
         }
         //set the results into textviews
         final int i=getCount()-1-postition;
-        holder.mPriceTv.setText("eo co tien di");
+        holder.mPriceTv.setText(modellist.get(i).getMinCost()+ " - "+ modellist.get(i).getMaxCost());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
-        holder.mPeopleTv.setText("1 dult");
-        holder.mLocationTv.setText("Pho di bo");
-        holder.mTimeTv.setText("...........");
+        holder.mPeopleTv.setText(modellist.get(i).getAdults()+"  adults"+ "           "+modellist.get(i).getChilds() + " childs");
+        holder.mLocationTv.setText(modellist.get(i).getName());
+        holder.mTimeTv.setText(modellist.get(i).getStartDate()+ " - "+ modellist.get(i).getEndDate());
         //set the result in imageview
         Glide.with(mContext)
                 .load(modellist.get(i).getAvatar())

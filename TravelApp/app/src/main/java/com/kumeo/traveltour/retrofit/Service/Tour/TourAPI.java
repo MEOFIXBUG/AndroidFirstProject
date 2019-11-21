@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface TourAPI {
     @GET("tour/list")
-    Call<TourResponse> getListTour(@Header("Authorization") String auth,@Query("rowPerPage") long perpage ,
+    Call<TourResponse> getListTour(@Query("rowPerPage") long perpage ,
                                    @Query("pageNum") long page
     );
 }

@@ -21,9 +21,9 @@ public class TourRepository {
         apiRequest = retrofitRequest.getRetrofitInstance().create(TourAPI.class);
     }
 
-    public LiveData<TourResponse> getTours(String auth, long perpage,long page) {
+    public LiveData<TourResponse> getTours(long perpage,long page) {
         final MutableLiveData<TourResponse> data = new MutableLiveData<>();
-        apiRequest.getListTour(auth,perpage, page)
+        apiRequest.getListTour(perpage, page)
                 .enqueue(new Callback<TourResponse>() {
 
                     @Override
