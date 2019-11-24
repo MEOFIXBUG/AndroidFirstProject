@@ -61,7 +61,7 @@ public class TourActivity extends AppCompatActivity {
     }
 
     private void getTour() {
-        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData(5,1);
+        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData(3,1);
         TourList.observe(this,tourResponse->{
             if (tourResponse != null) {
                 progress_circular_tour.setVisibility(View.GONE);
