@@ -16,8 +16,15 @@ public class TourViewModel extends AndroidViewModel {
         super(application);
         tourRepository = new TourRepository();
     }
-    public LiveData<TourResponse> getTourResponseLiveData( long perPage, long page) {
-        this.tourResponseLiveData=tourRepository.getTours(perPage,page);
+    public void init(long perpage, long page) {
+        if (this.tourResponseLiveData != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        tourResponseLiveData = tourRepository.getTours(perpage,page);
+    }
+    public LiveData<TourResponse> getTourResponseLiveData() {
         return tourResponseLiveData;
     }
 }

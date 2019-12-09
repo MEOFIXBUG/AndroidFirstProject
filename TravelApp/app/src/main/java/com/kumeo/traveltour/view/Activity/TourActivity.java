@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
@@ -31,8 +32,7 @@ public class TourActivity extends AppCompatActivity {
     private static final String TAG = TourActivity.class.getSimpleName();
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
     TourViewModel tourViewModel;
-    ListView listView;
-    RadioGroup whichRadio;
+    private RecyclerView my_recycler_view;
     TourAdapter adapter;
     private ProgressBar progress_circular_tour;
     private LinearLayoutManager layoutManager;
@@ -42,32 +42,40 @@ public class TourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tour);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        progress_circular_tour = (ProgressBar) findViewById(R.id.progress_circular_tour);
-        listView=(ListView)findViewById(R.id.tour_list);
-        adapter= new TourAdapter(this,tourArrayList);
-        listView.setAdapter(adapter);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-            }
+        initialization();
 
-        });
-        tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         getTour();
     }
 
+    private void initialization() {
+        progress_circular_tour = (ProgressBar) findViewById(R.id.progress_circular_tour);
+        my_recycler_view = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(TourActivity.this);
+        my_recycler_view.setLayoutManager(layoutManager);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        my_recycler_view.setHasFixedSize(true);
+
+        // adapter
+        adapter = new TourAdapter(TourActivity.this, tourArrayList);
+        my_recycler_view.setAdapter(adapter);
+
+        // View Model
+        tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
+    }
     private void getTour() {
-        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData(3,1);
+        tourViewModel.init(4,1);
+        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData();
         TourList.observe(this,tourResponse->{
             if (tourResponse != null) {
                 progress_circular_tour.setVisibility(View.GONE);
                 List<Tour> tours = tourResponse.getTours();
                 Log.d(TAG, "data:: " + tours.get(0).getName());
-               tourArrayList.addAll(tours);
+                tourArrayList.addAll(tours);
                 adapter.notifyDataSetChanged();
             }
         });

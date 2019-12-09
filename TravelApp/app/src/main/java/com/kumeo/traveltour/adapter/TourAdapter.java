@@ -10,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.model.Tour;
@@ -18,102 +21,58 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TourAdapter extends BaseAdapter {
+public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
 
-    //variables
-    Context mContext;
-    LayoutInflater inflater;
-    List<Tour> modellist;
-    ArrayList<Tour> arrayList;
+    private Context context;
+    ArrayList<Tour> tourArrayList;
 
-    //constructor
-    public TourAdapter(Context context, List<Tour> modellist) {
-        mContext = context;
-        this.modellist = modellist;
-        inflater = LayoutInflater.from(mContext);
-        this.arrayList = new ArrayList<Tour>();
-        this.arrayList.addAll(modellist);
+    public TourAdapter(Context context, ArrayList<Tour> articleArrayList) {
+        this.context = context;
+        this.tourArrayList = articleArrayList;
     }
 
-    public class ViewHolder{
-        TextView mPriceTv, mPeopleTv,mLocationTv,mTimeTv,mHiddenID;
-        ImageView mPlaceIv;
-    }
-
-
+    @NonNull
     @Override
-    public int getCount() {
-        return modellist.size();
+    public TourAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_tour,viewGroup,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int i) {
-        return modellist.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(final int postition, View view, ViewGroup parent) {
-        ViewHolder holder;
-        if (view==null){
-            holder = new ViewHolder();
-            view = inflater.inflate(R.layout.item_list_tour, null);
-
-            //locate the views in content_main.xml
-            holder.mLocationTv = view.findViewById(R.id.locationDescription);
-            holder.mTimeTv = view.findViewById(R.id.dateDescription);
-            holder.mPeopleTv = view.findViewById(R.id.peopleDescription);
-            holder.mPriceTv=view.findViewById(R.id.moneyDescription);
-//            holder.mHiddenID = view.findViewById(R.id.hiddenID);
-            holder.mPlaceIv=view.findViewById(R.id.ImgPlace);
-            view.setTag(holder);
-
-        }
-        else {
-            holder = (ViewHolder)view.getTag();
-        }
-        //set the results into textviews
-        final int i=getCount()-1-postition;
-        holder.mPriceTv.setText(modellist.get(i).getMinCost()+ " - "+ modellist.get(i).getMaxCost());
+    public void onBindViewHolder(@NonNull TourAdapter.ViewHolder viewHolder, int i) {
+        Tour tour=tourArrayList.get(i);
+        viewHolder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
-        holder.mPeopleTv.setText(modellist.get(i).getAdults()+"  adults"+ "           "+modellist.get(i).getChilds() + " childs");
-        holder.mLocationTv.setText(modellist.get(i).getName());
-        holder.mTimeTv.setText(modellist.get(i).getStartDate()+ " - "+ modellist.get(i).getEndDate());
-        //set the result in imageview
-        Glide.with(mContext)
-                .load(modellist.get(i).getAvatar())
-                .into(holder.mPlaceIv);
-        //listview item clicks
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //code later
-
-
-            }
-        });
-
-        return view;
+        viewHolder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
+        viewHolder.mLocationTv.setText(tour.getName());
+        viewHolder.mTimeTv.setText(tour.getStartDate()+ " - "+ tour.getEndDate());
+        Glide.with(context)
+                .load(tour.getAvatar())
+                .into(viewHolder.mPlaceIv);
     }
-    //filter
-    public void filter(String charText){
-        charText = charText.toLowerCase(Locale.getDefault());
-        modellist.clear();
-        if (charText.length()==0){
-            modellist.addAll(arrayList);
+
+    @Override
+    public int getItemCount() {
+        return tourArrayList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView mPlaceIv;;
+        private final TextView mPriceTv;
+        private final TextView mPeopleTv;
+        private final TextView mLocationTv;
+        private final TextView mTimeTv;
+        //private final TextView mHiddenID;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mLocationTv =(TextView) itemView.findViewById(R.id.locationDescription);
+            mTimeTv = (TextView)itemView.findViewById(R.id.dateDescription);
+            mPeopleTv = (TextView)itemView.findViewById(R.id.peopleDescription);
+            mPriceTv=(TextView)itemView.findViewById(R.id.moneyDescription);
+//            mHiddenID = itemView.findViewById(R.id.hiddenID);
+            mPlaceIv=(ImageView) itemView.findViewById(R.id.ImgPlace);
         }
-        else {
-            for (Tour model : arrayList){
-                if (model.getName().toLowerCase(Locale.getDefault())
-                        .contains(charText)){
-                    modellist.add(model);
-                }
-            }
-        }
-        notifyDataSetChanged();
     }
 }
