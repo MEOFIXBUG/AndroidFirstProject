@@ -46,9 +46,9 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
         viewHolder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
         viewHolder.mLocationTv.setText(tour.getName());
         viewHolder.mTimeTv.setText(tour.getStartDate()+ " - "+ tour.getEndDate());
-        Glide.with(context)
-                .load(tour.getAvatar())
-                .into(viewHolder.mPlaceIv);
+//        Glide.with(context)
+//                .load(tour.getAvatar())
+//                .into(viewHolder.mPlaceIv);
     }
 
     @Override

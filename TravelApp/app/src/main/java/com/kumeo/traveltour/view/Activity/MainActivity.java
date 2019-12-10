@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
 
     @Override
     public void login() {
-        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+        Intent intent = new Intent(MainActivity.this, TourActivity.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         MainActivity.this.finish();

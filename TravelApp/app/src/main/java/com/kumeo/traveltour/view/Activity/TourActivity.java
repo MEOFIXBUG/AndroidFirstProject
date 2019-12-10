@@ -33,7 +33,7 @@ public class TourActivity extends AppCompatActivity {
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
     TourViewModel tourViewModel;
     private RecyclerView my_recycler_view;
-    TourAdapter adapter;
+    private TourAdapter adapter;
     private ProgressBar progress_circular_tour;
     private LinearLayoutManager layoutManager;
     @Override
@@ -66,9 +66,10 @@ public class TourActivity extends AppCompatActivity {
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
+        tourViewModel.init(4,1);
+
     }
     private void getTour() {
-        tourViewModel.init(4,1);
         LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData();
         TourList.observe(this,tourResponse->{
             if (tourResponse != null) {
