@@ -82,10 +82,7 @@ public class LoginFragment extends Fragment {
                 loginFromActivityListener.register();
             }
         });
-
-
-
-        return view;
+    return view;
     }
     private void loginUser() {
         String Email = emailInput.getText().toString();
@@ -110,7 +107,6 @@ public class LoginFragment extends Fragment {
                         SplashActivity.appPreference.setToken(response.body().getToken());
                         SplashActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
                         loginFromActivityListener.login();
-
                     } else {
                         SplashActivity.appPreference.showToast("Login Failed");
                         emailInput.setText("");
@@ -185,8 +181,6 @@ public class LoginFragment extends Fragment {
                 SplashActivity.appPreference.showToast("ERROR");
 
             }
-
-
         });
     }
 

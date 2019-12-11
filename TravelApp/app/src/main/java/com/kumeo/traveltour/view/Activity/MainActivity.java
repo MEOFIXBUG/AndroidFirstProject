@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                //Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
 
@@ -82,13 +82,7 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
         startActivity(intent);
         MainActivity.this.finish();
     }
-    //@Override
-    public void loginByFacebook() {
-        Intent intent = new Intent(MainActivity.this, TourActivity.class);
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        MainActivity.this.finish();
-    }
+
     @Override
     public void signIn() {
         getSupportFragmentManager()
