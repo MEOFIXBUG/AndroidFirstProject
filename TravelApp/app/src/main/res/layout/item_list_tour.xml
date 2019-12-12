@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/tour_min"/>
+        android:src="@drawable/place"/>
 <!--        android:background="@drawable/tour_min"-->
 
 

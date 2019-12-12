@@ -66,7 +66,7 @@ public class TourActivity extends AppCompatActivity {
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
-        tourViewModel.init(4,1);
+        tourViewModel.init(49,1);
 
     }
     private void getTour() {

@@ -12,4 +12,21 @@
 
     <string name="facebook_app_id">423053111709310</string>
     <string name="fb_login_protocol_scheme">fb423053111709310</string>
+    <string name="navigation_drawer_travel">Travel</string>
+    <string name="navigation_drawer_about_us">About Us</string>
+    <string name="navigation_drawer_signout">Sign Out</string>
+    <string name="navigation_drawer_my_friends">My Friends</string>
+    <string name="navigation_drawer_settings">Settings</string>
+    <string name="my_trip">My Trips</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 </resources>
