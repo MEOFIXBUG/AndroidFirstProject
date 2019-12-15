@@ -53,12 +53,13 @@ public class TourActivity extends AppCompatActivity {
         my_recycler_view = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // use a linear layout manager
+        //layoutManager set chieu hien thi list VERTICAL/HORIZONTAL, va xac dinh context cho recycle view do
         layoutManager = new LinearLayoutManager(TourActivity.this);
         my_recycler_view.setLayoutManager(layoutManager);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        my_recycler_view.setHasFixedSize(true);
+        my_recycler_view.setHasFixedSize(true);//toi uu hien thi
 
         // adapter
         adapter = new TourAdapter(TourActivity.this, tourArrayList);
@@ -77,6 +78,7 @@ public class TourActivity extends AppCompatActivity {
                 List<Tour> tours = tourResponse.getTours();
                 Log.d(TAG, "data:: " + tours.get(0).getName());
                 tourArrayList.addAll(tours);
+
                 adapter.notifyDataSetChanged();
             }
         });

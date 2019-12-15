@@ -26,6 +26,7 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
     private Context context;
     ArrayList<Tour> tourArrayList;
 
+    //constructor
     public TourAdapter(Context context, ArrayList<Tour> articleArrayList) {
         this.context = context;
         this.tourArrayList = articleArrayList;
@@ -33,12 +34,14 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
 
     @NonNull
     @Override
+    // set item view trong list
     public TourAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_tour,viewGroup,false);
         return new ViewHolder(view);
     }
 
     @Override
+    //set gia tri cho tung itemview trog list voi gia tri thu i trong list tour tuong ung
     public void onBindViewHolder(@NonNull TourAdapter.ViewHolder viewHolder, int i) {
         Tour tour=tourArrayList.get(i);
         viewHolder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost());
@@ -56,6 +59,7 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
         return tourArrayList.size();
     }
 
+    // class ViewHOlder la item_list_tour
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mPlaceIv;;
         private final TextView mPriceTv;

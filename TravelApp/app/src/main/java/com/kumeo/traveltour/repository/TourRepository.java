@@ -28,7 +28,7 @@ public class TourRepository {
 
                     @Override
                     public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
-                        Log.d(TAG, "onResponse response:: " + response);
+
 
                         if (response.body() != null) {
                             data.setValue(response.body());
