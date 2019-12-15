@@ -3,6 +3,7 @@
     <color name="colorPrimary">#58a5f0</color>
     <color name="colorPrimaryDark">#004c8c</color>
     <color name="colorAccent">#0277bd</color>
+    <color name="bgBottomNavigation">#48FE4B</color>
     <!--
     <color name="darkBlue">#1976D2</color>
     <color name="blue">#005fb3</color>
