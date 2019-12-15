@@ -3,6 +3,7 @@ package com.kumeo.traveltour.viewmodel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -16,15 +17,28 @@ public class TourViewModel extends AndroidViewModel {
         super(application);
         tourRepository = new TourRepository();
     }
-    public void init(long perpage, long page) {
+    public void init(long perpage, long page, int flag ) {
         if (this.tourResponseLiveData != null) {
             // ViewModel is created per Fragment so
             // we know the userId won't change
             return;
         }
-        tourResponseLiveData = tourRepository.getTours(perpage,page);
+        if( flag ==1 ) {
+            tourResponseLiveData = tourRepository.getTours(perpage,page);
+        }
+        else {
+            if(flag==2){
+                try {
+                    tourResponseLiveData = tourRepository.getMyTrips(perpage,page);
+                }
+                catch (Exception ex){
+                    tourResponseLiveData= null;
+                }
+            }
+        }
     }
     public LiveData<TourResponse> getTourResponseLiveData() {
         return tourResponseLiveData;
     }
+
 }

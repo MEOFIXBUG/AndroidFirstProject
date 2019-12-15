@@ -26,26 +26,33 @@ import com.kumeo.traveltour.viewmodel.TourViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TravelFragment.OnFragmentInteractionListener} interface
+ * {@link MyTripFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TravelFragment#newInstance} factory method to
+ * Use the {@link MyTripFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TravelFragment extends Fragment {
+public class MyTripFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
     private TourAdapter adapter;
     private RecyclerView my_recycler_view;
     private ProgressBar progress_circular_tour;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
-    private static final String TAG = TravelFragment.class.getSimpleName();
+    private static final String TAG = MyTripFragment.class.getSimpleName();
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
     private OnFragmentInteractionListener mListener;
 
-    public TravelFragment() {
+    public MyTripFragment() {
         // Required empty public constructor
     }
 
@@ -55,12 +62,14 @@ public class TravelFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TravelFragment.
+     * @return A new instance of fragment MyTripFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TravelFragment newInstance(String param1, String param2) {
-        TravelFragment fragment = new TravelFragment();
+    public static MyTripFragment newInstance(String param1, String param2) {
+        MyTripFragment fragment = new MyTripFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +77,10 @@ public class TravelFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
@@ -77,12 +89,9 @@ public class TravelFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_travel, container, false);
         initialization(view);
-        getTour();
+        getMyTrips();
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-
     private void initialization(View view) {
         progress_circular_tour = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
@@ -101,21 +110,34 @@ public class TravelFragment extends Fragment {
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
-        tourViewModel.init(49,1,1);
+        tourViewModel.init(49,1,2);
 
     }
-    private void getTour() {
+    private void getMyTrips() {
         LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData();
-        TourList.observe(this,tourResponse->{
-            if (tourResponse != null) {
+        if(TourList!= null)
+        {
+            TourList.observe(this,tourResponse->{
                 progress_circular_tour.setVisibility(View.GONE);
-                List<Tour> tours = tourResponse.getTours();
-                Log.d(TAG, "data:: " + tours.get(0).getName());
-                tourArrayList.addAll(tours);
-                adapter.notifyDataSetChanged();
-            }
-        });
+                if (tourResponse != null) {
+
+                    List<Tour> tours = tourResponse.getTours();
+                    Log.d(TAG, "data:: " + tours.get(0).getName());
+                    tourArrayList.addAll(tours);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
+
     }
+
+    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

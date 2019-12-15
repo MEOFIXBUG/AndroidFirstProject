@@ -13,4 +13,9 @@ public interface TourAPI {
     Call<TourResponse> getListTour(@Query("rowPerPage") long perpage ,
                                    @Query("pageNum") long page
     );
+    @GET("tour/history-user")
+    Call<TourResponse> getMyTrips(@Query("pageIndex") long page,
+                                  @Query("pageSize") String perpage
+    );
+
 }

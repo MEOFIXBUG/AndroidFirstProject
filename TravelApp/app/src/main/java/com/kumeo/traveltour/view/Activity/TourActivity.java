@@ -16,10 +16,11 @@ import android.view.MenuItem;
 
 import com.kumeo.traveltour.R;
 
+import com.kumeo.traveltour.view.Fragment.MyTripFragment;
 import com.kumeo.traveltour.view.Fragment.TravelFragment;
 
 
-public class TourActivity extends AppCompatActivity implements TravelFragment.OnFragmentInteractionListener {
+public class TourActivity extends AppCompatActivity  {
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class TourActivity extends AppCompatActivity implements TravelFragment.On
                     return true;
                 case R.id.navigation_mytrips:
                     toolbar.setTitle("My Trips");
-                    fragment = new TravelFragment();
+                    fragment = new MyTripFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_friend:
