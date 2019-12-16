@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.Fragment.TravelFragment">
-
     <!-- TODO: Update blank fragment layout -->
     <ProgressBar
-        android:id="@+id/progress_circular_tour"
+        android:id="@+id/progress_circular_tour1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -17,6 +16,15 @@
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/progress_circular_tour2"
         android:scrollbars="vertical" />
+    <ProgressBar
+        android:id="@+id/progress_circular_tour2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

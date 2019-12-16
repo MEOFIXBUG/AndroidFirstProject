@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.kumeo.traveltour.R;
+import com.kumeo.traveltour.adapter.ItemAdapter;
 import com.kumeo.traveltour.adapter.TourAdapter;
+import com.kumeo.traveltour.extras.PaginationScrollListener;
 import com.kumeo.traveltour.model.Tour;
 import com.kumeo.traveltour.response.TourResponse;
 import com.kumeo.traveltour.view.Activity.TourActivity;
@@ -37,12 +41,17 @@ import java.util.List;
  */
 public class TravelFragment extends Fragment {
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
-    private TourAdapter adapter;
+    //private TourAdapter adapter;
+    private ItemAdapter adapter;
     private RecyclerView my_recycler_view;
-    private ProgressBar progress_circular_tour;
+    private ProgressBar progress_circular_tour1;
+    private ProgressBar progress_circular_tour2;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
     private static final String TAG = TravelFragment.class.getSimpleName();
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int page = 1;
     private OnFragmentInteractionListener mListener;
 
     public TravelFragment() {
@@ -77,14 +86,15 @@ public class TravelFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_travel, container, false);
         initialization(view);
-        getTour();
+        loadData(page);
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
 
     private void initialization(View view) {
-        progress_circular_tour = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
+        progress_circular_tour1 = (ProgressBar) view.findViewById(R.id.progress_circular_tour1);
+        progress_circular_tour2 = (ProgressBar) view.findViewById(R.id.progress_circular_tour2);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         // use a linear layout manager
@@ -96,24 +106,74 @@ public class TravelFragment extends Fragment {
         my_recycler_view.setHasFixedSize(true);
 
         // adapter
-        adapter = new TourAdapter(getActivity(), tourArrayList);
+        //adapter = new TourAdapter(getActivity(), tourArrayList);
+        adapter = new ItemAdapter(getActivity(), tourArrayList);
         my_recycler_view.setAdapter(adapter);
+        my_recycler_view.addOnScrollListener(new PaginationScrollListener(layoutManager){
+
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                if (!isLastPage) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadData(page);
+                        }
+                    }, 300);
+                }
+            }
+
+            @Override
+            public int getTotalPageCount() {
+                return 0;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
+        adapter.setOnItemClicklListener(new ItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getContext(), "Clicked item position: " + position, Toast.LENGTH_LONG).show();
+            }
+        });
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,1);
 
     }
-    private void getTour() {
-        LiveData<TourResponse> TourList= tourViewModel.getTours(49,1);
+    private void loadData(long pageIndex) {
+        progress_circular_tour2.setVisibility(View.INVISIBLE);
+        LiveData<TourResponse> TourList= tourViewModel.getTours(7,pageIndex);
         TourList.observe(this,tourResponse->{
+
+            isLoading = false;
             if (tourResponse != null) {
-                progress_circular_tour.setVisibility(View.GONE);
-                List<Tour> tours = tourResponse.getTours();
-                Log.d(TAG, "data:: " + tours.get(0).getName());
-                tourArrayList.addAll(tours);
-                adapter.notifyDataSetChanged();
+                progress_circular_tour2.setVisibility(View.GONE);
+                progress_circular_tour1.setVisibility(View.GONE);
+                adapter.addItems(tourResponse.getTours());
+                if (page >= tourResponse.getTotal()/7) {
+                    isLastPage = true;
+                } else {
+                    page = page + 1;
+                }
             }
+//            if (tourResponse != null) {
+//                progress_circular_tour.setVisibility(View.GONE);
+//                List<Tour> tours = tourResponse.getTours();
+//                Log.d(TAG, "data:: " + tours.get(0).getName());
+//                tourArrayList.addAll(tours);
+//                adapter.notifyDataSetChanged();
+//            }
         });
     }
     @Override

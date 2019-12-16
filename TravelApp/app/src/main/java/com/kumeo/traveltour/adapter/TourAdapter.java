@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -18,20 +19,21 @@ import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.model.Tour;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
 
+    private static final int ITEM = 0;
+    private static final int LOADING = 1;
+    private boolean isLoadingAdded = false;
+
     private Context context;
     ArrayList<Tour> tourArrayList;
-
+    AdapterView.OnItemClickListener mItemClickListener;
     //constructor
     public TourAdapter(Context context, ArrayList<Tour> articleArrayList) {
         this.context = context;
         this.tourArrayList = articleArrayList;
     }
-
     @NonNull
     @Override
     // set item view trong list

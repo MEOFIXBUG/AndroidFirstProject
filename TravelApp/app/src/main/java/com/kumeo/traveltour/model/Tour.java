@@ -6,8 +6,8 @@ public class Tour {
     private String name;
     private String minCost;
     private String maxCost;
-    private String startDate;
-    private String endDate;
+    private long startDate;
+    private long endDate;
     private long adults;
     private long childs;
     private boolean isPrivate;
@@ -39,14 +39,14 @@ public class Tour {
     public void setMaxCost(String value) { this.maxCost = value; }
 
 
-    public String getStartDate() { return startDate; }
+    public long getStartDate() { return startDate; }
 
-    public void setStartDate(String value) { this.startDate = value; }
+    public void setStartDate(long value) { this.startDate = value; }
 
 
-    public String getEndDate() { return endDate; }
+    public long getEndDate() { return endDate; }
 
-    public void setEndDate(String value) { this.endDate = value; }
+    public void setEndDate(long value) { this.endDate = value; }
 
 
     public long getAdults() { return adults; }
