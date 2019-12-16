@@ -53,7 +53,7 @@ public class TourRepository {
                     public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
 
                         if (response.body() != null) {
-                            Log.d(TAG, "trips total result:: " + response.body());
+                            //Log.d(TAG, "trips total result:: " + response.body().getTotal());
                             if(response.body().getTotal()!=0){
                                 Log.d(TAG, "trips total result:: " + response.body().getTotal());
                                 data.setValue(response.body());

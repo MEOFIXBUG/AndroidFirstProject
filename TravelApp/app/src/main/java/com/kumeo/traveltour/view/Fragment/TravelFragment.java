@@ -101,11 +101,11 @@ public class TravelFragment extends Fragment {
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
-        tourViewModel.init(49,1,1);
+        //tourViewModel.init(49,1,1);
 
     }
     private void getTour() {
-        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData();
+        LiveData<TourResponse> TourList= tourViewModel.getTours(49,1);
         TourList.observe(this,tourResponse->{
             if (tourResponse != null) {
                 progress_circular_tour.setVisibility(View.GONE);

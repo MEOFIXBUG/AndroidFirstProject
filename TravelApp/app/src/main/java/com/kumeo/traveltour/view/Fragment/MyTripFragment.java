@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.adapter.TourAdapter;
 import com.kumeo.traveltour.model.Tour;
@@ -25,6 +27,9 @@ import com.kumeo.traveltour.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +50,7 @@ public class MyTripFragment extends Fragment {
     private ProgressBar progress_circular_tour;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
+    TextView noTrips;
     private static final String TAG = MyTripFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -87,7 +93,7 @@ public class MyTripFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_travel, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_trip, container, false);
         initialization(view);
         getMyTrips();
         return view;
@@ -95,7 +101,8 @@ public class MyTripFragment extends Fragment {
     private void initialization(View view) {
         progress_circular_tour = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
+        FloatingActionButton add_fab= (FloatingActionButton) view.findViewById(R.id.add_trip);
+        noTrips =(TextView) view.findViewById(R.id.my_trips_no_items);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
         my_recycler_view.setLayoutManager(layoutManager);
@@ -110,21 +117,24 @@ public class MyTripFragment extends Fragment {
 
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
-        tourViewModel.init(49,1,2);
+        //tourViewModel.init(49,1,2);
 
     }
     private void getMyTrips() {
-        LiveData<TourResponse> TourList= tourViewModel.getTourResponseLiveData();
-        if(TourList!= null)
+        LiveData<TourResponse> MyTrips= tourViewModel.getMyTrips(49,1);
+        if(MyTrips!= null)
         {
-            TourList.observe(this,tourResponse->{
-                progress_circular_tour.setVisibility(View.GONE);
+            MyTrips.observe(this,tourResponse->{
+                progress_circular_tour.setVisibility(GONE);
                 if (tourResponse != null) {
-
+                    noTrips.setVisibility(GONE);
                     List<Tour> tours = tourResponse.getTours();
                     Log.d(TAG, "data:: " + tours.get(0).getName());
                     tourArrayList.addAll(tours);
                     adapter.notifyDataSetChanged();
+                }
+                else {
+                    noTrips.setVisibility(VISIBLE);
                 }
             });
         }

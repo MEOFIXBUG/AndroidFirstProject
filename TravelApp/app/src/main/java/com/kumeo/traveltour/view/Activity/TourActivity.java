@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.kumeo.traveltour.R;
 
 import com.kumeo.traveltour.view.Fragment.MyTripFragment;
+import com.kumeo.traveltour.view.Fragment.ProfileFragment;
 import com.kumeo.traveltour.view.Fragment.TravelFragment;
 
 
@@ -67,7 +68,7 @@ public class TourActivity extends AppCompatActivity  {
                     return true;
                 case R.id.navigation_profile:
                     toolbar.setTitle("Profile");
-                    fragment = new TravelFragment();
+                    fragment = new ProfileFragment();
                     loadFragment(fragment);
                     return true;
             }
