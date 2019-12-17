@@ -46,8 +46,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/locationDescription"
-                android:text="Ho chi minh- Ha noi"/>
+                android:id="@+id/locationDescription"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -68,8 +67,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/dateDescription"
-                android:text= "17/11/2019-20/11/2019"/>
+                android:id="@+id/dateDescription"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -88,8 +86,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/peopleDescription"
-                android:text="2 adults"/>
+                android:id="@+id/peopleDescription" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -108,8 +105,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/moneyDescription"
-                android:text="1000000 - 2000000 VND"/>
+                android:id="@+id/moneyDescription" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

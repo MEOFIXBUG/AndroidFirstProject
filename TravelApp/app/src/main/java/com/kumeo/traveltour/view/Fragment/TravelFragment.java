@@ -1,6 +1,8 @@
 package com.kumeo.traveltour.view.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,15 +17,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.adapter.ItemAdapter;
 import com.kumeo.traveltour.adapter.TourAdapter;
 import com.kumeo.traveltour.extras.PaginationScrollListener;
 import com.kumeo.traveltour.model.Tour;
 import com.kumeo.traveltour.response.TourResponse;
+import com.kumeo.traveltour.retrofit.Service.TourInterface;
+import com.kumeo.traveltour.view.Activity.CreateTourActivity;
+import com.kumeo.traveltour.view.Activity.MainActivity;
+import com.kumeo.traveltour.view.Activity.SplashActivity;
 import com.kumeo.traveltour.view.Activity.TourActivity;
 import com.kumeo.traveltour.viewmodel.TourViewModel;
 
@@ -53,6 +61,10 @@ public class TravelFragment extends Fragment {
     private boolean isLastPage = false;
     private int page = 1;
     private OnFragmentInteractionListener mListener;
+
+    private FloatingActionButton btnAdd;
+
+    private TourInterface createTourFromTravelTour;
 
     public TravelFragment() {
         // Required empty public constructor
@@ -85,12 +97,25 @@ public class TravelFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_travel, container, false);
+
+        ////Quyennnn
+        btnAdd=view.findViewById(R.id.fab);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SplashActivity.appPreference.showToast("Create Tour!!");
+                createTourFromTravelTour.openCreateTourActivity();
+            }
+        });
+        ////Quyennnn
+
         initialization(view);
         loadData(page);
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
+
 
     private void initialization(View view) {
         progress_circular_tour1 = (ProgressBar) view.findViewById(R.id.progress_circular_tour1);
@@ -185,6 +210,8 @@ public class TravelFragment extends Fragment {
 //            throw new RuntimeException(context.toString()
 //                    + " must implement OnFragmentInteractionListener");
 //        }
+        Activity activity = (Activity) context;
+        createTourFromTravelTour = (TourInterface) activity;
     }
 
     @Override

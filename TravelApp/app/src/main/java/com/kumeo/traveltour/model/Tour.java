@@ -4,14 +4,68 @@ public class Tour {
     private long id;
     private long status;
     private String name;
+<<<<<<< Updated upstream
     private String minCost;
     private String maxCost;
+=======
+    private long minCost;
+    private long maxCost;
+>>>>>>> Stashed changes
     private long startDate;
     private long endDate;
     private long adults;
     private long childs;
     private boolean isPrivate;
     private String avatar;
+
+    private long sourceLat;
+    private long sourceLong;
+    private long desLat;
+    private long desLong;
+
+    public Tour() {
+    }
+
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public long getSourceLat() {
+        return sourceLat;
+    }
+
+    public void setSourceLat(long sourceLat) {
+        this.sourceLat = sourceLat;
+    }
+
+    public long getSourceLong() {
+        return sourceLong;
+    }
+
+    public void setSourceLong(long sourceLong) {
+        this.sourceLong = sourceLong;
+    }
+
+    public long getDesLat() {
+        return desLat;
+    }
+
+    public void setDesLat(long desLat) {
+        this.desLat = desLat;
+    }
+
+    public long getDesLong() {
+        return desLong;
+    }
+
+    public void setDesLong(long desLong) {
+        this.desLong = desLong;
+    }
 
 
     public long getID() { return id; }
@@ -29,14 +83,14 @@ public class Tour {
     public void setName(String value) { this.name = value; }
 
 
-    public String getMinCost() { return minCost; }
+    public long getMinCost() { return minCost; }
 
-    public void setMinCost(String value) { this.minCost = value; }
+    public void setMinCost(long value) { this.minCost = value; }
 
 
-    public String getMaxCost() { return maxCost; }
+    public long getMaxCost() { return maxCost; }
 
-    public void setMaxCost(String value) { this.maxCost = value; }
+    public void setMaxCost(long value) { this.maxCost = value; }
 
 
     public long getStartDate() { return startDate; }

@@ -1,5 +1,6 @@
 package com.kumeo.traveltour.view.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,12 +17,13 @@ import android.view.MenuItem;
 
 import com.kumeo.traveltour.R;
 
+import com.kumeo.traveltour.retrofit.Service.TourInterface;
 import com.kumeo.traveltour.view.Fragment.MyTripFragment;
 import com.kumeo.traveltour.view.Fragment.ProfileFragment;
 import com.kumeo.traveltour.view.Fragment.TravelFragment;
 
 
-public class TourActivity extends AppCompatActivity  {
+public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +77,8 @@ public class TourActivity extends AppCompatActivity  {
             return false;
         }
     };
-
+    public void openCreateTourActivity() {
+        Intent intent=new Intent(TourActivity.this, CreateTourActivity.class);
+        startActivity(intent);
+    }
 }

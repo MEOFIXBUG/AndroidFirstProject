@@ -132,6 +132,7 @@ public class LoginFragment extends Fragment {
         // Callback registration
         FacebookSdk.sdkInitialize(getActivity());
         login.setFragment(this);
+        login.setReadPermissions("email", "public_profile", "user_friends");
         login.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -178,7 +179,8 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onError(FacebookException error) {
-                SplashActivity.appPreference.showToast("ERROR");
+                SplashActivity.appPreference.showToast(error.toString());
+                Log.d("ERROR", error.toString());
 
             }
         });

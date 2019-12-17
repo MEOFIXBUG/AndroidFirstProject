@@ -23,7 +23,10 @@
         <activity
             android:name=".view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
         <activity
             android:name=".view.Activity.MainActivity"
             android:label="@string/title_activity_main"
@@ -35,6 +38,9 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".view.Activity.CreateTourActivity">
+
         </activity>
 
         <meta-data
