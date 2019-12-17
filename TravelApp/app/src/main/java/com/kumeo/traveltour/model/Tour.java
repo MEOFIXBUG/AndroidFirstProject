@@ -4,13 +4,8 @@ public class Tour {
     private long id;
     private long status;
     private String name;
-<<<<<<< Updated upstream
-    private String minCost;
-    private String maxCost;
-=======
     private long minCost;
     private long maxCost;
->>>>>>> Stashed changes
     private long startDate;
     private long endDate;
     private long adults;
