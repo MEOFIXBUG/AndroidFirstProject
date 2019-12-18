@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:paddingRight="30dp"
-    android:paddingLeft="30dp"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,6 +18,7 @@
     android:textColor="#4aaaa7"
     android:textStyle="bold"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:text="CREATE TOUR"
     android:textAlignment="center">
 
@@ -33,21 +33,28 @@
         android:layout_height="match_parent"
         android:layout_marginRight="8dp"
         android:src="@drawable/ic_card_travel_orange_24dp" />
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_text_input_layout"
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/etTourName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:background="@drawable/rounded_edittext"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:textSize="@dimen/editTextSize"
             android:hint="Tour name (*)" />
     </com.google.android.material.textfield.TextInputLayout>
+
 </LinearLayout>
 
 <LinearLayout
@@ -64,6 +71,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_weight="1"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content">
 
         <EditText
@@ -74,6 +82,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:textSize="@dimen/editTextSize"
+            android:background="@drawable/rounded_edittext"
             android:editable="false"
             android:clickable="true"
             android:hint="Start date(*)" />
@@ -87,6 +97,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_weight="1"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content">
 
         <EditText
@@ -94,16 +105,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:background="@drawable/rounded_edittext"
             android:layout_centerHorizontal="true"
             android:editable="false"
             android:clickable="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:textSize="@dimen/editTextSize"
             android:hint="End date(*)" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
 
+<!--
 <TextView
     android:layout_width="wrap_content"
     android:layout_marginTop="10dp"
@@ -207,6 +221,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+-->
 
 
 
@@ -234,16 +249,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/etAdults"
+                android:background="@drawable/rounded_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
+                android:textSize="@dimen/editTextSize"
                 android:inputType="number"
                 android:hint="Adults" />
 
@@ -257,13 +275,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/etChilds"
+                android:background="@drawable/rounded_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
@@ -286,6 +307,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="wrap_content">
 
             <EditText
@@ -293,9 +315,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
+                android:background="@drawable/rounded_edittext"
                 android:inputType="number"
                 android:hint="MinCost" />
 
@@ -309,6 +333,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="wrap_content">
 
             <EditText
@@ -316,8 +341,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:background="@drawable/rounded_edittext"
                 android:ems="10"
                 android:inputType="number"
                 android:hint="MaxCost" />
@@ -326,23 +353,40 @@
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/etAvatar"
+            android:background="@drawable/rounded_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:textSize="@dimen/editTextSize"
             android:hint="Avatar image of tour" />
     </com.google.android.material.textfield.TextInputLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+        <RadioGroup
+            android:id="@+id/radioSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        <RadioButton
+            android:id="@+id/rdoBtnIsPrivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is this your private trip?"
+            android:onClick="onRadioButtonClicked"
+            android:checked="false" />
+        </RadioGroup>
+
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
@@ -354,7 +398,7 @@
             android:layout_height="wrap_content"
             android:textOn="TRUE"
             android:textOff="FALSE"
-            android:onClick="onToggleClicked"/>
+            android:onClick="onToggleClicked"/>-->
 
     </LinearLayout>
 
@@ -368,8 +412,9 @@
         android:textSize="20dp"
         android:textColor="#FFFFFFFF"
         android:gravity="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:layout_alignParentBottom="true"
         />

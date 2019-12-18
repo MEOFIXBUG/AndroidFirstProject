@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name=".view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
             android:theme="@style/AppTheme.NoActionBar">
@@ -39,7 +40,15 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".view.Activity.CreateTourActivity">
+        <activity android:name=".view.Activity.CreateTourActivity"
+
+            >
+
+        </activity>
+
+        <activity
+            android:name=".view.Activity.AddStopPointActivity"
+            android:theme="@style/AppTheme.CustomTheme">
 
         </activity>
 

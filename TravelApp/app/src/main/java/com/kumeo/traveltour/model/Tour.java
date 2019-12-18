@@ -17,6 +17,7 @@ public class Tour {
     private long sourceLong;
     private long desLat;
     private long desLong;
+    private long hostId;
 
     public Tour() {
     }
@@ -28,6 +29,13 @@ public class Tour {
 
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
+    }
+    public long getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(long hostId) {
+        this.hostId = hostId;
     }
 
     public long getSourceLat() {
