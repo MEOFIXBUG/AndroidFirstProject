@@ -62,7 +62,7 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SplashActivity.appPreference.showToast("Login");
+                loginUser();
             }
         });
 
@@ -94,6 +94,8 @@ public class LoginFragment extends Fragment {
         } else if (TextUtils.isEmpty(Password)){
             SplashActivity.appPreference.showToast("Password required");
         } else {
+            SplashActivity.appPreference.showToast("sss");
+
             Account user =new Account();
             user.setEmailPhone(Email);
             user.setPassword(Password);
