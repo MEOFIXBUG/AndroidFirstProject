@@ -4,22 +4,18 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Space;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.extras.converter;
 import com.kumeo.traveltour.model.Tour;
-import com.kumeo.traveltour.response.LoginResponse;
 import com.kumeo.traveltour.retrofit.Service.Tour.TourAPI;
-import com.kumeo.traveltour.retrofit.Service.TourInterface;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
 
 import java.text.ParseException;
@@ -27,12 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class CreateTourActivity extends AppCompatActivity{
 
@@ -69,7 +63,8 @@ public class CreateTourActivity extends AppCompatActivity{
                 {
                     try {
                         reqTour= makeTourRequest();
-                        createTour(reqTour);
+                        openMapActivity();
+                        //createTour(reqTour);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -101,7 +96,9 @@ public class CreateTourActivity extends AppCompatActivity{
                     //SplashActivity.appPreference.showToast(response.body().getStartDate()+"");
                     SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
                     SplashActivity.appPreference.showToast(response.body().getID()+"id");
-                    openAddStopPointActivity();
+                    //openAddStopPointActivity();
+                    openMapActivity();
+
                 } else {
                     SplashActivity.appPreference.showToast("Create tour failed in some fields");
                 }
@@ -256,6 +253,11 @@ public class CreateTourActivity extends AppCompatActivity{
 
     public void openAddStopPointActivity() {
         Intent intent=new Intent(CreateTourActivity.this, AddStopPointActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMapActivity() {
+        Intent intent=new Intent(CreateTourActivity.this, TourMapsActivity.class);
         startActivity(intent);
     }
 }

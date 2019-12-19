@@ -46,6 +46,7 @@ import java.util.List;
  * to handle interaction events.
  * Use the {@link TravelFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
  */
 public class TravelFragment extends Fragment {
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
@@ -98,7 +99,8 @@ public class TravelFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_travel, container, false);
 
-        ////Quyennnn
+
+        //Quyennnn
         btnAdd=view.findViewById(R.id.fab);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,7 @@ public class TravelFragment extends Fragment {
             }
         });
         ////Quyennnn
+
 
         initialization(view);
         loadData(page);

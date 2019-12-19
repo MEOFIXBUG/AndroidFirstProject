@@ -20,6 +20,8 @@ import com.kumeo.traveltour.model.Tour;
 
 import java.util.ArrayList;
 
+import static com.kumeo.traveltour.extras.converter.createDate;
+
 public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
 
     private static final int ITEM = 0;
@@ -50,7 +52,7 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
         //holder.mDescTv.setText(modellist.get(i).getDesc());
         viewHolder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
         viewHolder.mLocationTv.setText(tour.getName());
-        viewHolder.mTimeTv.setText(tour.getStartDate()+ " - "+ tour.getEndDate());
+        viewHolder.mTimeTv.setText(createDate(tour.getStartDate())+ "  -  "+ createDate(tour.getEndDate()));
         if(tour.getAvatar()!= null)
         {
             if(!tour.getAvatar().isEmpty())

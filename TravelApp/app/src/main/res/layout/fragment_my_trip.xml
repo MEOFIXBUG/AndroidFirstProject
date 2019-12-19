@@ -18,14 +18,16 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add_circle_white_24dp" />
+        android:layout_alignBottom="@+id/my_recycler_view"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_add_black_24dp"
+        android:layout_marginBottom="40sp"
+        android:layout_marginRight="20sp"
+        tools:ignore="RelativeOverlap" />-->
 
     <TextView
         android:id="@+id/my_trips_no_items"

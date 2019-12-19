@@ -1,5 +1,6 @@
 package com.kumeo.traveltour.view.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.adapter.TourAdapter;
 import com.kumeo.traveltour.model.Tour;
 import com.kumeo.traveltour.response.TourResponse;
+import com.kumeo.traveltour.retrofit.Service.TourInterface;
+import com.kumeo.traveltour.view.Activity.SplashActivity;
 import com.kumeo.traveltour.view.Activity.TourActivity;
 import com.kumeo.traveltour.viewmodel.TourViewModel;
 
@@ -51,12 +54,14 @@ public class MyTripFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
     TextView noTrips;
+    //private TourInterface createTourFromTravelTour;
     private static final String TAG = MyTripFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private FloatingActionButton add_fab;
 
     public MyTripFragment() {
         // Required empty public constructor
@@ -96,12 +101,24 @@ public class MyTripFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_trip, container, false);
         initialization(view);
         getMyTrips();
+
+
+/*        ////Quyennnn
+        add_fab=view.findViewById(R.id.add_trip);
+        add_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SplashActivity.appPreference.showToast("Create Tour!!");
+                createTourFromTravelTour.openCreateTourActivity();
+            }
+        });
+        ////Quyennnn*/
         return view;
     }
     private void initialization(View view) {
         progress_circular_tour = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        FloatingActionButton add_fab= (FloatingActionButton) view.findViewById(R.id.add_trip);
+         //add_fab= (FloatingActionButton) view.findViewById(R.id.add_trip);
         noTrips =(TextView) view.findViewById(R.id.my_trips_no_items);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
@@ -157,6 +174,8 @@ public class MyTripFragment extends Fragment {
 //            throw new RuntimeException(context.toString()
 //                    + " must implement OnFragmentInteractionListener");
 //        }
+        //Activity activity = (Activity) context;
+        //createTourFromTravelTour = (TourInterface) activity;
     }
 
     @Override
@@ -164,6 +183,7 @@ public class MyTripFragment extends Fragment {
         super.onDetach();
 //        mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
