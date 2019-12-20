@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorLightGray"
     tools:context=".view.Fragment.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:layout_weight="2"
-                android:gravity="center"
                 android:layout_marginBottom="16dp"
-                android:background="@color/backgroundDefault">
-
+                android:layout_weight="2"
+                android:background="@color/backgroundDefault"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
 
 
                 <ImageView
@@ -33,22 +33,22 @@
                     android:layout_height="150dp"
                     android:layout_marginTop="25dp"
                     android:gravity="center"
-                    android:src="@drawable/placeholder"/>
+                    android:src="@drawable/placeholder" />
 
                 <TextView
                     android:id="@+id/txtFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-thin"
                     android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:text="John Doe"/>
+                    android:text="John Doe"
+                    android:textSize="25sp" />
 
                 <ImageButton
                     android:id="@+id/btnEditProfilePicture"
-                    android:layout_height="30dip"
                     android:layout_width="30dip"
+                    android:layout_height="30dip"
                     android:layout_gravity="right"
                     android:background="@drawable/ic_add_a_photo_black_24dp" />
 
@@ -58,76 +58,78 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:padding="15dp"
-                android:gravity="center"
                 android:layout_marginBottom="16dp"
-                android:background="@color/backgroundDefault">
+                android:layout_weight="1"
+                android:background="@color/backgroundDefault"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/profileHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:textSize="25sp"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Account Information" />
+                    android:text="Account Information"
+                    android:textSize="25sp" />
 
 
                 <TextView
-                    android:id="@+id/txtClientFirstName"
+                    android:id="@+id/emailPro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="FirstName: John"/>
+                    android:text="Email : " />
 
                 <TextView
-                    android:id="@+id/txtClientLastName"
+                    android:id="@+id/phonePro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Las name: Doe"/>
+                    android:text="SDT : " />
+
                 <TextView
-                    android:id="@+id/txtClientEmail"
+                    android:id="@+id/addPro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Email: john.doe@gmail.com"/>
+                    android:text="Địa chỉ : " />
+
                 <TextView
-                    android:id="@+id/txtClientPhone"
+                    android:id="@+id/genPro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Email: 4162354874"/>
+                    android:text="Giới tính : " />
+
                 <TextView
-                    android:id="@+id/txtClientCreditCard"
+                    android:id="@+id/dobPro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Credit Card: **** **** **** 2048"/>
+                    android:text="Ngày sinh : " />
 
 
                 <ImageButton
                     android:id="@+id/btnEditProfile"
-                    android:layout_height="30dip"
                     android:layout_width="30dip"
+                    android:layout_height="30dip"
                     android:layout_gravity="right"
                     android:background="@drawable/ic_edit_black_24dp" />
-
 
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/signOut"
+                android:id="@+id/signOutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/circle"
                 android:gravity="center"
                 android:text="Sign Out"
-                android:layout_marginLeft = "40dp"
-                android:layout_marginRight = "40dp"
                 android:textColor="#fff"
                 android:textSize="20dp" />
         </LinearLayout>
