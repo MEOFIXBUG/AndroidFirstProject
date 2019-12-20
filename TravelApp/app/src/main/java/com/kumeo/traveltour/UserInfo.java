@@ -91,7 +91,7 @@ public class UserInfo {
     @SerializedName("id")
     @Expose
     private String userId;
-    @SerializedName("full_name")
+    @SerializedName("fullName")
     @Expose
     private String fullName;
     @SerializedName("email")
