@@ -1,6 +1,7 @@
 package com.kumeo.traveltour.view.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import com.kumeo.traveltour.UserInfo;
 import com.kumeo.traveltour.extras.MyApplication;
 import com.kumeo.traveltour.retrofit.Service.User.UserAPI;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
+import com.kumeo.traveltour.view.Activity.CreateTourActivity;
+import com.kumeo.traveltour.view.Activity.MainActivity;
 import com.kumeo.traveltour.view.Activity.SplashActivity;
+import com.kumeo.traveltour.view.Activity.TourActivity;
+import com.kumeo.traveltour.view.Activity.TourMapsActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -126,8 +131,11 @@ public class ProfileFragment extends Fragment {
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                SplashActivity.appPreference.showToast("Signout Successful");
+                SplashActivity.appPreference.setToken("");
+                SplashActivity.appPreference.setLoginStatus(false);
+                SplashActivity.appPreference.showToast(("Logout successful"));//oki
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
         return view;

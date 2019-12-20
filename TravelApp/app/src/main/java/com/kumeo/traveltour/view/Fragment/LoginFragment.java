@@ -94,7 +94,6 @@ public class LoginFragment extends Fragment {
         } else if (TextUtils.isEmpty(Password)){
             SplashActivity.appPreference.showToast("Password required");
         } else {
-            SplashActivity.appPreference.showToast("sss");
 
             Account user =new Account();
             user.setEmailPhone(Email);
