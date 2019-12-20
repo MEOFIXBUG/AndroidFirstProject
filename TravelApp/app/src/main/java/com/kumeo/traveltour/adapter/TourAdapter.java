@@ -48,7 +48,7 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
     //set gia tri cho tung itemview trog list voi gia tri thu i trong list tour tuong ung
     public void onBindViewHolder(@NonNull TourAdapter.ViewHolder viewHolder, int i) {
         Tour tour=tourArrayList.get(i);
-        viewHolder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost());
+        viewHolder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost() + "id: "+ tour.getID());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
         viewHolder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
         viewHolder.mLocationTv.setText(tour.getName());

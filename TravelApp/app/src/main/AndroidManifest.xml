@@ -44,11 +44,12 @@
 
         <activity
             android:name=".view.Activity.TourMapsActivity"
-            android:label="@string/title_activity_tour_maps"></activity>
+            android:theme="@style/AppTheme.NoActionBarMap"
+            android:label="@string/title_activity_tour_maps">
+        </activity>
         <activity android:name=".view.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

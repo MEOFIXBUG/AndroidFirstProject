@@ -2,6 +2,7 @@ package com.kumeo.traveltour.view.Activity;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,8 +34,8 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(10.763250, 106.682215);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10));
-        mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+        //mMap.setMyLocationEnabled(true);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -46,9 +47,15 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
 
                 mMap.clear();// clear marker cu
 
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                openAddStopPointActivity();
                 mMap.addMarker(markerOptions);
             }
         });
+    }
+
+    public void openAddStopPointActivity() {
+        Intent intent=new Intent(TourMapsActivity.this, AddStopPointActivity.class);
+        startActivity(intent);
     }
 }
