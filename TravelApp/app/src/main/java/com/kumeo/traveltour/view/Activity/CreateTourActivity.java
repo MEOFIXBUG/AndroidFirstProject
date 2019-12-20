@@ -240,6 +240,7 @@ public class CreateTourActivity extends AppCompatActivity{
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        if(checked==true)((RadioButton) view).setChecked(!checked);
 
         // Check which radio button was clicked
         switch(view.getId()) {

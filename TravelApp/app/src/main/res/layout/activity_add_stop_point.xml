@@ -4,6 +4,7 @@
     android:layout_gravity="center"
     android:paddingRight="30dp"
     android:paddingLeft="30dp"
+    android:layout_centerVertical="true"
     android:paddingBottom="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,11 +16,10 @@
         android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textColor="#4aaaa7"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:text="ADD STOP POINT"
             android:textAlignment="center">
 
@@ -38,7 +38,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/etSPName"
@@ -56,14 +56,14 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Service type"
             android:textSize="14dp"
             android:layout_height="wrap_content">
         </TextView>
         <Spinner
             android:id="@+id/planets_spinner"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_width="match_parent"
             android:background="@drawable/rounded_edittext"
             android:layout_height="wrap_content" />
@@ -71,7 +71,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etSPAddress"
@@ -88,86 +88,17 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Provinces"
             android:textSize="14dp"
             android:layout_height="wrap_content">
         </TextView>
         <Spinner
             android:id="@+id/province_spinner"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_width="match_parent"
             android:background="@drawable/rounded_edittext"
             android:layout_height="wrap_content" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Arrive at"
-            android:textSize="14dp"
-            android:layout_height="wrap_content">
-        </TextView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/icon_date"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_access_time_black_24dp" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etStartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:ems="10"
-                    android:textSize="@dimen/editTextSize"
-                    android:background="@drawable/rounded_edittext"
-                    android:editable="false"
-                    android:clickable="true"
-                    android:hint="Choose time" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_date_range_black_24dp" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etEndDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:background="@drawable/rounded_edittext"
-                    android:layout_centerHorizontal="true"
-                    android:editable="false"
-                    android:clickable="true"
-                    android:layout_centerVertical="true"
-                    android:ems="10"
-                    android:textSize="@dimen/editTextSize"
-                    android:hint="End date(*)" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
@@ -181,7 +112,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -207,7 +138,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -225,13 +156,82 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Arrive at"
+            android:textSize="14dp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etTimeArrive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:textSize="@dimen/editTextSize"
+                    android:background="@drawable/rounded_edittext"
+                    android:editable="false"
+                    android:clickable="true"
+                    android:hint="Choose time" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etDateArrive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/rounded_edittext"
+                    android:layout_centerHorizontal="true"
+                    android:editable="false"
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:textSize="@dimen/editTextSize"
+                    android:hint="Choose date(*)" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etAvatar"
+                android:id="@+id/etDateLeave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -243,19 +243,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnCreate"
+            android:id="@+id/btnSAVE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/circle"
             android:text="SAVE"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:textColor="#FFFFFFFF"
             android:gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
             />
     </LinearLayout>
 </ScrollView>

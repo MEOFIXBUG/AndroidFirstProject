@@ -135,7 +135,6 @@ public class LoginFragment extends Fragment {
         // Callback registration
         FacebookSdk.sdkInitialize(getActivity());
         login.setFragment(this);
-        login.setReadPermissions("email", "public_profile", "user_friends");
         login.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
