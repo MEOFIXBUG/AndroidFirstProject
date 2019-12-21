@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements AccountInterface 
                     .commit();
 
         setSupportActionBar(toolbar);
-
         try {
             PackageManager z= getPackageManager();
             PackageInfo info = z.getPackageInfo(
