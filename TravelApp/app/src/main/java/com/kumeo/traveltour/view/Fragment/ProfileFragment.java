@@ -9,16 +9,19 @@ import android.os.Bundle;
 import com.facebook.CallbackManager;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.UserInfo;
 import com.kumeo.traveltour.extras.MyApplication;
+import com.kumeo.traveltour.response.ActiveResponse;
 import com.kumeo.traveltour.retrofit.Service.User.UserAPI;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
 import com.kumeo.traveltour.view.Activity.CreateTourActivity;
@@ -30,6 +33,8 @@ import com.kumeo.traveltour.view.Activity.TourMapsActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,8 +92,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        UserAPI user;
         String header =  SplashActivity.appPreference.getToken();
+        UserAPI user;
         user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
         Call<UserInfo> info = user.myInfo(header);
         info.enqueue(new Callback<UserInfo>() {
@@ -101,6 +106,10 @@ public class ProfileFragment extends Fragment {
                     TextView address = view.findViewById(R.id.addPro);
                     TextView gender = view.findViewById(R.id.genPro);
                     TextView dob = view.findViewById(R.id.dobPro);
+                    TextView emailVeri = view.findViewById(R.id.emailVeri);
+                    TextView phoneVeri = view.findViewById(R.id.phoneVeri);
+
+                    Button btnEmailVeri = view.findViewById(R.id.emailVeriBtn);
 
                     fullName.setText(""+response.body().getFullName());
                     email.setText("Email : "+response.body().getEmail());
@@ -113,6 +122,27 @@ public class ProfileFragment extends Fragment {
                     else {
                         gender.setText("Giới tính : Nữ");}
                     dob.setText("Ngày Sinh : "+response.body().getDob());
+
+                    if (response.body().isEmailVerified()== true)
+                    {
+                        emailVeri.setText("Xác thực email : Đã xác thực");
+                        btnEmailVeri.setVisibility(view.GONE);
+                    }
+                    else
+                    {
+                        emailVeri.setText("Xác thực email : Chưa xác thực");
+                        btnEmailVeri.setVisibility(view.VISIBLE);
+                    }
+                    if (response.body().isPhoneVerified()== true)
+                    {
+                        phoneVeri.setText("Xác thực SDT : Đã xác thực");
+                        btnEmailVeri.setVisibility(view.GONE);
+                    }
+                    else
+                    {
+                        phoneVeri.setText("Xác thực SDT : Chưa xác thực");
+                        btnEmailVeri.setVisibility(view.VISIBLE);
+                    }
 
                     if (response.body().getFullName()== null) fullName.setText("[Chưa cập nhật]");
                     if (response.body().getAddress()== null) address.setText("Địa chỉ : [Chưa cập nhật]");
@@ -136,6 +166,32 @@ public class ProfileFragment extends Fragment {
                 SplashActivity.appPreference.showToast(("Logout successful"));//oki
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        Button verifyEmailbtn = view.findViewById(R.id.emailVeriBtn);
+        verifyEmailbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Call<ActiveResponse> sendActive = user.sendActive(Integer.parseInt(SplashActivity.appPreference.getUserID()),"email");
+                sendActive.enqueue(new Callback<ActiveResponse>() {
+                    @Override
+                    public void onResponse(Call<ActiveResponse> call, Response<ActiveResponse> response) {
+                        if (response.isSuccessful()){
+                            SplashActivity.appPreference.showToast("Send active request succesfull");
+                            VerificationFragment nextFrag= new VerificationFragment();
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_container, nextFrag, "findThisFragment")
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ActiveResponse> call, Throwable t) {
+                        SplashActivity.appPreference.showToast("Send active request failed. Try again later");
+                    }
+                });
+
             }
         });
         return view;
