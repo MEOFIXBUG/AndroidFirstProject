@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful()){
                         SplashActivity.appPreference.showToast("Login Successful");
-                        SplashActivity.appPreference.setToken(response.body().getUserId());
+                        SplashActivity.appPreference.setUserID(response.body().getUserId());
                         SplashActivity.appPreference.setToken(response.body().getToken());
                         SplashActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
                         loginFromActivityListener.login();
