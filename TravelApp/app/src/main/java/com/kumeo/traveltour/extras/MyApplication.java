@@ -33,6 +33,12 @@ public class MyApplication {
     public String  getToken() {
         return sharedPreferences.getString(String.valueOf(R.string.s_pref_token), "");
     }
+    public String  getUserID() {
+        return sharedPreferences.getString(String.valueOf(R.string.s_pref_id), "");
+    }
+    public void setUserID(String userID){
+        editor.putString(String.valueOf(R.string.s_pref_id), userID);
+    }
     // For Name
     public void setDisplayName(String name){
         editor.putString(String.valueOf(R.string.s_pref_name), name);
