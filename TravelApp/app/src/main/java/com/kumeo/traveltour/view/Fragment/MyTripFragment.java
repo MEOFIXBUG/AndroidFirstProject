@@ -130,6 +130,7 @@ public class MyTripFragment extends Fragment {
 
         // adapter
         adapter = new TourAdapter(getActivity(), tourArrayList);
+        
         my_recycler_view.setAdapter(adapter);
 
         // View Model

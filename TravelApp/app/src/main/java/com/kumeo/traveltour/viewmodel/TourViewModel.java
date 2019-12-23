@@ -58,5 +58,4 @@ public class TourViewModel extends AndroidViewModel {
         return tourResponseLiveData;
     }
 
-
 }

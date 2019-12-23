@@ -31,17 +31,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         this.mContext = context;
         this.Items = tourArrayList;
     }
-    public ItemAdapter(Context context) {
-        Items = new ArrayList<>();
-        mContext = context;
-    }
-
-    public ItemAdapter(List<Tour> items) {
-        this.Items = items;
-    }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final ImageView mPlaceIv;;
+        Tour mTour;
+        private final ImageView mPlaceIv;
         private final TextView mPriceTv;
         private final TextView mPeopleTv;
         private final TextView mLocationTv;
@@ -50,19 +43,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mLocationTv =(TextView) itemView.findViewById(R.id.locationDescription);
             mTimeTv = (TextView)itemView.findViewById(R.id.dateDescription);
             mPeopleTv = (TextView)itemView.findViewById(R.id.peopleDescription);
             mPriceTv=(TextView)itemView.findViewById(R.id.moneyDescription);
 //            mHiddenID = itemView.findViewById(R.id.hiddenID);
             mPlaceIv=(ImageView) itemView.findViewById(R.id.ImgPlace);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getPosition());
+                mItemClickListener.onItemClick(mTour.getID());
             }
         }
     }
@@ -76,7 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Tour tour = Items.get(position);
-
+        holder.mTour=tour;
         holder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
         holder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
@@ -100,7 +93,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+         void onItemClick(long tourID);
     }
 
     public void setOnItemClicklListener(final OnItemClickListener mItemClickListener) {

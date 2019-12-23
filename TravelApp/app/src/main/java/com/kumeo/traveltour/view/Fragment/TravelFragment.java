@@ -136,6 +136,8 @@ public class TravelFragment extends Fragment {
         // adapter
         //adapter = new TourAdapter(getActivity(), tourArrayList);
         adapter = new ItemAdapter(getActivity(), tourArrayList);
+        adapter.setOnItemClicklListener(tourID -> SplashActivity.appPreference.showToast("onclick" + tourID));
+
         my_recycler_view.setAdapter(adapter);
         my_recycler_view.addOnScrollListener(new PaginationScrollListener(layoutManager){
 
@@ -165,12 +167,6 @@ public class TravelFragment extends Fragment {
             @Override
             public boolean isLoading() {
                 return isLoading;
-            }
-        });
-        adapter.setOnItemClicklListener(new ItemAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getContext(), "Clicked item position: " + position, Toast.LENGTH_LONG).show();
             }
         });
 
