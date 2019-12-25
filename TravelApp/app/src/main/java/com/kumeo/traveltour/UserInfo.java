@@ -15,7 +15,13 @@ public class UserInfo {
         this.address = address;
         this.gender = gender;
     }
-
+    public UserInfo(String fullName, String email, String phone,  String dob, int gender) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.gender = gender;
+    }
     public String getUserId() {
         return userId;
     }

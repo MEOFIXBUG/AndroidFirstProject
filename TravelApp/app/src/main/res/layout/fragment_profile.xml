@@ -34,7 +34,9 @@
                     android:layout_marginTop="25dp"
                     android:gravity="center"
                     android:src="@drawable/placeholder" />
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/txtFullName"
                     android:layout_width="match_parent"
@@ -44,6 +46,17 @@
                     android:gravity="center"
                     android:text="John Doe"
                     android:textSize="25sp" />
+                    <EditText
+                        android:visibility="gone"
+                        android:id="@+id/txtFullNameEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-thin"
+                        android:gravity="center"
+                        android:hint="Name"
+                        android:textSize="25sp" />
+                </RelativeLayout>
 
                 <ImageButton
                     android:id="@+id/btnEditProfilePicture"
@@ -83,44 +96,120 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Email : " />
-                </RelativeLayout>
 
+                    <EditText
+                        android:visibility="gone"
+                        android:id="@+id/emailProEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Email : " />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/phonePro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="SDT : " />
-
-                <TextView
-                    android:id="@+id/addPro"
+                    <EditText
+                    android:visibility="gone"
+                    android:id="@+id/phoneProEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Địa chỉ : " />
-
-                <TextView
-                    android:id="@+id/genPro"
+                    android:hint="SDT : " />
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Giới tính : " />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/addPro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Địa chỉ : " />
+                    <EditText
+                        android:visibility="gone"
+                        android:id="@+id/addProEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Địa chỉ : " />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/dobPro"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Ngày sinh : " />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/genPro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Giới tính : " />
+                    <EditText
+                        android:visibility="gone"
+                        android:id="@+id/genProEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Giới tính : " />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/dobPro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Ngày sinh : " />
+                    <EditText
+                        android:visibility="gone"
+                        android:id="@+id/dobProEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Ngày sinh : " />
+                </RelativeLayout>
 
 
-                <ImageButton
-                    android:id="@+id/btnEditProfile"
-                    android:layout_width="30dip"
-                    android:layout_height="30dip"
-                    android:layout_gravity="right"
-                    android:background="@drawable/ic_edit_black_24dp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <ImageButton
+        android:id="@+id/btnEditProfile"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/ic_edit_black_24dp" />
+
+    <ImageButton
+        android:visibility="gone"
+        android:id="@+id/btnEditDone"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/ok" />
+
+    <ImageButton
+        android:visibility="gone"
+        android:id="@+id/btnCancelEdit"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="270dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/btnEditDone"
+        android:background="@drawable/cancel" />
+
+</RelativeLayout>
                 <TextView
                     android:id="@+id/AccountVerificationHeading"
                     android:layout_width="match_parent"

@@ -34,4 +34,6 @@ public interface UserAPI {
  Call<RecoveryOTP> requestOTP(@Body OTPreq req);
  @POST("/user/verify-otp-recovery")
  Call<RecoveryResponse> verifyOTP(@Body OTPres OTPres);
+ @POST("/user/edit-info")
+ Call<RecoveryResponse> updateInfo(@Header("Authorization") String author,@Body UserInfo userInfo);
 }
