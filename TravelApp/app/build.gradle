@@ -60,6 +60,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //Timeline View
+    implementation 'com.github.vipulasri:timelineview:1.0.4'
+    // Lottie : animations
+    implementation 'com.airbnb.android:lottie:2.7.0'
 
 
 }

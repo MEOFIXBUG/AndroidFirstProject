@@ -55,7 +55,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(mTour.getID());
+                mItemClickListener.onItemClick(mTour);
             }
         }
     }
@@ -93,7 +93,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public interface OnItemClickListener {
-         void onItemClick(long tourID);
+         void onItemClick(Tour tour);
     }
 
     public void setOnItemClicklListener(final OnItemClickListener mItemClickListener) {

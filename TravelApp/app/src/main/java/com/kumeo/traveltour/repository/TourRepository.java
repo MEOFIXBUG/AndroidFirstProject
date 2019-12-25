@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kumeo.traveltour.response.TourInfoResponse;
 import com.kumeo.traveltour.response.TourResponse;
 import com.kumeo.traveltour.retrofit.Service.Tour.TourAPI;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
@@ -66,6 +67,33 @@ public class TourRepository {
                     }
                     @Override
                     public void onFailure(Call<TourResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
+    public LiveData<TourInfoResponse> getTourInfoByID(int id){
+        final MutableLiveData<TourInfoResponse> data = new MutableLiveData<>();
+        apiRequest.getTourInfo(id)
+                .enqueue(new Callback<TourInfoResponse>() {
+
+                    @Override
+                    public void onResponse(Call<TourInfoResponse> call, Response<TourInfoResponse> response) {
+
+                        if (response.body() != null) {
+                            //Log.d(TAG, "trips total result:: " + response.body().getTotal());
+                            if(response.body()!=null){
+                                Log.d(TAG, "Name:: " + response.body().getName());
+                                data.setValue(response.body());
+                            }
+                            else {
+                                data.setValue(null);
+                            }
+
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<TourInfoResponse> call, Throwable t) {
                         data.setValue(null);
                     }
                 });

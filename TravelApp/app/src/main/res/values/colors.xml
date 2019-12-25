@@ -6,9 +6,12 @@
     <color name="bgBottomNavigation">#004c40</color>
     <color name="colorLightGray">#EEEEEE</color>
     <color name="backgroundDefault">#FFFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="blue">#005fb3</color>
     <!--
     <color name="darkBlue">#1976D2</color>
-    <color name="blue">#005fb3</color>
+
     <color name="lightBlue">#106fc2</color>
     -->
 </resources>

@@ -1,5 +1,11 @@
 package com.kumeo.traveltour.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.kumeo.traveltour.UserInfo;
+
+import java.util.List;
+
 public class Tour {
     private long id;
     private long status;
@@ -18,6 +24,16 @@ public class Tour {
     private long desLat;
     private long desLong;
     private long hostId;
+//    @SerializedName("stopPoints")
+//    @Expose
+//    private List<StopPoint> stopPoints=null;
+//    @SerializedName("comments")
+//    @Expose
+//    private List<StopPoint> comments=null;
+//    @SerializedName("comments")
+//    @Expose
+//    private List<UserInfo> members=null;
+
 
     public Tour() {
     }

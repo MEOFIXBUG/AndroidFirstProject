@@ -29,5 +29,4 @@ public class TourResponse {
     public void setTours(List<Tour> Tours) {
         this.tours = Tours;
     }
-
 }
