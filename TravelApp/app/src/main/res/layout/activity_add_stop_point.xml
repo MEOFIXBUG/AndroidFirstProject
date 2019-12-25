@@ -225,35 +225,83 @@
         </LinearLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_margin="3dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Leave at"
+            android:textSize="14dp"
             android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/etDateLeave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:ems="10"
-                android:textSize="@dimen/editTextSize"
-                android:hint="Leave at" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/etTimeLeave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:textSize="@dimen/editTextSize"
+                    android:background="@drawable/rounded_edittext"
+                    android:editable="false"
+                    android:clickable="true"
+                    android:hint="Choose time" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etDateLeave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/rounded_edittext"
+                    android:layout_centerHorizontal="true"
+                    android:editable="false"
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:textSize="@dimen/editTextSize"
+                    android:hint="Choose date(*)" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnSAVE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/circle"
-            android:text="SAVE"
+            android:text="ADD TO TEMP LIST"
             android:textSize="16dp"
             android:textColor="#FFFFFFFF"
             android:gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="8dp"
-            />
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>

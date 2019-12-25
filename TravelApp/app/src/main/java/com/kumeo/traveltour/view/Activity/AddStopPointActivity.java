@@ -1,6 +1,7 @@
 package com.kumeo.traveltour.view.Activity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class AddStopPointActivity extends AppCompatActivity {
     private  EditText etMinCost;
     private  EditText etMaxCost;
     private  EditText etTimeArrive;
+    private  EditText etTimeLeave;
     private  EditText etDateArrive;
     private  EditText etDateLeave;
 
@@ -41,6 +44,8 @@ public class AddStopPointActivity extends AppCompatActivity {
         initialize();
         chooseDate(etDateArrive);
         chooseDate(etDateLeave);
+        timePicker(etTimeArrive);
+        timePicker(etTimeLeave);
 
         btnSave=findViewById(R.id.btnSAVE);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +63,8 @@ public class AddStopPointActivity extends AppCompatActivity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        double pop_up_width =dm.widthPixels*0.875;
-        double pop_up_height=dm.heightPixels*0.875;
+        double pop_up_width =dm.widthPixels*0.85;
+        double pop_up_height=dm.heightPixels*0.8;
 
         getWindow().setLayout((int)pop_up_width, (int)pop_up_height);
     }
@@ -73,6 +78,7 @@ public class AddStopPointActivity extends AppCompatActivity {
         etTimeArrive=findViewById(R.id.etTimeArrive);
         etDateArrive=findViewById(R.id.etDateArrive);
         etDateLeave=findViewById(R.id.etDateLeave);
+        etTimeLeave=findViewById(R.id.etTimeLeave);
     }
     public boolean checkRequiredField() {
         if (TextUtils.isEmpty(etSPName.getText())) {
@@ -91,23 +97,6 @@ public class AddStopPointActivity extends AppCompatActivity {
             etDateLeave.setError("End Date is required");
             return false;
         }
-        /*if (TextUtils.isEmpty(etSourceLat.getText())) {
-            etSourceLat.setError("Source Latitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etSourceLong.getText())) {
-            etSourceLong.setError("Source Longitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etDesLat.getText())) {
-            etDesLat.setError("Destination Latitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etDesLong.getText())) {
-            etDesLong.setError("Destination Longitude is required");
-            return false;
-        }*/
-
         String startDate = etDateArrive.getText().toString();
         String endDate=etDateLeave.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -159,5 +148,26 @@ public class AddStopPointActivity extends AppCompatActivity {
         String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         etStartDate.setText(sdf.format(myCalendar.getTime()));
+    }
+    private void timePicker(EditText eReminderTime)
+    {
+        eReminderTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddStopPointActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        eReminderTime.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
+
     }
 }
