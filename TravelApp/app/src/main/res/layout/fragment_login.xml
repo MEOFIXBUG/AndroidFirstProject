@@ -149,7 +149,17 @@
                 android:layout_marginRight = "40dp"
                 android:textColor="#fff"
                 android:textSize="20dp" />
-
+            <Button
+                android:background="@drawable/circle"
+                android:id="@+id/forgotpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot password ?"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft = "40dp"
+                android:layout_marginRight = "40dp"
+                android:textColor="#fff"
+                ></Button>
         </LinearLayout>
 
     </ScrollView>

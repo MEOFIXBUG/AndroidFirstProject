@@ -1,6 +1,5 @@
 package com.kumeo.traveltour.view.Fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,18 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.UserInfo;
+import com.kumeo.traveltour.model.OTPreq;
+import com.kumeo.traveltour.model.OTPres;
 import com.kumeo.traveltour.response.ActiveResultResponse;
+import com.kumeo.traveltour.response.RecoveryResponse;
+import com.kumeo.traveltour.retrofit.Service.AccountInterface;
 import com.kumeo.traveltour.retrofit.Service.User.UserAPI;
 import com.kumeo.traveltour.retrofit.retrofitRequest;
-import com.kumeo.traveltour.view.Activity.MainActivity;
 import com.kumeo.traveltour.view.Activity.PinEntryEditText;
 import com.kumeo.traveltour.view.Activity.SplashActivity;
 
@@ -28,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerificationFragment extends Fragment {
+public class RecoveryPassOTPFragment extends Fragment {
     //private static final String ARG_PARAM1 = "param1";
    // private static final String ARG_PARAM2 = "param2";
 
@@ -36,12 +35,10 @@ public class VerificationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button clickOk;
+    private Button recoBtn;
 
-    private MyTripFragment.OnFragmentInteractionListener mListener;
-    private FloatingActionButton add_fab;
-
-    public VerificationFragment() {
+    private AccountInterface registerFromActivityListener;
+    public RecoveryPassOTPFragment() {
         // Required empty public constructor
     }
 
@@ -70,7 +67,7 @@ public class VerificationFragment extends Fragment {
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    View view = inflater.inflate(R.layout.fragment_verification, container, false);
+    View view = inflater.inflate(R.layout.fragment_recovery_pass, container, false);
     final PinEntryEditText txtPinEntry = (PinEntryEditText) view.findViewById(R.id.inputCode);
     txtPinEntry.addTextChangedListener(new TextWatcher() {
         @Override
@@ -83,22 +80,20 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         public void afterTextChanged(Editable s) {
             if (s.toString().length()==6) {
                 txtPinEntry.setText(null);
-                UserAPI user;
-                user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
-                Call<ActiveResultResponse> isActive = user.getActiveStatus(Integer.parseInt(SplashActivity.appPreference.getUserID()),"email",s.toString());
-                isActive.enqueue(new Callback<ActiveResultResponse>() {
+                UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
+                OTPres otpres = new OTPres();
+                otpres.setUserId(429);
+                otpres.setVerifyCode("121212");
+                otpres.setNewPassword("333333");
+                Call<RecoveryResponse> verifyOTP = user.verifyOTP(otpres);
+                verifyOTP.enqueue(new Callback<RecoveryResponse>() {
                     @Override
-                    public void onResponse(Call<ActiveResultResponse> call, Response<ActiveResultResponse> response) {
+                    public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
                         if (response.isSuccessful() && response.code() == 200){
-                            if (response.body().getSuccess()==true)
+                            if (response.body().getMessage()=="Successful")
                             {
-                                SplashActivity.appPreference.showToast("Verified");
-                                SplashActivity.appPreference.setEmailVerified(true);
-                                ProfileFragment nextFrag= new ProfileFragment();
-                                getActivity().getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment_container, nextFrag, "tag2")
-                                        .addToBackStack(null)
-                                        .commit();
+                                SplashActivity.appPreference.showToast("Successful. Please login");
+                                registerFromActivityListener.signIn();
                             }
                         }
                         else
@@ -107,7 +102,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                         }
                     }
                     @Override
-                    public void onFailure(Call<ActiveResultResponse> call, Throwable t) {
+                    public void onFailure(Call<RecoveryResponse> call, Throwable t) {
                     }
                 });
             }

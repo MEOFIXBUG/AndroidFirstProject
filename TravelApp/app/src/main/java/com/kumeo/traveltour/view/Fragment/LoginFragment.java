@@ -75,7 +75,18 @@ public class LoginFragment extends Fragment {
                 loginFacebook(btnFB);
             }
         });
-
+        //forgor passs
+        Button forgotbtn = view.findViewById(R.id.forgotpass);
+        forgotbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgotPasswordFragment nextFrag= new ForgotPasswordFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, nextFrag, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         //for register
         registerBtn = view.findViewById(R.id.sigup_reg);
         registerBtn.setOnClickListener(new View.OnClickListener() {
