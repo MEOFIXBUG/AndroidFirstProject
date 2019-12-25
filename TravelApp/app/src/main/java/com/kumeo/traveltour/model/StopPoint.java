@@ -25,6 +25,8 @@ public class StopPoint {
     private long lng;
     @SerializedName("arrivalAt")
     private long arrivalAt;
+    private String address;
+    private long provinceId;
     public long getLeaveAt ()
     {
         return leaveAt;
@@ -35,15 +37,6 @@ public class StopPoint {
         this.leaveAt = leaveAt;
     }
 
-    public String getName ()
-    {
-        return name;
-    }
-
-    public void setName (String name)
-    {
-        this.name = name;
-    }
 
     public long getMaxCost ()
     {
@@ -65,14 +58,12 @@ public class StopPoint {
         this.serviceTypeId = serviceTypeId;
     }
 
-    public int getId ()
-    {
-        return id;
-    }
-
     public void setId (int id)
     {
         this.id = id;
+    }
+    public long getId() {
+        return id;
     }
 
     public String getAvatar ()
@@ -95,15 +86,6 @@ public class StopPoint {
         this.minCost = minCost;
     }
 
-    public long getLat ()
-    {
-        return lat;
-    }
-
-    public void setLat (long lat)
-    {
-        this.lat = lat;
-    }
 
     public long getLong ()
     {
@@ -115,13 +97,51 @@ public class StopPoint {
         this.lng = lng;
     }
 
-    public long getArrivalAt ()
-    {
+
+
+
+
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public long getLat() {
+        return lat;
+    }
+
+    public void setLat(long lat) {
+        this.lat = lat;
+    }
+
+
+    public long getArrivalAt() {
         return arrivalAt;
     }
 
-    public void setArrivalAt (long arrivalAt)
-    {
+    public void setArrivalAt(long arrivalAt) {
         this.arrivalAt = arrivalAt;
     }
 
