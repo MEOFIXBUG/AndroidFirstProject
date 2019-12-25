@@ -68,7 +68,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_recovery_pass, container, false);
-    final PinEntryEditText txtPinEntry = (PinEntryEditText) view.findViewById(R.id.inputCode);
+    final PinEntryEditText txtPinEntry = (PinEntryEditText) view.findViewById(R.id.inputOTP);
     txtPinEntry.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,25 +79,30 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         public void afterTextChanged(Editable s) {
             if (s.toString().length()==6) {
-                txtPinEntry.setText(null);
                 UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
                 OTPres otpres = new OTPres();
                 otpres.setUserId(429);
-                otpres.setVerifyCode("121212");
+                otpres.setVerifyCode(s.toString());//vai
                 otpres.setNewPassword("333333");
                 Call<RecoveryResponse> verifyOTP = user.verifyOTP(otpres);
                 verifyOTP.enqueue(new Callback<RecoveryResponse>() {
                     @Override
                     public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
                         if (response.isSuccessful() && response.code() == 200){
-                            if (response.body().getMessage()=="Successful")
+                            if (response.body().getMessage().compareTo("Successful")==0)
                             {
                                 SplashActivity.appPreference.showToast("Successful. Please login");
-                                registerFromActivityListener.signIn();
+                                //registerFromActivityListener.signIn();
+                                LoginFragment nextFrag = new LoginFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.fragment_container, nextFrag, "LoginFrag")
+                                        .addToBackStack(null)
+                                        .commit();
                             }
                         }
                         else
                         {
+                            txtPinEntry.setText(null);
                             SplashActivity.appPreference.showToast("Verify code is invalid or expired");
                         }
                     }
