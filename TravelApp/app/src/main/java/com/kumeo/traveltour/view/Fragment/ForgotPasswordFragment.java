@@ -76,22 +76,7 @@ public class ForgotPasswordFragment extends Fragment {
                             public void onResponse(Call<RecoveryOTP> call, Response<RecoveryOTP> response) {
                                 if (response.isSuccessful()) {
                                     if (response.code() == 200) {
-                                        //có vô đc đây ko, vo roi
                                         SplashActivity.appPreference.showToast("Request OTP OK");
-                                        //Chuyen sang man hinh nhap OTP
-                                        // Cho nay nha/
-                                        //ko Qua duoc man hinh nhap OTP. opt.xaml la nào
-                                        //Do
-                                        //làm lại đi, lam gi, demo ha
-                                        //cái opt.xaml đau
-                                        //từ chỗ nào click để mở qua, chỗ này
-                                        //fragment này nằm ở đâu z. trong cái nào á,
-                                        //Tu trong login, mo qua man hinh nhap email, roi qua cai nhap OTP
-                                        //cho hổm mình làm gioogns z hông, gioosng, t copy qua ma ko dc do
-                                        //
-
-                                        //loi o duoi nay, coi xem t co copy ko sua cho nao ko, chu ko ranh cai frag nay
-
                                         RecoveryPassOTPFragment nextFrag = new RecoveryPassOTPFragment();
                                         getActivity().getSupportFragmentManager().beginTransaction()
                                                 .replace(R.id.fragment_container, nextFrag, "recoveryinput")

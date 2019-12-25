@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -7,21 +7,58 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         tools:context=".view.Fragment.RecoveryPassOTPFragment">
+        <EditText
+            android:id="@+id/idEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="100dp"
+            android:hint="Account ID"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="16dp" />
+    <EditText
+        android:id="@+id/newPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="5dp"
+        android:hint="New Password"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16dp" />
 
         <com.kumeo.traveltour.view.Activity.PinEntryEditText
             android:id="@+id/inputOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="175dp"
-            android:layout_marginBottom="379dp"
+            android:layout_above="@+id/sendOTP"
             android:cursorVisible="false"
             android:digits="1234567890"
             android:inputType="number"
             android:maxLength="6"
             android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true" />
+            android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/sendOTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background = "@drawable/circle"
+        android:layout_margin="40dp"
+        android:text="Send"
+        android:textSize="16dp">
+
+    </Button>
 
 
-    </RelativeLayout>
+
+
+    </LinearLayout>
