@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +108,7 @@ public class LoginFragment extends Fragment {
                         SplashActivity.appPreference.showToast("Login Successful");
                         SplashActivity.appPreference.setUserID(response.body().getUserId());
                         SplashActivity.appPreference.setToken(response.body().getToken());
+                        SplashActivity.appPreference.setEmailVerified(response.body().getEmailVerified());
                         SplashActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
                         loginFromActivityListener.login();
                     } else {

@@ -39,6 +39,13 @@ public class MyApplication {
     public void setUserID(String userID){
         editor.putString(String.valueOf(R.string.s_pref_id), userID);
     }
+    public String  getEmailVerified() {
+        return sharedPreferences.getString(String.valueOf(R.string.s_pref_email_verified), "");
+    }
+    public void setEmailVerified(Boolean eV){
+        editor.putString(String.valueOf(R.string.s_pref_email_verified), eV.toString());
+    }
+
     // For Name
     public void setDisplayName(String name){
         editor.putString(String.valueOf(R.string.s_pref_name), name);

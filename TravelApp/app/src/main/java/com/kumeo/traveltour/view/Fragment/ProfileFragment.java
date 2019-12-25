@@ -122,26 +122,26 @@ public class ProfileFragment extends Fragment {
                     else {
                         gender.setText("Giới tính : Nữ");}
                     dob.setText("Ngày Sinh : "+response.body().getDob());
-
-                    if (response.body().isEmailVerified()== true)
+                    SplashActivity.appPreference.showToast(SplashActivity.appPreference.getEmailVerified());
+                    if (SplashActivity.appPreference.getEmailVerified().compareTo("true")==0)
                     {
                         emailVeri.setText("Xác thực email : Đã xác thực");
-                        btnEmailVeri.setVisibility(view.GONE);
+                        btnEmailVeri.setVisibility(View.GONE);
                     }
                     else
                     {
                         emailVeri.setText("Xác thực email : Chưa xác thực");
-                        btnEmailVeri.setVisibility(view.VISIBLE);
+                        btnEmailVeri.setVisibility(View.GONE);
                     }
                     if (response.body().isPhoneVerified()== true)
                     {
                         phoneVeri.setText("Xác thực SDT : Đã xác thực");
-                        btnEmailVeri.setVisibility(view.GONE);
+                        btnEmailVeri.setVisibility(View.GONE);
                     }
                     else
                     {
                         phoneVeri.setText("Xác thực SDT : Chưa xác thực");
-                        btnEmailVeri.setVisibility(view.VISIBLE);
+                        btnEmailVeri.setVisibility(View.GONE);
                     }
 
                     if (response.body().getFullName()== null) fullName.setText("[Chưa cập nhật]");

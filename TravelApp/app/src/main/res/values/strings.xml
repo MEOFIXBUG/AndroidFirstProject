@@ -3,6 +3,7 @@
     <string name="title_activity_main">TravelTour</string>
     <string name="action_settings">Settings</string>
     <string name="s_pref_id">sh_preference_uID</string>
+    <string name="s_pref_email_verified">sh_pref_email_verified</string>
     <string name="s_pref_file">com.kumeo.traveltour.sh_preference_file</string>
     <string name="s_pref_login_status">com.kumeo.traveltour.sh_preference_login_status</string>
     <string name="s_pref_name">sh_preference_name</string>

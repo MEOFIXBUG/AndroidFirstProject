@@ -93,6 +93,7 @@ public class VerificationFragment extends Fragment {
                                 if (response.body().getSuccess()==true)
                                 {
                                     SplashActivity.appPreference.showToast("Verified");
+                                    SplashActivity.appPreference.setEmailVerified(true);
                                     ProfileFragment nextFrag= new ProfileFragment();
                                     getActivity().getSupportFragmentManager().beginTransaction()
                                             .replace(R.id.fragment_container, nextFrag, "tag2")
