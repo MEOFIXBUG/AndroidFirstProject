@@ -111,10 +111,6 @@ public class CreateTourActivity extends AppCompatActivity{
         });
     }
 
-
-
-
-
     private void chooseDate(EditText etStartDate)
     {
         final Calendar myCalendar = Calendar.getInstance();
@@ -239,16 +235,19 @@ public class CreateTourActivity extends AppCompatActivity{
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-        if(checked==true)((RadioButton) view).setChecked(!checked);
+        //boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.rdoBtnIsPrivate:
-                if (checked)
-                    isPrivate=true;
-                break;
+        //SplashActivity.appPreference.showToast(isPrivate);
+        if (!((RadioButton) view).isSelected()) {
+            ((RadioButton) view).setChecked(true);
+            ((RadioButton) view).setSelected(true);
+            isPrivate=true;
+        } else {
+            ((RadioButton) view).setChecked(false);
+            ((RadioButton) view).setSelected(false);
+            isPrivate=false;
         }
+        SplashActivity.appPreference.showToast(isPrivate+"");
     }
 
 
