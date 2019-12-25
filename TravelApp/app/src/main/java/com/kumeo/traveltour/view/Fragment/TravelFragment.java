@@ -30,6 +30,7 @@ import com.kumeo.traveltour.model.Tour;
 import com.kumeo.traveltour.response.TourResponse;
 import com.kumeo.traveltour.retrofit.Service.TourInterface;
 import com.kumeo.traveltour.view.Activity.CreateTourActivity;
+import com.kumeo.traveltour.view.Activity.DetailTourActivity;
 import com.kumeo.traveltour.view.Activity.MainActivity;
 import com.kumeo.traveltour.view.Activity.SplashActivity;
 import com.kumeo.traveltour.view.Activity.TourActivity;
@@ -37,6 +38,8 @@ import com.kumeo.traveltour.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 /**
@@ -136,7 +139,14 @@ public class TravelFragment extends Fragment {
         // adapter
         //adapter = new TourAdapter(getActivity(), tourArrayList);
         adapter = new ItemAdapter(getActivity(), tourArrayList);
-        adapter.setOnItemClicklListener(tourID -> SplashActivity.appPreference.showToast("onclick" + tourID));
+        adapter.setOnItemClicklListener((tour) ->
+        {
+            SplashActivity.appPreference.showToast("onclick" + tour.getID());
+            Intent intent = new Intent(getActivity(), DetailTourActivity.class);
+            intent.putExtra("tourID",tour.getID());
+            intent.putExtra("tourName",tour.getName());
+            startActivity(intent);
+        });
 
         my_recycler_view.setAdapter(adapter);
         my_recycler_view.addOnScrollListener(new PaginationScrollListener(layoutManager){

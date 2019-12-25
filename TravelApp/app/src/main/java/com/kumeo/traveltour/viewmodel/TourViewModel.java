@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.kumeo.traveltour.repository.TourRepository;
+import com.kumeo.traveltour.response.TourInfoResponse;
 import com.kumeo.traveltour.response.TourResponse;
 
 public class TourViewModel extends AndroidViewModel {
@@ -57,5 +58,12 @@ public class TourViewModel extends AndroidViewModel {
         }
         return tourResponseLiveData;
     }
-
+    public LiveData<TourInfoResponse> getTourInfo(int id){
+        try {
+             return tourRepository.getTourInfoByID(id);
+        }
+        catch (Exception ex){
+            return null;
+        }
+    }
 }

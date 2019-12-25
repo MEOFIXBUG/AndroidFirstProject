@@ -2,6 +2,7 @@ package com.kumeo.traveltour.retrofit.Service.Tour;
 
 
 import com.kumeo.traveltour.model.Tour;
+import com.kumeo.traveltour.response.TourInfoResponse;
 import com.kumeo.traveltour.response.TourResponse;
 
 import retrofit2.Call;
@@ -24,4 +25,6 @@ public interface TourAPI {
     @POST("/tour/create")
     Call<Tour> createTour(@Body Tour tourCreate);
 
+    @GET("tour/info")
+    Call<TourInfoResponse> getTourInfo(@Query("tourId") int tourId);
 }
