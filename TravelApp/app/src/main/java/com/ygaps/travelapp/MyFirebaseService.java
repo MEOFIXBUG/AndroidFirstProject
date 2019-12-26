@@ -11,6 +11,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
 
@@ -19,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.view.Activity.MainActivity;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
+import com.ygaps.travelapp.view.Fragment.ProfileFragment;
 
 import java.util.Map;
 
@@ -50,28 +53,21 @@ public class MyFirebaseService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
+        //Custom
+        RemoteViews myNoti = new RemoteViews(getPackageName(), R.layout.notification);
         String channelId = getString(R.string.app_name);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
+        String tourName = "A user invited you to tour : "+ data.get("name");
+        myNoti.setTextViewText(R.id.message,tourName);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText("Test")
+                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                         .setAutoCancel(true)
+                        .setCustomContentView(myNoti)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent)
-                        .setDefaults(Notification.DEFAULT_ALL)
-                        .setPriority(NotificationManager.IMPORTANCE_HIGH)
-                        .addAction(new NotificationCompat.Action(
-                                android.R.drawable.sym_call_missed,
-                                "Cancel",
-                                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)))
-                        .addAction(new NotificationCompat.Action(
-                                android.R.drawable.sym_call_outgoing,
-                                "OK",
-                                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)));
+                        .setPriority(NotificationManager.IMPORTANCE_HIGH);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
