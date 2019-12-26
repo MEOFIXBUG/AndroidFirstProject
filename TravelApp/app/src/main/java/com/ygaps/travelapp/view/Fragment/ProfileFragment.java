@@ -2,10 +2,14 @@ package com.ygaps.travelapp.view.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +18,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.ygaps.travelapp.BuildConfig;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.UserInfo;
 import com.ygaps.travelapp.model.PasswordUpdate;
+import com.ygaps.travelapp.model.RegistrationFirebase;
 import com.ygaps.travelapp.response.ActiveResponse;
 import com.ygaps.travelapp.response.RecoveryResponse;
 import com.ygaps.travelapp.retrofit.Service.User.UserAPI;
@@ -48,7 +58,7 @@ public class ProfileFragment extends Fragment {
     private ImageButton editPro;
     private ImageButton editOk;
     private ImageButton editCancel;
-
+    private  ImageButton sendregFB;
     private Button btnChangepass;
     private OnFragmentInteractionListener mListener;
     public ProfileFragment() {
@@ -90,7 +100,57 @@ public class ProfileFragment extends Fragment {
         editPro = view.findViewById(R.id.btnEditProfile);
         editOk = view.findViewById(R.id.btnEditDone);
         editCancel = view.findViewById(R.id.btnCancelEdit);
+        //
+        sendregFB = view.findViewById(R.id.sendFirebaseReg);
+        sendregFB.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              FirebaseInstanceId.getInstance().getInstanceId()
+                      .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                          @Override
+                          public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                              if (!task.isSuccessful()) {
 
+                                  SplashActivity.appPreference.showToast("Failed");
+                                  return;
+                              }
+                              // Get new Instance ID token
+                              String token = task.getResult().getToken();
+                              SplashActivity.appPreference.setFirebaseToken(token);
+                              String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                              UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
+                              RegistrationFirebase reg = new RegistrationFirebase();
+                              reg.setFcmToken(token);
+                              reg.setDeviceId(androidId);
+                              reg.setPlatform(1);
+                              reg.setAppVersion("1.0");
+                              Call<RecoveryResponse> regFB = user.regFirebase(SplashActivity.appPreference.getToken(),reg);
+                              regFB.enqueue(new Callback<RecoveryResponse>() {
+                                  @Override
+                                  public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
+                                      if (response.isSuccessful()) {
+                                          if (response.code() == 200) {
+                                              SplashActivity.appPreference.showToast("Reg Firebase Ok");
+                                              Log.d("Firebaselog","Reg Firebase Ok");
+                                          } else if (response.code() == 404) {
+                                          } else {
+                                          }
+                                      }
+                                  }
+                                  @Override
+                                  public void onFailure(Call<RecoveryResponse> call, Throwable t) {
+                                  }
+                              });
+
+                              Log.d("IDne",androidId);
+                              Log.d("ccc",token);
+                              Log.d("ccc",SplashActivity.appPreference.getToken());
+                          }
+                      });
+
+          }
+      });
+        //
         TextView fullName = view.findViewById(R.id.txtFullName);
         TextView email = view.findViewById(R.id.emailPro);
         TextView phone = view.findViewById(R.id.phonePro);

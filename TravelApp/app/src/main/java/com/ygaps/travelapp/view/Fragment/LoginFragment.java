@@ -127,54 +127,11 @@ public class LoginFragment extends Fragment {
                         SplashActivity.appPreference.showToast("Login Successful");
                         SplashActivity.appPreference.setUserID(response.body().getUserId());
                         SplashActivity.appPreference.setToken(response.body().getToken());
+                        //co token roi ne
                         SplashActivity.appPreference.setEmailVerified(response.body().getEmailVerified());
                         SplashActivity.appPreference.setLoginStatus(true); // set login status in sharedPreference
                         //Firebase
-                        FirebaseInstanceId.getInstance().getInstanceId()
-                                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                        if (!task.isSuccessful()) {
 
-                                            SplashActivity.appPreference.showToast("Failed");
-                                            return;
-                                        }
-                                        // Get new Instance ID token
-                                        String token = task.getResult().getToken();
-                                        SplashActivity.appPreference.setFirebaseToken(token);
-
-
-                                        String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-
-                                        UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
-                                        RegistrationFirebase reg = new RegistrationFirebase();
-                                        reg.setFcmToken(token);
-                                        reg.setDeviceId(androidId);
-                                        reg.setPlatform(1);
-                                        reg.setAppVersion(BuildConfig.VERSION_NAME);
-                                        Call<RecoveryResponse> regFB = user.regFirebase(response.body().getToken(),reg);
-                                        regFB.enqueue(new Callback<RecoveryResponse>() {
-                                            @Override
-                                            public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
-                                                if (response.isSuccessful()) {
-                                                    if (response.code() == 200) {
-SplashActivity.appPreference.showToast("Reg Firebase Ok");
-Log.d("Firebaselog","Reg Firebase Ok");
-                                                    } else if (response.code() == 404) {
-                                                    } else {
-                                                    }
-                                                }
-                                            }
-                                            @Override
-                                            public void onFailure(Call<RecoveryResponse> call, Throwable t) {
-                                            }
-                                        });
-
-                                        Log.d("IDne",androidId);
-                                        Log.d("ccc",token);
-                                        Log.d("ccc",SplashActivity.appPreference.getToken());
-                                    }
-                                });
 
 
 

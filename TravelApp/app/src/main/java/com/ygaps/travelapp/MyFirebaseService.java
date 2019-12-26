@@ -1,4 +1,4 @@
-package com.ygaps.travelapp.retrofit;
+package com.ygaps.travelapp;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -20,19 +20,20 @@ import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.view.Activity.MainActivity;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
 
+import java.util.Map;
+
 public class MyFirebaseService extends FirebaseMessagingService {
-    private static final String TAG = "MyFirebaseService";
+    private static final String TAG = "Firebaselog";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // handle a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "MessageFB" + remoteMessage.getNotification().getBody());
-            SplashActivity.appPreference.showToast("Firebase work");
-            sendNotification(remoteMessage.getNotification().getBody());
+        Log.d(TAG, remoteMessage.getData().toString());
+        if (remoteMessage.getData() != null) {
+            Log.d(TAG, "Lay data firebase");
+            sendNotification(remoteMessage.getData());
         }
     }
-
     @Override
     public void onNewToken(String token) {
         Log.d(TAG, "Refreshed token: " + token);
@@ -44,7 +45,7 @@ public class MyFirebaseService extends FirebaseMessagingService {
         // TODO: Implement this method to send token to your app server.
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(Map<String, String> data) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -57,7 +58,7 @@ public class MyFirebaseService extends FirebaseMessagingService {
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
                         .setContentTitle(getString(R.string.app_name))
-                        .setContentText(messageBody)
+                        .setContentText("Test")
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent)
