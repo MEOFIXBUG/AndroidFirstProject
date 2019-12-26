@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,11 +27,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.ygaps.travelapp.BuildConfig;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.model.Account;
+import com.ygaps.travelapp.model.RegistrationFirebase;
 import com.ygaps.travelapp.model.facebookToken;
 import com.ygaps.travelapp.response.LoginResponse;
+import com.ygaps.travelapp.response.RecoveryResponse;
 import com.ygaps.travelapp.retrofit.Service.AccountInterface;
+import com.ygaps.travelapp.retrofit.Service.User.UserAPI;
+import com.ygaps.travelapp.retrofit.retrofitRequest;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
 
 import com.google.android.gms.tasks.Task;
@@ -136,6 +142,35 @@ public class LoginFragment extends Fragment {
                                         // Get new Instance ID token
                                         String token = task.getResult().getToken();
                                         SplashActivity.appPreference.setFirebaseToken(token);
+
+
+                                        String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+                                        UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
+                                        RegistrationFirebase reg = new RegistrationFirebase();
+                                        reg.setFcmToken(token);
+                                        reg.setDeviceId(androidId);
+                                        reg.setPlatform(1);
+                                        reg.setAppVersion(BuildConfig.VERSION_NAME);
+                                        Call<RecoveryResponse> regFB = user.regFirebase(response.body().getToken(),reg);
+                                        regFB.enqueue(new Callback<RecoveryResponse>() {
+                                            @Override
+                                            public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
+                                                if (response.isSuccessful()) {
+                                                    if (response.code() == 200) {
+SplashActivity.appPreference.showToast("Reg Firebase Ok");
+Log.d("Firebaselog","Reg Firebase Ok");
+                                                    } else if (response.code() == 404) {
+                                                    } else {
+                                                    }
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(Call<RecoveryResponse> call, Throwable t) {
+                                            }
+                                        });
+
+                                        Log.d("IDne",androidId);
                                         Log.d("ccc",token);
                                         Log.d("ccc",SplashActivity.appPreference.getToken());
                                     }

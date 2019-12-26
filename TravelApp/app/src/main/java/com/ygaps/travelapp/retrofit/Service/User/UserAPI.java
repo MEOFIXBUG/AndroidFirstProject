@@ -4,6 +4,7 @@ import com.ygaps.travelapp.UserInfo;
 import com.ygaps.travelapp.model.OTPreq;
 import com.ygaps.travelapp.model.OTPres;
 import com.ygaps.travelapp.model.PasswordUpdate;
+import com.ygaps.travelapp.model.RegistrationFirebase;
 import com.ygaps.travelapp.response.ActiveResponse;
 import com.ygaps.travelapp.response.ActiveResultResponse;
 import com.ygaps.travelapp.response.RecoveryOTP;
@@ -33,5 +34,6 @@ public interface UserAPI {
  Call<RecoveryResponse> updateInfo(@Header("Authorization") String author,@Body UserInfo userInfo);
 @POST("/user/update-password")
  Call<RecoveryResponse> updatePassword(@Header("Authorization") String author, @Body PasswordUpdate updatePass);
-
+@POST("/user/notification/put-token")
+ Call<RecoveryResponse> regFirebase(@Header("Authorization") String author, @Body RegistrationFirebase reg);
 }
