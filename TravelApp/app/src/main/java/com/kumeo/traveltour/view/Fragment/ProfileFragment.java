@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.kumeo.traveltour.R;
 import com.kumeo.traveltour.UserInfo;
 import com.kumeo.traveltour.extras.MyApplication;
+import com.kumeo.traveltour.model.PasswordUpdate;
 import com.kumeo.traveltour.response.ActiveResponse;
 import com.kumeo.traveltour.response.RecoveryResponse;
 import com.kumeo.traveltour.retrofit.Service.User.UserAPI;
@@ -62,6 +63,8 @@ public class ProfileFragment extends Fragment {
     private ImageButton editPro;
     private ImageButton editOk;
     private ImageButton editCancel;
+
+    private Button btnChangepass;
     private OnFragmentInteractionListener mListener;
     public ProfileFragment() {
         // Required empty public constructor
@@ -118,7 +121,12 @@ public class ProfileFragment extends Fragment {
         EditText addEdit = view.findViewById(R.id.addProEdit);
         EditText genEdit = view.findViewById(R.id.genProEdit);
         EditText dobEdit = view.findViewById(R.id.dobProEdit);
+        //
 
+        EditText curpas = view.findViewById(R.id.currentpass);
+        EditText newpas1 = view.findViewById(R.id.newpass);
+        EditText newpas2 = view.findViewById(R.id.newpass2);
+        //
         editOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -336,6 +344,67 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+        //Changepass
+        btnChangepass = view.findViewById(R.id.changepassBtn);
+        btnChangepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String curpasStr = curpas.getText().toString();
+                String newpas1Str = newpas1.getText().toString();
+                String newpas2Str = newpas2.getText().toString();
+                if (curpasStr.compareTo("")==0 || newpas1Str.compareTo("")==0 || newpas2Str.compareTo("")==0)
+                {
+                    SplashActivity.appPreference.showToast("Input password");
+                }
+                else if (newpas1Str.length()<6 || newpas2Str.length()<6)
+                {
+                    SplashActivity.appPreference.showToast("New password must longer than 6 character");
+                }
+                else if (newpas1Str.compareTo(newpas2Str)!=0)
+                {
+                    SplashActivity.appPreference.showToast("Repeat new password not match");
+                }
+                else
+                {
+                    PasswordUpdate pu = new PasswordUpdate();
+                    pu.setUserId(Integer.parseInt(SplashActivity.appPreference.getUserID()));
+                    pu.setCurrentPassword(curpasStr);
+                    pu.setNewPassword(newpas1Str);
+                    String header = SplashActivity.appPreference.getToken();
+                    Call<RecoveryResponse> updatePassword = user.updatePassword(header,pu);
+                    updatePassword.enqueue(new Callback<RecoveryResponse>() {
+                        @Override
+                        public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
+                            if (response.isSuccessful() && response.code()==200){
+                                    SplashActivity.appPreference.showToast("Update password successfull");
+                                curpas.setText("");
+                                newpas1.setText("");
+                                newpas2.setText("");
+                            }
+                            else if (response.code()==400)
+                            {
+                                SplashActivity.appPreference.showToast("Current password is wrong");
+                            }
+                            else
+                            {
+                                SplashActivity.appPreference.showToast("Update password failed (Server Erro)");
+                                curpas.setText("");
+                                newpas1.setText("");
+                                newpas2.setText("");
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<RecoveryResponse> call, Throwable t) {
+                            SplashActivity.appPreference.showToast("Send request failed. Try again later");
+                        }
+                    });
+                }
+
+            }
+            });
+
+
+
         return view;
     }
 

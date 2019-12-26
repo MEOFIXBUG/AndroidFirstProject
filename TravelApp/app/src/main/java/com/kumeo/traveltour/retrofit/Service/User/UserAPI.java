@@ -8,6 +8,7 @@ import com.kumeo.traveltour.UserInfo;
 import com.kumeo.traveltour.extras.MyApplication;
 import com.kumeo.traveltour.model.OTPreq;
 import com.kumeo.traveltour.model.OTPres;
+import com.kumeo.traveltour.model.PasswordUpdate;
 import com.kumeo.traveltour.response.ActiveResponse;
 import com.kumeo.traveltour.response.ActiveResultResponse;
 import com.kumeo.traveltour.response.RecoveryOTP;
@@ -36,4 +37,7 @@ public interface UserAPI {
  Call<RecoveryResponse> verifyOTP(@Body OTPres OTPres);
  @POST("/user/edit-info")
  Call<RecoveryResponse> updateInfo(@Header("Authorization") String author,@Body UserInfo userInfo);
+@POST("/user/update-password")
+ Call<RecoveryResponse> updatePassword(@Header("Authorization") String author, @Body PasswordUpdate updatePass);
+
 }
