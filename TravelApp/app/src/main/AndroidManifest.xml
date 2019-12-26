@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kumeo.traveltour">
+    package="com.ygaps.travelapp">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -25,7 +25,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.Activity.DetailTourActivity"></activity>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/com_facebook_button_icon" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/app_name" />
+        <service
+            android:name=".retrofit.MyFirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -42,10 +59,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".view.Activity.TourMapsActivity"
+            android:name="com.ygaps.travelapp.view.Activity.TourMapsActivity"
             android:label="@string/title_activity_tour_maps"
             android:theme="@style/AppTheme.NoActionBarMap"></activity>
-        <activity android:name=".view.Activity.SplashActivity">
+        <activity android:name="com.ygaps.travelapp.view.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,11 +70,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.Activity.TourActivity"
+            android:name="com.ygaps.travelapp.view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.Activity.MainActivity"
+            android:name="com.ygaps.travelapp.view.Activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -68,9 +85,9 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".view.Activity.CreateTourActivity" />
+        <activity android:name="com.ygaps.travelapp.view.Activity.CreateTourActivity" />
         <activity
-            android:name=".view.Activity.AddStopPointActivity"
+            android:name="com.ygaps.travelapp.view.Activity.AddStopPointActivity"
             android:theme="@style/AppTheme.CustomTheme" />
 
         <meta-data

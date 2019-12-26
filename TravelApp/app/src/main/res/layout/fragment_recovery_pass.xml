@@ -35,7 +35,7 @@
         android:textColorHint="#FFFFFF"
         android:textSize="16dp" />
 
-        <com.kumeo.traveltour.view.Activity.PinEntryEditText
+        <com.ygaps.travelapp.view.Activity.PinEntryEditText
             android:id="@+id/inputOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

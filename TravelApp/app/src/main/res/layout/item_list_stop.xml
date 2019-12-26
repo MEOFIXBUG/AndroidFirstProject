@@ -27,7 +27,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-            <com.kumeo.traveltour.extras.CircleImageView
+            <com.ygaps.travelapp.extras.CircleImageView
                 android:id="@+id/profile_image"
                 app:civ_border_color="@color/bgBottomNavigation"
                 app:civ_border_width="2dp"
