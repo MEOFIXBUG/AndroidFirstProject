@@ -1,6 +1,7 @@
 package com.ygaps.travelapp.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,8 +12,10 @@ import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 
 public class TourViewModel extends AndroidViewModel {
+    private static final String TAG = TourViewModel.class.getSimpleName();
     private TourRepository tourRepository;
     private LiveData<TourResponse> tourResponseLiveData;
+    private LiveData<TourInfoResponse> tourInfoResponseLiveData;
     public TourViewModel(@NonNull Application application) {
         super(application);
         tourRepository = new TourRepository();
@@ -55,11 +58,14 @@ public class TourViewModel extends AndroidViewModel {
         }
         return tourResponseLiveData;
     }
-    public LiveData<TourInfoResponse> getTourInfo(int id){
+    public LiveData<TourInfoResponse> getTourInfo(long id){
         try {
-             return tourRepository.getTourInfoByID(id);
+            Log.d(TAG," re: " + id);
+            tourInfoResponseLiveData= tourRepository.getTourInfoByID(id);
+             return tourInfoResponseLiveData;
         }
         catch (Exception ex){
+            Log.d(TAG," re: " + ex);
             return null;
         }
     }

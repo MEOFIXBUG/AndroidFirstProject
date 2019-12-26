@@ -35,7 +35,6 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadFragment(new TravelFragment());
-
     }
 
     private void loadFragment(Fragment fragment) {

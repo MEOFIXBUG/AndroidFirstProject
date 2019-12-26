@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +16,17 @@ import android.view.ViewGroup;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.StopListAdapter;
 import com.ygaps.travelapp.model.StopPoint;
+import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourViewModel;
 
 
 /**
@@ -40,7 +48,7 @@ public class StopPointFragment extends Fragment {
     private StopListAdapter adapter;
     private RecyclerView my_recycler_view;
     private LinearLayoutManager layoutManager;
-    TourViewModel tourViewModel;
+    //TourViewModel tourViewModel;
     private static final String TAG = TravelFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,6 +93,7 @@ public class StopPointFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_stop_point, container, false);
         initialization(view);
+        getstopPoint();
         return view;
     }
     private void initialization(View view) {
@@ -97,9 +106,6 @@ public class StopPointFragment extends Fragment {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         my_recycler_view.setHasFixedSize(true);
-        StopPoint a = new StopPoint();
-        a.setName("Quan Com");
-        stopArrayList.add(a);
         // adapter
         //adapter = new TourAdapter(getActivity(), tourArrayList);
         adapter = new StopListAdapter(getActivity(),stopArrayList);
@@ -110,9 +116,32 @@ public class StopPointFragment extends Fragment {
 
         my_recycler_view.setAdapter(adapter);
 
+
         // View Model
         //tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,1);
+
+    }
+    private void getstopPoint() {
+        LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
+        if(data!= null)
+        {
+            data.observe(this,tourInfoResponse->{
+
+                if (tourInfoResponse != null) {
+                    List<StopPoint> stop = tourInfoResponse.getStopPoints();
+                    if(stop.isEmpty())
+                    {
+                        stopArrayList.addAll(stop);
+
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                else {
+
+                }
+            });
+        }
 
     }
     // TODO: Rename method, update argument and hook method into UI event

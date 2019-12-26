@@ -87,6 +87,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
             cityname= (TextView)view.findViewById(R.id.tv);
             date= (TextView)view.findViewById(R.id.date);
             timelineView= (TimelineView)view.findViewById(R.id.timeline_view);
+            timelineView.initLine(11);
             view.setOnClickListener(this);
         }
 

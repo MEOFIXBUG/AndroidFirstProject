@@ -25,5 +25,5 @@ public interface TourAPI {
     Call<Tour> createTour(@Body Tour tourCreate);
 
     @GET("tour/info")
-    Call<TourInfoResponse> getTourInfo(@Query("tourId") int tourId);
+    Call<TourInfoResponse> getTourInfo(@Query("tourId") long tourId);
 }

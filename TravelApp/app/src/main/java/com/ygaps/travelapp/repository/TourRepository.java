@@ -26,16 +26,13 @@ public class TourRepository {
         final MutableLiveData<TourResponse> data = new MutableLiveData<>();
         apiRequest.getListTour(perpage, page)
                 .enqueue(new Callback<TourResponse>() {
-
                     @Override
                     public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
 
 
                         if (response.body() != null) {
                             data.setValue(response.body());
-
                             Log.d(TAG, "tours total result:: " + response.body().getTotal());
-
                         }
                     }
                     @Override
@@ -72,31 +69,35 @@ public class TourRepository {
                 });
         return data;
     }
-    public LiveData<TourInfoResponse> getTourInfoByID(int id){
+    public LiveData<TourInfoResponse> getTourInfoByID(long id){
         final MutableLiveData<TourInfoResponse> data = new MutableLiveData<>();
+        Log.d(TAG, "toi da vao day");
         apiRequest.getTourInfo(id)
                 .enqueue(new Callback<TourInfoResponse>() {
 
                     @Override
                     public void onResponse(Call<TourInfoResponse> call, Response<TourInfoResponse> response) {
 
-                        if (response.body() != null) {
-                            //Log.d(TAG, "trips total result:: " + response.body().getTotal());
-                            if(response.body()!=null){
-                                Log.d(TAG, "Name:: " + response.body().getName());
-                                data.setValue(response.body());
-                            }
-                            else {
-                                data.setValue(null);
-                            }
-
+                        //Log.d(TAG, "trips total result:: " + response.body().getTotal());
+                        if(response.body()!=null){
+                            Log.d(TAG, "Name:: " + response.body().getName());
+                            Log.d(TAG, "t met nhan:: " + response.body());
+                           data.setValue(response.body());
                         }
+                        else {
+                            Log.d(TAG, "null1: ");
+                            data.setValue(null);
+                        }
+
+
                     }
                     @Override
                     public void onFailure(Call<TourInfoResponse> call, Throwable t) {
+                        Log.d(TAG, "null2: ");
                         data.setValue(null);
                     }
                 });
+        Log.d(TAG,data.toString());
         return data;
     }
 
