@@ -134,6 +134,7 @@ public class TravelFragment extends Fragment {
             Intent intent = new Intent(getActivity(), DetailTourActivity.class);
             intent.putExtra("tourID",tour.getID());
             intent.putExtra("tourName",tour.getName());
+            intent.putExtra("Editable",false);
             startActivity(intent);
         });
 

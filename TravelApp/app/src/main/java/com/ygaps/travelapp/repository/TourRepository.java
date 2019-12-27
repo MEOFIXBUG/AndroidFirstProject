@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
@@ -24,7 +26,7 @@ public class TourRepository {
 
     public LiveData<TourResponse> getTours(long perpage,long page) {
         final MutableLiveData<TourResponse> data = new MutableLiveData<>();
-        apiRequest.getListTour(perpage, page)
+        apiRequest.getListTour(perpage, page,"startDate",false)
                 .enqueue(new Callback<TourResponse>() {
                     @Override
                     public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
@@ -98,6 +100,25 @@ public class TourRepository {
                     }
                 });
         Log.d(TAG,data.toString());
+        return data;
+    }
+    public LiveData<StatusResponse> Invite_Join(toInvited req){
+        final MutableLiveData<StatusResponse> data = new MutableLiveData<>();
+        apiRequest.Invite_Join(req)
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+
+                        if (response.body() != null) {
+                            data.setValue(response.body());
+                            Log.d(TAG, "tours total result:: " + response.body().getMessage());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
         return data;
     }
 

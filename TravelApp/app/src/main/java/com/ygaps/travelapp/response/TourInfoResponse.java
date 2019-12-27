@@ -30,13 +30,13 @@ public class TourInfoResponse {
     private String name;
     @SerializedName("maxCost")
     @Expose
-    private long maxCost;
+    private String maxCost;
     @SerializedName("id")
     @Expose
     private long id;
     @SerializedName("minCost")
     @Expose
-    private long minCost;
+    private String minCost;
     @SerializedName("startDate")
     @Expose
     private long startDate;
@@ -134,12 +134,12 @@ public class TourInfoResponse {
         this.name = name;
     }
 
-    public long getMaxCost ()
+    public String getMaxCost ()
     {
         return maxCost;
     }
 
-    public void setMaxCost (long maxCost)
+    public void setMaxCost (String maxCost)
     {
         this.maxCost = maxCost;
     }
@@ -154,12 +154,12 @@ public class TourInfoResponse {
         this.id = id;
     }
 
-    public long getMinCost ()
+    public String getMinCost ()
     {
         return minCost;
     }
 
-    public void setMinCost (long minCost)
+    public void setMinCost (String minCost)
     {
         this.minCost = minCost;
     }

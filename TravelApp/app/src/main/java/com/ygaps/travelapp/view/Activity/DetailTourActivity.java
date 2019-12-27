@@ -25,6 +25,7 @@ public class DetailTourActivity extends AppCompatActivity {
     private static final String TAG = DetailTourActivity.class.getSimpleName();
     public static  TourViewModel tourViewModel;
     public static long tourID;
+    public static boolean Editable;
 //    ImageView placeImageView;
     private Toolbar toolbar;
     @Override
@@ -34,6 +35,7 @@ public class DetailTourActivity extends AppCompatActivity {
         tourViewModel= ViewModelProviders.of(this).get(TourViewModel.class);
         Intent intent= getIntent();
         tourID=intent.getLongExtra("tourID",1);
+        Editable=intent.getBooleanExtra("Editable",false);
         toolbar = findViewById(R.id.toolbar);
         String tourName=intent.getStringExtra("tourName");
         toolbar.setTitle(tourName);
