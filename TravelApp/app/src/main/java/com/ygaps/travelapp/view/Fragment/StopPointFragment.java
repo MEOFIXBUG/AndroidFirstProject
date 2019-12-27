@@ -130,7 +130,7 @@ public class StopPointFragment extends Fragment {
 
                 if (tourInfoResponse != null) {
                     List<StopPoint> stop = tourInfoResponse.getStopPoints();
-                    if(stop.isEmpty())
+                    if(!stop.isEmpty())
                     {
                         stopArrayList.addAll(stop);
 

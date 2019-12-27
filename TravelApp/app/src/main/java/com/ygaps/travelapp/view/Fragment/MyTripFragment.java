@@ -1,6 +1,7 @@
 package com.ygaps.travelapp.view.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,9 +19,12 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.adapter.TourAdapter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
+import com.ygaps.travelapp.view.Activity.DetailTourActivity;
+import com.ygaps.travelapp.view.Activity.SplashActivity;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
@@ -43,7 +47,7 @@ public class MyTripFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
-    private TourAdapter adapter;
+    private ItemAdapter adapter;
     private RecyclerView my_recycler_view;
     private ProgressBar progress_circular_tour;
     private LinearLayoutManager layoutManager;
@@ -124,8 +128,15 @@ public class MyTripFragment extends Fragment {
         my_recycler_view.setHasFixedSize(true);
 
         // adapter
-        adapter = new TourAdapter(getActivity(), tourArrayList);
-        
+        adapter = new ItemAdapter(getActivity(), tourArrayList);
+        adapter.setOnItemClicklListener((tour) ->
+        {
+            SplashActivity.appPreference.showToast("onclick" + tour.getID());
+            Intent intent = new Intent(getActivity(), DetailTourActivity.class);
+            intent.putExtra("tourID",tour.getID());
+            intent.putExtra("tourName",tour.getName());
+            startActivity(intent);
+        });
         my_recycler_view.setAdapter(adapter);
 
         // View Model
