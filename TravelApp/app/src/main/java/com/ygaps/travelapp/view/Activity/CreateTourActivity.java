@@ -80,8 +80,8 @@ public class CreateTourActivity extends AppCompatActivity{
                 {
                     try {
                         reqTour= makeTourRequest();
-                        //openMapActivity();
-                        createTour(reqTour);
+                        openMapActivity();
+                        //createTour(reqTour);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
