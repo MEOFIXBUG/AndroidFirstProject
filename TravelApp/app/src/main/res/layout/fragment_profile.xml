@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
-    tools:context=".view.Fragment.ProfileFragment">
-
     <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        tools:context=".view.Fragment.ProfileFragment"
+        android:background="@color/colorLightGray"
         android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -20,7 +17,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"
-                android:layout_weight="2"
                 android:background="@color/backgroundDefault"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -30,8 +26,8 @@
                 <ImageView
                     android:id="@+id/profileImage"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:src="@drawable/placeholder" />
                 <RelativeLayout
@@ -45,6 +41,7 @@
                     android:fontFamily="sans-serif-thin"
                     android:gravity="center"
                     android:text="John Doe"
+<<<<<<< Updated upstream
                     android:textSize="25sp" />
                     <EditText
                         android:visibility="gone"
@@ -62,6 +59,14 @@
                     android:id="@+id/sendFirebaseReg"
                     android:layout_width="30dip"
                     android:layout_height="30dip"
+=======
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/btnEditProfilePicture"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+>>>>>>> Stashed changes
                     android:layout_gravity="right"
                     android:background="@drawable/ic_add_a_photo_black_24dp" />
 
@@ -70,14 +75,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_weight="1"
                 android:background="@color/backgroundDefault"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp">
-    android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/profileHeading"
                     android:layout_width="match_parent"
@@ -85,7 +88,7 @@
                     android:layout_marginBottom="16dp"
                     android:fontFamily="sans-serif-thin"
                     android:text="Account Information"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -94,7 +97,7 @@
                     android:id="@+id/emailPro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:text="Email : " />
 
                     <EditText
@@ -112,13 +115,14 @@
                     android:id="@+id/phonePro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:text="SDT : " />
                     <EditText
                     android:visibility="gone"
                     android:id="@+id/phoneProEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+<<<<<<< Updated upstream
                     android:layout_marginBottom="16dp"
                     android:hint="SDT : " />
                 </RelativeLayout>
@@ -139,9 +143,14 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Địa chỉ : " />
                 </RelativeLayout>
+=======
+                    android:layout_marginBottom="12dp"
+                    android:text="Địa chỉ : " />
+>>>>>>> Stashed changes
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+<<<<<<< Updated upstream
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/genPro"
@@ -157,9 +166,15 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Giới tính : " />
                 </RelativeLayout>
+=======
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Giới tính : " />
+>>>>>>> Stashed changes
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+<<<<<<< Updated upstream
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/dobPro"
@@ -175,6 +190,11 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Ngày sinh : " />
                 </RelativeLayout>
+=======
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Ngày sinh : " />
+>>>>>>> Stashed changes
 
 
 <RelativeLayout
@@ -217,24 +237,26 @@
                     android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-thin"
                     android:text="Account Verification"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:layout_gravity="left">
 
     <TextView
         android:id="@+id/emailVeri"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Xác thực email  :  Chưa xác thực" />
+        android:layout_marginBottom="12dp"
+        android:text="Xác thực email  :  [Chưa xác thực]" />
     <Button
         android:id="@+id/emailVeriBtn"
         android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Xác thực"></Button>
+        android:text="Xác thực">
+    </Button>
 </LinearLayout>
 
                 <LinearLayout
@@ -245,14 +267,15 @@
                     android:id="@+id/phoneVeri"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Xác thực phone : Chưa xác thực" />
+                    android:layout_marginBottom="12dp"
+                    android:text="Xác thực phone : [Chưa xác thực]" />
                     <Button
                         android:id="@+id/phoneVeriBtn"
                     android:layout_marginStart="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xác thực"></Button>
+                    android:text="Xác thực">
+                    </Button>
                 </LinearLayout>
 
 
@@ -340,8 +363,5 @@
                 android:textColor="#fff"
                 android:textSize="20dp" />
         </LinearLayout>
-
-
     </ScrollView>
 
-</LinearLayout>

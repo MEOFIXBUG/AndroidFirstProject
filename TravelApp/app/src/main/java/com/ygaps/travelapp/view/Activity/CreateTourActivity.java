@@ -12,11 +12,28 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/CreateTourActivity.java
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
+=======
+import com.kumeo.traveltour.R;
+import com.kumeo.traveltour.extras.ReadExcel;
+import com.kumeo.traveltour.extras.converter;
+import com.kumeo.traveltour.model.Tour;
+import com.kumeo.traveltour.retrofit.Service.Tour.TourAPI;
+import com.kumeo.traveltour.retrofit.retrofitRequest;
+>>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/CreateTourActivity.java
+
+/*import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;*/
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +44,8 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.lang.Integer.parseInt;
 
 public class CreateTourActivity extends AppCompatActivity{
 
@@ -48,6 +67,7 @@ public class CreateTourActivity extends AppCompatActivity{
 
     private TourAPI tourapi;
     private Tour reqTour;
+    private long tourId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +83,8 @@ public class CreateTourActivity extends AppCompatActivity{
                 {
                     try {
                         reqTour= makeTourRequest();
-                        openMapActivity();
-                        //createTour(reqTour);
+                        //openMapActivity();
+                        createTour(reqTour);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -77,8 +97,6 @@ public class CreateTourActivity extends AppCompatActivity{
         chooseDate(etEndDate);
 
     }
-
-
 
 
 
@@ -96,7 +114,7 @@ public class CreateTourActivity extends AppCompatActivity{
                     //SplashActivity.appPreference.showToast(response.body().getStartDate()+"");
                     SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
                     SplashActivity.appPreference.showToast(response.body().getID()+"id");
-                    //openAddStopPointActivity();
+                    tourId=response.body().getID();
                     openMapActivity();
 
                 } else {
@@ -219,15 +237,15 @@ public class CreateTourActivity extends AppCompatActivity{
         res.setDesLat(Integer.parseInt(etDesLat.getText().toString()));
         res.setDesLong(Integer.parseInt(etDesLong.getText().toString()));*/
 
-        if (!TextUtils.isEmpty(etAdults.getText()))res.setAdults(Integer.parseInt(etAdults.getText().toString()));
-        if( !TextUtils.isEmpty(etChilds.getText()))res.setChilds(Integer.parseInt(etChilds.getText().toString()));
+        if (!TextUtils.isEmpty(etAdults.getText()))res.setAdults(parseInt(etAdults.getText().toString()));
+        if( !TextUtils.isEmpty(etChilds.getText()))res.setChilds(parseInt(etChilds.getText().toString()));
         if(!TextUtils.isEmpty(etAvatar.getText()))res.setAvatar(etAvatar.getText().toString());
         /*if (!TextUtils.isEmpty(etSourceLong.getText()))res.setSourceLong(Integer.parseInt(etSourceLong.getText().toString()));
         if (!TextUtils.isEmpty(etSourceLat.getText()))res.setSourceLat(Integer.parseInt(etSourceLat.getText().toString()));
         if (!TextUtils.isEmpty(etDesLong.getText()))res.setDesLong(Integer.parseInt(etDesLong.getText().toString()));
         if (!TextUtils.isEmpty(etDesLat.getText()))res.setDesLat(Integer.parseInt(etDesLat.getText().toString()));*/
-        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost(Integer.parseInt(etMinCost.getText().toString()));
-        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost(Integer.parseInt(etMaxCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost(parseInt(etMinCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost(parseInt(etMaxCost.getText().toString()));
         res.setIsPrivate(isPrivate);
 
         return res;
@@ -258,6 +276,8 @@ public class CreateTourActivity extends AppCompatActivity{
 
     public void openMapActivity() {
         Intent intent=new Intent(CreateTourActivity.this, TourMapsActivity.class);
+        intent.putExtra("tourId", tourId);
         startActivity(intent);
     }
+
 }

@@ -3,7 +3,9 @@ package com.ygaps.travelapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StopPoint {
+import java.io.Serializable;
+
+public class StopPoint implements Serializable {
     @SerializedName("leaveAt")
     private long leaveAt;
     @SerializedName("name")
@@ -19,10 +21,10 @@ public class StopPoint {
     @SerializedName("minCost")
     private long minCost;
     @SerializedName("lat")
-    private long lat;
+    private double lat;
     @SerializedName("long")
     @Expose
-    private long lng;
+    private double lng;
     @SerializedName("arrivalAt")
     private long arrivalAt;
     private String address;
@@ -87,12 +89,12 @@ public class StopPoint {
     }
 
 
-    public long getLong ()
+    public double getLong ()
     {
         return lng;
     }
 
-    public void setLong (long lng)
+    public void setLong (double lng)
     {
         this.lng = lng;
     }
@@ -128,11 +130,11 @@ public class StopPoint {
         this.provinceId = provinceId;
     }
 
-    public long getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(long lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 

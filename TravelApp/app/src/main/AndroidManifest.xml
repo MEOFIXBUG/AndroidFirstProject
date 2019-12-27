@@ -73,8 +73,14 @@
             android:name="com.ygaps.travelapp.view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
+
+        
+<!--        <activity
             android:name="com.ygaps.travelapp.view.Activity.MainActivity"
+            android:name=".view.Activity.ListStopPoint"
+            android:label="@string/title_activity_list_stop_point" />-->
+        <activity
+            android:name=".view.Activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 

@@ -2,25 +2,54 @@ package com.ygaps.travelapp.view.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/AddStopPointActivity.java
 import com.ygaps.travelapp.R;
+=======
+import com.kumeo.traveltour.R;
+import com.kumeo.traveltour.extras.ReadExcel;
+import com.kumeo.traveltour.extras.converter;
+import com.kumeo.traveltour.model.Province;
+import com.kumeo.traveltour.model.ServiceType;
+import com.kumeo.traveltour.model.StopPoint;
+>>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/AddStopPointActivity.java
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+
+import static java.lang.Integer.parseInt;
 
 public class AddStopPointActivity extends AppCompatActivity {
 
@@ -32,8 +61,18 @@ public class AddStopPointActivity extends AppCompatActivity {
     private  EditText etTimeLeave;
     private  EditText etDateArrive;
     private  EditText etDateLeave;
+    private Spinner spinnerService;
+    private Spinner spinnerProvince;
+    private int serviceType;
+    private long province;
+    private double longitudeFromMap;//nhan tu man hinh tour map
+    private double latitudeFromMap;
 
     private Button btnSave;
+    private List<String>serviceName;
+    private List<String>provinces;
+    private List<Province>listProvinces;
+    private List<ServiceType>listServiceType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,17 +80,59 @@ public class AddStopPointActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_stop_point);
 
         configPopUpWindow();
+
+        //readExcel file
+        serviceName= ReadExcel.getListServiceName(AddStopPointActivity.this);
+        provinces=ReadExcel.getListProvincesName(AddStopPointActivity.this);
+        listProvinces=ReadExcel.readProvinceExcelFile(AddStopPointActivity.this);
+        listServiceType=ReadExcel.readServiceTypeExcelFile(AddStopPointActivity.this);
+
         initialize();
         chooseDate(etDateArrive);
         chooseDate(etDateLeave);
         timePicker(etTimeArrive);
         timePicker(etTimeLeave);
+        setAdapterSpinner(spinnerProvince, provinces);
+        setAdapterSpinner(spinnerService, serviceName);
+
+        recieveDataFromMapAvtivity();
+
+        spinnerProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //SplashActivity.appPreference.showToast(listProvinces.get(position).getCode());
+                province=listProvinces.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //SplashActivity.appPreference.showToast(listServiceType.get(position).getId()+"");
+                serviceType=listServiceType.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btnSave=findViewById(R.id.btnSAVE);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkRequiredField();
+
+                try {
+                    openTourMapActivity();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -79,6 +160,8 @@ public class AddStopPointActivity extends AppCompatActivity {
         etDateArrive=findViewById(R.id.etDateArrive);
         etDateLeave=findViewById(R.id.etDateLeave);
         etTimeLeave=findViewById(R.id.etTimeLeave);
+        spinnerService=findViewById(R.id.service_spinner);
+        spinnerProvince=findViewById(R.id.province_spinner);
     }
     public boolean checkRequiredField() {
         if (TextUtils.isEmpty(etSPName.getText())) {
@@ -86,7 +169,11 @@ public class AddStopPointActivity extends AppCompatActivity {
             return false;
         }
         if (TextUtils.isEmpty(etTimeArrive.getText())) {
-            etTimeArrive.setError("Time is required");
+            etTimeArrive.setError("Time Arrive is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etTimeLeave.getText())) {
+            etTimeArrive.setError("Time Leave is required");
             return false;
         }
         if (TextUtils.isEmpty(etDateArrive.getText())) {
@@ -94,7 +181,7 @@ public class AddStopPointActivity extends AppCompatActivity {
             return false;
         }
         if (TextUtils.isEmpty(etDateLeave.getText())) {
-            etDateLeave.setError("End Date is required");
+            etDateLeave.setError("Leave Date is required");
             return false;
         }
         String startDate = etDateArrive.getText().toString();
@@ -170,4 +257,50 @@ public class AddStopPointActivity extends AppCompatActivity {
         });
 
     }
+    public void setAdapterSpinner(Spinner spinnerTP, List<String>list)
+    {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+
+        spinnerTP.setAdapter(adapter);
+    }
+    public void openTourMapActivity() throws ParseException {
+        Intent intent=new Intent(AddStopPointActivity.this, TourMapsActivity.class);
+
+        StopPoint newStopPoint =makeStopPointRequest();
+        intent.putExtra("newStopPoint",newStopPoint);
+
+        startActivity(intent);
+    }
+    private StopPoint makeStopPointRequest() throws ParseException {
+        StopPoint res = new StopPoint();
+
+        //bat buoc
+        res.setName(etSPName.getText().toString());
+        res.setArrivalAt(converter.milisecondDate(etDateArrive.getText().toString()));
+        res.setLeaveAt(converter.milisecondDate(etDateLeave.getText().toString()));
+        res.setServiceTypeId(serviceType);
+        //long, lat
+        res.setLong(longitudeFromMap);
+        res.setLat(latitudeFromMap);
+
+        //optional
+        res.setProvinceId(province);
+        if (!TextUtils.isEmpty(etSPAddress.getText()))res.setAddress(etSPAddress.getText().toString());
+        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost(parseInt(etMinCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost(parseInt(etMaxCost.getText().toString()));
+
+        return res;
+    }
+
+    private void recieveDataFromMapAvtivity()
+    {
+        if(getIntent()!=null) {
+            Intent intent = getIntent();
+
+            longitudeFromMap=intent.getDoubleExtra("longitude", 0);//danh dau day la su kien edit
+            latitudeFromMap=intent.getDoubleExtra("latitude", 0);
+        }
+    }
+
 }

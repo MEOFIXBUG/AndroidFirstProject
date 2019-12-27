@@ -61,12 +61,17 @@
             android:textSize="14dp"
             android:layout_height="wrap_content">
         </TextView>
-        <Spinner
-            android:id="@+id/planets_spinner"
-            android:layout_margin="3dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/rounded_edittext"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_spinner"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/service_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -93,12 +98,17 @@
             android:textSize="14dp"
             android:layout_height="wrap_content">
         </TextView>
-        <Spinner
-            android:id="@+id/province_spinner"
-            android:layout_margin="3dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/rounded_edittext"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_spinner"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/province_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
@@ -106,7 +116,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_monetization_on_black_24dp"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -132,7 +142,7 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_monetization_on_black_24dp"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -173,7 +183,7 @@
                 android:id="@+id/icon_date"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/ic_access_time_black_24dp" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
@@ -199,7 +209,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/ic_date_range_black_24dp" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
@@ -240,7 +250,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/ic_access_time_black_24dp" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
@@ -266,7 +276,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/ic_date_range_black_24dp" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"

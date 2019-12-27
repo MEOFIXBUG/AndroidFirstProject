@@ -3,7 +3,10 @@ package com.ygaps.travelapp.view.Activity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,11 +14,27 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/TourMapsActivity.java
 import com.ygaps.travelapp.R;
+=======
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.kumeo.traveltour.R;
+import com.kumeo.traveltour.extras.SharePreferenceListStopPoint;
+import com.kumeo.traveltour.model.StopPoint;
+
+import java.util.ArrayList;
+>>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/TourMapsActivity.java
 
 public class TourMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private FloatingActionButton btnListSP;
+    private double longitude;
+    private double latitude;
+    private long tourId;
+
+    ArrayList<StopPoint> listStopPoint=new ArrayList<StopPoint>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +44,18 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        btnListSP=(FloatingActionButton)findViewById(R.id.btnList);
+        btnListSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openListStopPointInfo();
+            }
+        });
+
+        listStopPoint=SharePreferenceListStopPoint.loadData(TourMapsActivity.this);//doc tu file len
+        recieveFromSPActivity();
+        recieveFromCreateToutActivity();
     }
 
     @Override
@@ -44,11 +75,14 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
 
                 markerOptions.position(latLng);
                 markerOptions.title(latLng.latitude+" - "+ latLng.longitude);
+                longitude=latLng.longitude;
+                latitude=latLng.latitude;
 
                 mMap.clear();// clear marker cu
-
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+
                 openAddStopPointActivity();
+
                 mMap.addMarker(markerOptions);
             }
         });
@@ -56,6 +90,30 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     public void openAddStopPointActivity() {
         Intent intent=new Intent(TourMapsActivity.this, AddStopPointActivity.class);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("latitude", latitude);
         startActivity(intent);
+    }
+
+    public void openListStopPointInfo() {
+        Intent intent=new Intent(TourMapsActivity.this, ListStopPoint.class);
+        intent.putExtra("tourId", tourId);
+        startActivity(intent);
+    }
+
+    public void recieveFromSPActivity()
+    {
+        if(getIntent()!=null && getIntent().getSerializableExtra("newStopPoint")!=null) {
+            StopPoint newStopPoint = (StopPoint) getIntent().getSerializableExtra("newStopPoint");
+            listStopPoint.add(newStopPoint);
+            SharePreferenceListStopPoint.saveData(listStopPoint, TourMapsActivity.this);
+        }
+    }
+    public void recieveFromCreateToutActivity()
+    {
+        if(getIntent()!=null) {
+            Intent intent = getIntent();
+            tourId=intent.getLongExtra("tourId", 0);
+        }
     }
 }
