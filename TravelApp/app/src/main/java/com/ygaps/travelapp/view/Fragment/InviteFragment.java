@@ -74,6 +74,7 @@ public class InviteFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String UserID=SplashActivity.appPreference.getUserID();
     private EditText etTourName;
     private EditText etStartDate;
     private EditText etEndDate;
@@ -160,6 +161,7 @@ public class InviteFragment extends Fragment {
         inviteBtn=(Button) view.findViewById(R.id.btnInvite);
         checkBox = (CheckBox) view.findViewById(R.id.checkbox_id);
         Done =(Button) view.findViewById(R.id.btnDone);
+        getTourBaseInfo();
         if(!Editable){
             disableEditText(etTourName);
             disableEditText(etAdults);
@@ -177,7 +179,7 @@ public class InviteFragment extends Fragment {
         }
         adapterCountries = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,countries);
         textCountry.setAdapter(adapterCountries);
-        getTourBaseInfo();
+
         // Sét đặt số ký tự nhỏ nhất, để cửa sổ gợi ý hiển thị
         textCountry.setThreshold(1);
         textCountry.addTextChangedListener(new TextWatcher() {
@@ -207,15 +209,20 @@ public class InviteFragment extends Fragment {
             public void onClick(View v) {
                 SplashActivity.appPreference.showToast("onclick invite" );
                 selectedID=Integer.parseInt(IdList.get(countries.indexOf(textCountry.getText().toString())));
-                if(selectedID>0){
                     Log.d(TAG,""+selectedID);
                     toInvited a= new toInvited();
                     a.setTourId(Long.toString(tourID));
-                    a.setInvitedUserId(SplashActivity.appPreference.getUserID());
-                    a.setInvited(false);
+                    if(!Editable){
+                        a.setInvitedUserId(UserID);
+                        a.setInvited(false);
+                    }
+                    else{
+                        if(selectedID>0){
+                        a.setInvitedUserId(Integer.toString(selectedID));
+                        a.setInvited(false);
+                        }
+                    }
                     tourViewModel.Invite_Join(a);
-                }
-
             }
         });
 
@@ -266,6 +273,7 @@ public class InviteFragment extends Fragment {
             data.observe(this,tourInfo->{
 
                 if (tourInfo != null) {
+
                     if (!TextUtils.isEmpty(tourInfo.getName())&& tourInfo.getName()!= null) {
                         etTourName.setText(tourInfo.getName());
                     }

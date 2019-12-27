@@ -44,6 +44,7 @@ public class DetailTourActivity extends AppCompatActivity {
         //intialization();
        // getTourInfo(tourID);
         Log.d(TAG,"xxx :" +tourID);
+        Log.d(TAG,"EDIT :" +Editable);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadFragment(new StopPointFragment());
@@ -65,24 +66,21 @@ public class DetailTourActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    toolbar.setTitle("a");
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_mytrips:
-                    toolbar.setTitle("b");
                     fragment = new InviteFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_friend:
-                    toolbar.setTitle("3");
-                    fragment = new StopPointFragment();
-                    loadFragment(fragment);
+//                    fragment = new StopPointFragment();
+//                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_profile:
-                    toolbar.setTitle("4");
-                    fragment = new InviteFragment();
-                    loadFragment(fragment);
+
+//                    fragment = new InviteFragment();
+//                    loadFragment(fragment);
                     return true;
             }
             return false;

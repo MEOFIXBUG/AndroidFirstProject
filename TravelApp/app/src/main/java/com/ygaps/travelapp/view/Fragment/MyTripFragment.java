@@ -135,6 +135,7 @@ public class MyTripFragment extends Fragment {
             Intent intent = new Intent(getActivity(), DetailTourActivity.class);
             intent.putExtra("tourID",tour.getID());
             intent.putExtra("tourName",tour.getName());
+            intent.putExtra("Editable",true);
             startActivity(intent);
         });
         my_recycler_view.setAdapter(adapter);

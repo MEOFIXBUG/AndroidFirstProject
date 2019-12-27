@@ -18,7 +18,7 @@ public class TourInfoResponse {
     private int adults;
     @SerializedName("hostId")
     @Expose
-    private int hostId;
+    private String hostId;
     @SerializedName("isPrivate")
     @Expose
     private boolean isPrivate;
@@ -95,12 +95,12 @@ public class TourInfoResponse {
     {
         this.adults = adults;
     }
-    public int getHostId ()
+    public String getHostId ()
     {
         return hostId;
     }
 
-    public void setHostId (int hostId)
+    public void setHostId (String hostId)
     {
         this.hostId = hostId;
     }

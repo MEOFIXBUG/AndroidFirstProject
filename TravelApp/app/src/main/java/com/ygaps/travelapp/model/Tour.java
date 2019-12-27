@@ -16,7 +16,7 @@ public class Tour {
     private long sourceLong;
     private long desLat;
     private long desLong;
-    private long hostId;
+    private String hostId;
 //    @SerializedName("stopPoints")
 //    @Expose
 //    private List<StopPoint> stopPoints=null;
@@ -39,11 +39,11 @@ public class Tour {
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
-    public long getHostId() {
+    public String getHostId() {
         return hostId;
     }
 
-    public void setHostId(long hostId) {
+    public void setHostId(String hostId) {
         this.hostId = hostId;
     }
 
