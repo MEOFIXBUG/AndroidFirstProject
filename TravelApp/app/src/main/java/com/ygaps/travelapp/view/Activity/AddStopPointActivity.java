@@ -3,11 +3,9 @@ package com.ygaps.travelapp.view.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,32 +18,16 @@ import android.widget.TimePicker;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/AddStopPointActivity.java
 import com.ygaps.travelapp.R;
-=======
-import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.extras.ReadExcel;
-import com.kumeo.traveltour.extras.converter;
-import com.kumeo.traveltour.model.Province;
-import com.kumeo.traveltour.model.ServiceType;
-import com.kumeo.traveltour.model.StopPoint;
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/AddStopPointActivity.java
-
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-
-import java.io.InputStream;
+import com.ygaps.travelapp.extras.ReadExcel;
+import com.ygaps.travelapp.extras.converter;
+import com.ygaps.travelapp.model.Province;
+import com.ygaps.travelapp.model.ServiceType;
+import com.ygaps.travelapp.model.StopPoint;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 

@@ -12,20 +12,17 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/CreateTourActivity.java
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
-=======
-import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.extras.ReadExcel;
-import com.kumeo.traveltour.extras.converter;
-import com.kumeo.traveltour.model.Tour;
-import com.kumeo.traveltour.retrofit.Service.Tour.TourAPI;
-import com.kumeo.traveltour.retrofit.retrofitRequest;
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/CreateTourActivity.java
+
+import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.extras.converter;
+import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
+import com.ygaps.travelapp.retrofit.retrofitRequest;
 
 /*import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;

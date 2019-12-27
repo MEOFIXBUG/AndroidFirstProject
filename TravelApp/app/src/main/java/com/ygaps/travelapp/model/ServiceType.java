@@ -1,4 +1,4 @@
-package com.kumeo.traveltour.model;
+package com.ygaps.travelapp.model;
 
 public class ServiceType {
     private int id;

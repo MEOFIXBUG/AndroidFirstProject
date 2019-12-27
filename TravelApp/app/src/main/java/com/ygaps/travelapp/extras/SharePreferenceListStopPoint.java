@@ -1,11 +1,11 @@
-package com.kumeo.traveltour.extras;
+package com.ygaps.travelapp.extras;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.kumeo.traveltour.model.StopPoint;
+import com.ygaps.travelapp.model.StopPoint;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

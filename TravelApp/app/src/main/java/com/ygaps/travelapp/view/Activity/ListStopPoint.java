@@ -1,7 +1,6 @@
-package com.kumeo.traveltour.view.Activity;
+package com.ygaps.travelapp.view.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,14 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.adapter.StopListAdapter;
-import com.kumeo.traveltour.extras.SharePreferenceListStopPoint;
-import com.kumeo.traveltour.model.StopPoint;
+import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.adapter.StopListAdapter;
+import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
+import com.ygaps.travelapp.model.StopPoint;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ListStopPoint extends AppCompatActivity {

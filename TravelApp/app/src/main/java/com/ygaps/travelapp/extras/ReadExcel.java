@@ -1,13 +1,12 @@
-package com.kumeo.traveltour.extras;
+package com.ygaps.travelapp.extras;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
-import com.kumeo.traveltour.model.Province;
-import com.kumeo.traveltour.model.ServiceType;
-import com.kumeo.traveltour.view.Activity.SplashActivity;
+import com.ygaps.travelapp.model.Province;
+import com.ygaps.travelapp.model.ServiceType;
+import com.ygaps.travelapp.view.Activity.SplashActivity;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;

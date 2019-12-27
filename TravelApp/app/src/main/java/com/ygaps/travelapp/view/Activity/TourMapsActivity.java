@@ -3,10 +3,8 @@ package com.ygaps.travelapp.view.Activity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,17 +12,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/view/Activity/TourMapsActivity.java
 import com.ygaps.travelapp.R;
-=======
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.extras.SharePreferenceListStopPoint;
-import com.kumeo.traveltour.model.StopPoint;
+import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
+import com.ygaps.travelapp.model.StopPoint;
 
 import java.util.ArrayList;
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/view/Activity/TourMapsActivity.java
 
 public class TourMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,6 +38,7 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //button list stop point
         btnListSP=(FloatingActionButton)findViewById(R.id.btnList);
         btnListSP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +62,9 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         //mMap.setMyLocationEnabled(true);
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapLongClick(LatLng latLng) {
                 MarkerOptions markerOptions=new MarkerOptions();
 
                 markerOptions.position(latLng);
@@ -84,6 +78,13 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
                 openAddStopPointActivity();
 
                 mMap.addMarker(markerOptions);
+            }
+        });
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
             }
         });
     }

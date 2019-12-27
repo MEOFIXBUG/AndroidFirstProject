@@ -1,4 +1,4 @@
-package com.kumeo.traveltour.model;
+package com.ygaps.travelapp.model;
 
 public class Province {
     private long id;

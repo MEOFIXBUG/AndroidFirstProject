@@ -12,31 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.github.vipulasri.timelineview.TimelineView;
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/adapter/StopListAdapter.java
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.model.StopPoint;
-=======
-import com.kumeo.traveltour.R;
-import com.kumeo.traveltour.extras.ReadExcel;
-import com.kumeo.traveltour.model.ServiceType;
-import com.kumeo.traveltour.model.StopPoint;
-import com.kumeo.traveltour.model.Tour;
-import com.kumeo.traveltour.view.Activity.SplashActivity;
-import com.squareup.picasso.Picasso;
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/adapter/StopListAdapter.java
+import com.ygaps.travelapp.extras.ReadExcel;
+import com.ygaps.travelapp.model.ServiceType;
+import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.view.Activity.SplashActivity;
 
 import java.util.ArrayList;
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/adapter/StopListAdapter.java
 
 import static com.ygaps.travelapp.extras.converter.createDate;
-=======
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.List;
-import java.util.Locale;
-import static com.kumeo.traveltour.extras.converter.createDate;
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/adapter/StopListAdapter.java
+
+import static com.ygaps.travelapp.extras.converter.createDate;
 
 public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.TimelineViewHolder> {
     private static final int VIEW_TYPE_HEADER = 100;
@@ -113,11 +102,8 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
             cityname= (TextView)view.findViewById(R.id.tv);
             date= (TextView)view.findViewById(R.id.date);
             timelineView= (TimelineView)view.findViewById(R.id.timeline_view);
-<<<<<<< Updated upstream:TravelApp/app/src/main/java/com/ygaps/travelapp/adapter/StopListAdapter.java
             timelineView.initLine(11);
-=======
             serviceName=(TextView)view.findViewById(R.id.serviceName);
->>>>>>> Stashed changes:TravelApp/app/src/main/java/com/kumeo/traveltour/adapter/StopListAdapter.java
             view.setOnClickListener(this);
         }
 
