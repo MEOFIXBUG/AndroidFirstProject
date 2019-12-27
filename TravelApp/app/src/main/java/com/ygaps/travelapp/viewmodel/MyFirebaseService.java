@@ -1,4 +1,4 @@
-package com.ygaps.travelapp;
+package com.ygaps.travelapp.viewmodel;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

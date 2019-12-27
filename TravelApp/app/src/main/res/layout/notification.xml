@@ -39,7 +39,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnAccept"
+                android:id="@+id/btnDeny"
                 android:layout_marginEnd="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
@@ -48,7 +48,7 @@
 
             <Button
                 android:layout_marginEnd="10dp"
-                android:id="@+id/btnDenied"
+                android:id="@+id/btnView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/circle"
