@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.Fragment.StopPointFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvStopPoint"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:clipToPadding="false"
+            android:padding="10dp"
+            tools:listitem="@layout/item_list_stop"/>
+
+        <Button
+            android:id="@+id/btnAddNewStopPoint"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/circle"
+            android:layout_weight="1"
+            android:text="ADD TO TOUR"
+            android:textSize="20dp"
+            android:textColor="#FFFFFFFF"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
+            />
+        <TextView
+            android:id="@+id/no_stop_point"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|center_horizontal"
+            android:text="no point"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</FrameLayout>
