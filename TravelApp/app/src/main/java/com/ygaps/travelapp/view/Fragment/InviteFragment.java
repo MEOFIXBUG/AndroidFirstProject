@@ -1,16 +1,51 @@
 package com.ygaps.travelapp.view.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.UserInfo;
+import com.ygaps.travelapp.adapter.ItemAdapter;
+import com.ygaps.travelapp.adapter.TourAdapter;
+import com.ygaps.travelapp.extras.PaginationScrollListener;
+import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.repository.UserRepository;
+import com.ygaps.travelapp.response.TourResponse;
+import com.ygaps.travelapp.response.UserListRp;
+import com.ygaps.travelapp.view.Activity.DetailTourActivity;
+import com.ygaps.travelapp.view.Activity.SplashActivity;
+import com.ygaps.travelapp.viewmodel.TourViewModel;
+import com.ygaps.travelapp.viewmodel.UserViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 
 /**
@@ -30,7 +65,15 @@ public class InviteFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private EditText textFullname;
+    private AutoCompleteTextView textCountry;
+    private Button inviteBtn;
+    private List<String> countries = new ArrayList<>();
+    UserViewModel userViewModel;
+    private List<String> IdList =new ArrayList<>();
+    private int selectedID=-1;
+    private static final String TAG = InviteFragment.class.getSimpleName();
+    ArrayAdapter adapterCountries;
     private OnFragmentInteractionListener mListener;
 
     public InviteFragment() {
@@ -68,15 +111,105 @@ public class InviteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invite, container, false);
+        View view =inflater.inflate(R.layout.fragment_invite, container, false);
+        initialization(view);
+        Log.d(TAG,textCountry.getText().toString());
+        getUsers(textCountry.getText().toString());
+        return view;
     }
+    private void initialization(View view) {
+        textFullname = (EditText) view.findViewById(R.id.editText);
+        textCountry =(AutoCompleteTextView)view.findViewById(R.id.autoCompleteTextView);
+        adapterCountries = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,countries);
+        textCountry.setAdapter(adapterCountries);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        // Sét đặt số ký tự nhỏ nhất, để cửa sổ gợi ý hiển thị
+        textCountry.setThreshold(1);
+        textCountry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG,textCountry.getText().toString());
+                getUsers(textCountry.getText().toString());
+            }
+        });
+        // adapter
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        //tourViewModel.init(49,1,2);
+        inviteBtn=(Button) view.findViewById(R.id.invite);
+        inviteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SplashActivity.appPreference.showToast("onclick invite" );
+                selectedID=Integer.parseInt(IdList.get(countries.indexOf(textCountry.getText().toString())));
+                if(selectedID>0){
+                    sendInvation(selectedID);
+                }
+            }
+        });
+
+    }
+    private void getUsers(String key) {
+
+        LiveData<UserListRp> data= userViewModel.searchUsers(key,50,1);
+        if(data!= null)
+        {
+            data.observe(this,userResponse->{
+
+                if (userResponse != null) {
+                    List<UserInfo> temp = userResponse.getUsers();
+                    countries.clear();
+                    IdList.clear();
+                    int i=0;
+                    for (UserInfo s : temp) {
+                        if(s.getFullName()!=null){
+                            countries.add(s.getFullName());
+                            IdList.add(s.getUserId());
+                            i++;
+                            if(i==5) break;
+                        }
+                    }
+
+                    for(String a : countries){
+                        if(a!= null){
+                            Log.d(TAG,a);
+                        }
+                    }
+                    //adapterCountries.add(countries);
+                    adapterCountries.clear();
+                    adapterCountries.addAll(countries);
+                    adapterCountries.notifyDataSetChanged();
+
+                }
+                else {
+
+                }
+            });
+        }
+
+    }
+    private boolean sendInvation(int Uid){
+        try {
+            return  true;
+        }catch ( Exception ex){
+            return false;
         }
     }
+    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {

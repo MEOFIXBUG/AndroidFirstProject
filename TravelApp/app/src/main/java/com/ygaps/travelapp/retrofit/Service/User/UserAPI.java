@@ -9,6 +9,7 @@ import com.ygaps.travelapp.response.ActiveResponse;
 import com.ygaps.travelapp.response.ActiveResultResponse;
 import com.ygaps.travelapp.response.RecoveryOTP;
 import com.ygaps.travelapp.response.RecoveryResponse;
+import com.ygaps.travelapp.response.UserListRp;
 
 
 import retrofit2.Call;
@@ -36,4 +37,7 @@ public interface UserAPI {
  Call<RecoveryResponse> updatePassword(@Header("Authorization") String author, @Body PasswordUpdate updatePass);
 @POST("/user/notification/put-token")
  Call<RecoveryResponse> regFirebase(@Header("Authorization") String author, @Body RegistrationFirebase reg);
+@GET("/user/search")
+ Call<UserListRp> searchUser(@Query("searchKey") String searchKey, @Query("pageIndex") long pageIndex,
+                             @Query("pageSize") String pageSize);
 }
