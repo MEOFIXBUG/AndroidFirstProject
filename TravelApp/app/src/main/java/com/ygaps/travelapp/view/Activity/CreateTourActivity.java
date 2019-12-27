@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
@@ -72,6 +73,8 @@ public class CreateTourActivity extends AppCompatActivity{
 
         initialize();
 
+        SharePreferenceListStopPoint.clear(CreateTourActivity.this);
+
         btnCreate = findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +83,12 @@ public class CreateTourActivity extends AppCompatActivity{
                 {
                     try {
                         reqTour= makeTourRequest();
-                        openMapActivity();
-                        //createTour(reqTour);
+                        //openMapActivity();
+                        createTour(reqTour);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-
                 }
             }
         );
@@ -112,6 +114,8 @@ public class CreateTourActivity extends AppCompatActivity{
                     SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
                     SplashActivity.appPreference.showToast(response.body().getID()+"id");
                     tourId=response.body().getID();
+
+                    SharePreferenceListStopPoint.saveTourIdFromCreateTour(tourId, CreateTourActivity.this);
                     openMapActivity();
 
                 } else {
@@ -273,7 +277,7 @@ public class CreateTourActivity extends AppCompatActivity{
 
     public void openMapActivity() {
         Intent intent=new Intent(CreateTourActivity.this, TourMapsActivity.class);
-        intent.putExtra("tourId", tourId);
+        //intent.putExtra("tourId", tourId);
         startActivity(intent);
     }
 

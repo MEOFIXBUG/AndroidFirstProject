@@ -1,8 +1,15 @@
 package com.ygaps.travelapp.view.Activity;
 
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +17,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ygaps.travelapp.R;
@@ -26,8 +35,7 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
     private double longitude;
     private double latitude;
     private long tourId;
-
-    ArrayList<StopPoint> listStopPoint=new ArrayList<StopPoint>();
+    StopPoint newStopPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +55,16 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
-        listStopPoint=SharePreferenceListStopPoint.loadData(TourMapsActivity.this);//doc tu file len
-        recieveFromSPActivity();
-        recieveFromCreateToutActivity();
+        //listStopPoint=SharePreferenceListStopPoint.loadData(TourMapsActivity.this);//doc tu file len
+        //recieveFromCreateToutActivity();
     }
-
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        recieveFromSPActivity();
+        //now getIntent() should always return the last received intent
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -65,28 +78,80 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                MarkerOptions markerOptions=new MarkerOptions();
+                longitude=latLng.longitude;
+                latitude=latLng.latitude;
+                openAddStopPointActivity();
+                /*MarkerOptions markerOptions=new MarkerOptions();
 
                 markerOptions.position(latLng);
                 markerOptions.title(latLng.latitude+" - "+ latLng.longitude);
                 longitude=latLng.longitude;
                 latitude=latLng.latitude;
 
-                mMap.clear();// clear marker cu
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
 
+                //mMap.clear();// clear marker cu
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                 openAddStopPointActivity();
 
-                mMap.addMarker(markerOptions);
+                if(newStopPoint.getServiceTypeId()==1){
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant));
+                }
+                else if(newStopPoint.getServiceTypeId()==2)
+                {
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hotel));
+                }
+                else if(newStopPoint.getServiceTypeId()==3)
+                {
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.rest));
+                }
+                else if(newStopPoint.getServiceTypeId()==4)
+                {
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orther));
+                }
+
+                mMap.addMarker(markerOptions);*/
             }
         });
+    }
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
+    public void makeMarker()
+    {
+        MarkerOptions markerOptions=new MarkerOptions();
 
-            }
-        });
+        LatLng latLng=new LatLng(newStopPoint.getLat(), newStopPoint.getLong());
+        markerOptions.position(latLng);
+
+        //mMap.clear();// clear marker cu
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        //openAddStopPointActivity();
+        int height = 90;
+        int width = 90;
+        BitmapDrawable bitmapdraw;
+
+        if(newStopPoint.getServiceTypeId()==1){
+            bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.restaurant);
+            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant));
+        }
+        else if(newStopPoint.getServiceTypeId()==2)
+        {
+            bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.hotel);
+            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hotel));
+        }
+        else if(newStopPoint.getServiceTypeId()==3)
+        {
+            bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.rest);
+            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.rest));
+        }
+        else
+        {
+            bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.orther);
+            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orther));
+        }
+        Bitmap b=bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        markerOptions.title(newStopPoint.getName());
+        mMap.addMarker(markerOptions);
     }
 
     public void openAddStopPointActivity() {
@@ -98,16 +163,18 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     public void openListStopPointInfo() {
         Intent intent=new Intent(TourMapsActivity.this, ListStopPoint.class);
-        intent.putExtra("tourId", tourId);
+        //intent.putExtra("tourId", tourId);
         startActivity(intent);
     }
 
     public void recieveFromSPActivity()
     {
         if(getIntent()!=null && getIntent().getSerializableExtra("newStopPoint")!=null) {
-            StopPoint newStopPoint = (StopPoint) getIntent().getSerializableExtra("newStopPoint");
-            listStopPoint.add(newStopPoint);
-            SharePreferenceListStopPoint.saveData(listStopPoint, TourMapsActivity.this);
+            newStopPoint = (StopPoint) getIntent().getSerializableExtra("newStopPoint");
+            //SplashActivity.appPreference.showToast(newStopPoint.getName());
+            //listStopPoint.add(newStopPoint);
+            //SharePreferenceListStopPoint.saveData(listStopPoint, TourMapsActivity.this);
+            makeMarker();
         }
     }
     public void recieveFromCreateToutActivity()

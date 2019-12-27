@@ -1,6 +1,8 @@
 package com.ygaps.travelapp.retrofit.Service.Tour;
 
 
+import com.ygaps.travelapp.model.MessageResponse;
+import com.ygaps.travelapp.model.StopPointsOfTour;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
@@ -23,6 +25,9 @@ public interface TourAPI {
 
     @POST("/tour/create")
     Call<Tour> createTour(@Body Tour tourCreate);
+
+    @POST("/tour/set-stop-points")
+    Call<MessageResponse> createListStopPoint(@Body StopPointsOfTour listStopPoints);
 
     @GET("tour/info")
     Call<TourInfoResponse> getTourInfo(@Query("tourId") long tourId);
