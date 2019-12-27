@@ -125,7 +125,7 @@ public class CreateTourActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Tour> call, Throwable t) {
-                SplashActivity.appPreference.showToast("Create Failed");
+                SplashActivity.appPreference.showToast("Create Failed. Check your internet connection.");
             }
         });
     }

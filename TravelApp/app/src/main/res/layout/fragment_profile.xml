@@ -26,8 +26,8 @@
                 <ImageView
                     android:id="@+id/profileImage"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:src="@drawable/placeholder" />
                 <RelativeLayout
@@ -41,7 +41,7 @@
                     android:fontFamily="sans-serif-thin"
                     android:gravity="center"
                     android:text="John Doe"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                     <EditText
                         android:visibility="gone"
                         android:id="@+id/txtFullNameEdit"
@@ -51,7 +51,7 @@
                         android:fontFamily="sans-serif-thin"
                         android:gravity="center"
                         android:hint="Name"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
                 </RelativeLayout>
 
                 <ImageButton
@@ -63,12 +63,10 @@
 
                 <ImageButton
                     android:id="@+id/btnEditProfilePicture"
-                    android:layout_width="25dip"
-                    android:layout_height="25dip"
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
                     android:layout_gravity="right"
                     android:background="@drawable/ic_add_a_photo_black_24dp" />
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -140,8 +138,6 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Địa chỉ : " />
                 </RelativeLayout>
-                    android:layout_marginBottom="12dp"
-                    android:text="Địa chỉ : " />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -181,9 +177,6 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Ngày sinh : " />
                 </RelativeLayout>
-   android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Ngày sinh : " />
 
 
 <RelativeLayout
@@ -269,6 +262,15 @@
 
 
             </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/backgroundDefault"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="15dp">
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -276,7 +278,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-thin"
                 android:text="Change Password"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -289,6 +291,7 @@
                 <EditText
                     android:hint="Current password"
                     android:id="@+id/currentpass"
+
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -317,35 +320,37 @@
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_marginLeft="10dp"
-                    android:text="New password : "
+                    android:text="Confirm password : "
                     android:layout_width="150dp"
                     android:layout_height="wrap_content">
                 </TextView>
                 <EditText
-                    android:hint="New password"
+                    android:hint="Confirm password"
                     android:id="@+id/newpass2"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </EditText>
             </LinearLayout>
-            <Button
-                android:id="@+id/changepassBtn"
-                android:text="Change Password"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/circle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/changepassBtn"
+                    android:text="Change Password"
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+            </LinearLayout>
 
-            </Button>
             <Button
                 android:id="@+id/signOutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
                 android:background="@drawable/circle"
                 android:gravity="center"
                 android:text="Sign Out"
