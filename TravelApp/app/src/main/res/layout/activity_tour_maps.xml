@@ -79,7 +79,9 @@
             app:itemBackground="@color/colorPrimaryDark"
             app:itemIconTint="@android:color/holo_orange_dark"
             app:itemTextColor="@android:color/holo_orange_light"
-            android:layout_margin="30dp"
+            android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
             app:menu="@menu/map_stoppoint_menu">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -1,83 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.Fragment.InviteFragment">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/my_trips_main_layout"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tour Name"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        android:layout_height="match_parent" >
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp">
-            <requestFocus />
-        </EditText>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You can invite some friends"
-            android:id="@+id/textView2"
-            android:layout_below="@+id/editText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_card_travel_orange_24dp" />
+
+            <EditText
+                android:id="@+id/etTourName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="Tour name (*)" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:id="@+id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+
+
+            <EditText
+                android:id="@+id/etStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:background="@drawable/rounded_edittext"
+                android:editable="false"
+                android:clickable="true"
+                android:hint="Start date(*)" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+
+
+            <EditText
+                android:id="@+id/etEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:layout_centerHorizontal="true"
+                android:editable="false"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="End date(*)" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_people_black_24dp"/>
+
+
+            <EditText
+                android:id="@+id/etAdults"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:inputType="number"
+                android:hint="Adults" />
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_people_black_24dp"/>
+
+
+            <EditText
+                android:id="@+id/etChilds"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Childs" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+
+
+            <EditText
+                android:id="@+id/etMinCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="number"
+                android:hint="MinCost" />
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+
+            <EditText
+                android:id="@+id/etMaxCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="MaxCost" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_height="wrap_content" android:layout_margin="15dp">
+
+            <EditText
+                android:id="@+id/etAvatar"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="Avatar image of tour.............." />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="update"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="@drawable/circle"
+                android:id="@+id/updateAvatar"
+                android:textSize="20dp"
+                android:layout_marginLeft="23dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_height="wrap_content" android:layout_margin="15dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/uInvite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="Invite my friend at here..........."
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/btnInvite"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="@drawable/circle"
+                android:text="Invite"
+                android:textSize="20dp"
+                android:layout_marginLeft="23dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+            <CheckBox
+                android:id="@+id/checkbox_id"
+                android:text="Make public"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/editText"
-            android:layout_alignEnd="@+id/editText"
-            android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
 
         <Button
-            android:id="@+id/invite"
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:background="@drawable/round_shape"
-            android:textColor="@color/white"
-            android:layout_below="@+id/autoCompleteTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="invite"/>
-        <ToggleButton
-            android:id="@+id/ispublic_toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:text="DONE"
+            android:textSize="20dp"
+            android:textColor="#FFFFFFFF"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:background="@drawable/round_shape"
-            android:textColor="@color/white"
-            android:textOn="@string/public_trip_toggle_on"
-            android:textOff="@string/public_trip_toggle_off" />
-
-
-    </RelativeLayout>
-
-</FrameLayout>
+            android:layout_alignParentBottom="true"
+            />
+    </LinearLayout>
+</ScrollView>

@@ -2,6 +2,7 @@ package com.ygaps.travelapp.view.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
@@ -32,7 +35,9 @@ import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.adapter.TourAdapter;
 import com.ygaps.travelapp.extras.PaginationScrollListener;
 import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.repository.UserRepository;
+import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.response.UserListRp;
 import com.ygaps.travelapp.view.Activity.DetailTourActivity;
@@ -46,6 +51,10 @@ import java.util.stream.Collectors;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.ygaps.travelapp.extras.converter.createDate;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourViewModel;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.Editable;
 
 
 /**
@@ -65,9 +74,25 @@ public class InviteFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText etTourName;
+    private EditText etStartDate;
+    private EditText etEndDate;
+    /* public EditText etSourceLat;
+     public EditText etSourceLong;
+     public EditText etDesLong;
+     public EditText etDesLat;*/
+    private EditText etAdults;
+    private EditText etChilds;
+    private EditText etMinCost;
+    private EditText etMaxCost;
+    private EditText etAvatar;
+    public boolean isPrivate=false;
     private EditText textFullname;
     private AutoCompleteTextView textCountry;
     private Button inviteBtn;
+    private Button updateAvatar;
+    private Button Done;
+    private CheckBox checkBox;
     private List<String> countries = new ArrayList<>();
     UserViewModel userViewModel;
     private List<String> IdList =new ArrayList<>();
@@ -118,11 +143,41 @@ public class InviteFragment extends Fragment {
         return view;
     }
     private void initialization(View view) {
-        textFullname = (EditText) view.findViewById(R.id.editText);
-        textCountry =(AutoCompleteTextView)view.findViewById(R.id.autoCompleteTextView);
+        etTourName=view.findViewById(R.id.etTourName);
+        etStartDate=view.findViewById(R.id.etStartDate);
+        etEndDate=view.findViewById(R.id.etEndDate);
+/*        etSourceLong=findViewById(R.id.etSourceLong);
+        etSourceLat=findViewById(R.id.etSourceLat);
+        etDesLat=findViewById(R.id.etDesLat);
+        etDesLong=findViewById(R.id.etDesLong);*/
+        etAdults=view.findViewById(R.id.etAdults);
+        etChilds=view.findViewById(R.id.etChilds);
+        etMinCost=view.findViewById(R.id.etMinCost);
+        etMaxCost=view.findViewById(R.id.etMaxCost);
+        etAvatar=view.findViewById(R.id.etAvatar);
+        textCountry =(AutoCompleteTextView)view.findViewById(R.id.uInvite);
+        updateAvatar=(Button) view.findViewById(R.id.updateAvatar);
+        inviteBtn=(Button) view.findViewById(R.id.btnInvite);
+        checkBox = (CheckBox) view.findViewById(R.id.checkbox_id);
+        Done =(Button) view.findViewById(R.id.btnDone);
+        if(!Editable){
+            disableEditText(etTourName);
+            disableEditText(etAdults);
+            disableEditText(etAvatar);
+            disableEditText(etChilds);
+            disableEditText(etEndDate);
+            disableEditText(etStartDate);
+            disableEditText(etMaxCost);
+            disableEditText(etMinCost);
+            disableEditText(textCountry);
+            inviteBtn.setText("JOIN");
+            updateAvatar.setVisibility(GONE);
+            Done.setVisibility(GONE);
+            checkBox.setEnabled(false);
+        }
         adapterCountries = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,countries);
         textCountry.setAdapter(adapterCountries);
-
+        getTourBaseInfo();
         // Sét đặt số ký tự nhỏ nhất, để cửa sổ gợi ý hiển thị
         textCountry.setThreshold(1);
         textCountry.addTextChangedListener(new TextWatcher() {
@@ -144,16 +199,23 @@ public class InviteFragment extends Fragment {
         });
         // adapter
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
         //tourViewModel.init(49,1,2);
-        inviteBtn=(Button) view.findViewById(R.id.invite);
+
         inviteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SplashActivity.appPreference.showToast("onclick invite" );
                 selectedID=Integer.parseInt(IdList.get(countries.indexOf(textCountry.getText().toString())));
                 if(selectedID>0){
-                    sendInvation(selectedID);
+                    Log.d(TAG,""+selectedID);
+                    toInvited a= new toInvited();
+                    a.setTourId(Long.toString(tourID));
+                    a.setInvitedUserId(SplashActivity.appPreference.getUserID());
+                    a.setInvited(false);
+                    tourViewModel.Invite_Join(a);
                 }
+
             }
         });
 
@@ -196,6 +258,47 @@ public class InviteFragment extends Fragment {
             });
         }
 
+    }
+    private void getTourBaseInfo(){
+        LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
+        if(data!= null)
+        {
+            data.observe(this,tourInfo->{
+
+                if (tourInfo != null) {
+                    if (!TextUtils.isEmpty(tourInfo.getName())&& tourInfo.getName()!= null) {
+                        etTourName.setText(tourInfo.getName());
+                    }
+                    if (!TextUtils.isEmpty(createDate(tourInfo.getStartDate()))&& createDate(tourInfo.getStartDate())!= null) {
+                        etStartDate.setText(createDate(tourInfo.getStartDate()));
+                    }
+                    if (!TextUtils.isEmpty(createDate(tourInfo.getEndDate()))&& createDate(tourInfo.getEndDate())!= null) {
+                        etEndDate.setText(createDate(tourInfo.getEndDate()));
+                    }
+                        etAdults.setText(Integer.toString(tourInfo.getAdults()));
+
+                        etChilds.setText(Integer.toString(tourInfo.getChilds()));
+
+                        etMinCost.setText(tourInfo.getMinCost());
+
+                        etMaxCost.setText((tourInfo.getMaxCost()));
+
+
+                    //etAvatar
+
+                }
+                else {
+
+                }
+            });
+        }
+    }
+    private void disableEditText(EditText editText) {
+        editText.setFocusable(false);
+        editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setKeyListener(null);
+        //editText.setBackgroundColor(Color.WHITE);
     }
     private boolean sendInvation(int Uid){
         try {

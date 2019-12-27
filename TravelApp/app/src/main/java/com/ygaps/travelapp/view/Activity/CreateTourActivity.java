@@ -245,8 +245,8 @@ public class CreateTourActivity extends AppCompatActivity{
         if (!TextUtils.isEmpty(etSourceLat.getText()))res.setSourceLat(Integer.parseInt(etSourceLat.getText().toString()));
         if (!TextUtils.isEmpty(etDesLong.getText()))res.setDesLong(Integer.parseInt(etDesLong.getText().toString()));
         if (!TextUtils.isEmpty(etDesLat.getText()))res.setDesLat(Integer.parseInt(etDesLat.getText().toString()));*/
-        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost(parseInt(etMinCost.getText().toString()));
-        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost(parseInt(etMaxCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost((etMinCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost((etMaxCost.getText().toString()));
         res.setIsPrivate(isPrivate);
 
         return res;
