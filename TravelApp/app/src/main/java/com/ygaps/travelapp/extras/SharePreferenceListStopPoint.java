@@ -23,6 +23,21 @@ public class SharePreferenceListStopPoint {
         editor.apply();
     }
 
+    public static void saveTourIdFromCreateTour(long tourId, Context activity){
+        SharedPreferences mySharePreferences=activity.getSharedPreferences("shared_Prefernces",MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharePreferences.edit();
+        editor.putLong("tourId", tourId);
+        editor.apply();
+    }
+
+    public static long loadTourId(Context activity) {
+        long tourId;
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("shared_Prefernces", MODE_PRIVATE);
+        tourId = sharedPreferences.getLong("tourId", 0);
+
+        return tourId;
+    }
+
     public static ArrayList<StopPoint> loadData(Context activity) {
         ArrayList<StopPoint>listStopPoint;
         SharedPreferences sharedPreferences = activity.getSharedPreferences("shared_Prefernces", MODE_PRIVATE);
@@ -36,5 +51,13 @@ public class SharePreferenceListStopPoint {
         }
 
         return listStopPoint;
+    }
+
+    public static void clear(Context activity)
+    {
+        SharedPreferences preferences = activity.getSharedPreferences("shared_Prefernces", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

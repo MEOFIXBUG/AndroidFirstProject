@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:weightSum="7"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:background="@color/bgBottomNavigation"
+    android:layout_height="0dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="Stop point information"
+        android:paddingTop="10dp"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content">
+    </TextView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation_SP_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgBottomNavigation"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemTextColor="@color/white"
+        app:itemTextAppearanceInactive="@color/lightOrange"
+        app:menu="@menu/detail_point_nav_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</LinearLayout>
+    <FrameLayout
+        android:layout_weight="6"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="32dp">
+    </FrameLayout>
+</LinearLayout>

@@ -4,20 +4,19 @@ public class Tour {
     private long id;
     private long status;
     private String name;
-    private long minCost;
-    private long maxCost;
+    private String minCost;
+    private String maxCost;
     private long startDate;
     private long endDate;
     private long adults;
     private long childs;
     private boolean isPrivate;
     private String avatar;
-
     private long sourceLat;
     private long sourceLong;
     private long desLat;
     private long desLong;
-    private long hostId;
+    private String hostId;
 //    @SerializedName("stopPoints")
 //    @Expose
 //    private List<StopPoint> stopPoints=null;
@@ -40,11 +39,11 @@ public class Tour {
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
-    public long getHostId() {
+    public String getHostId() {
         return hostId;
     }
 
-    public void setHostId(long hostId) {
+    public void setHostId(String hostId) {
         this.hostId = hostId;
     }
 
@@ -96,14 +95,14 @@ public class Tour {
     public void setName(String value) { this.name = value; }
 
 
-    public long getMinCost() { return minCost; }
+    public String getMinCost() { return minCost; }
 
-    public void setMinCost(long value) { this.minCost = value; }
+    public void setMinCost(String value) { this.minCost = value; }
 
 
-    public long getMaxCost() { return maxCost; }
+    public String getMaxCost() { return maxCost; }
 
-    public void setMaxCost(long value) { this.maxCost = value; }
+    public void setMaxCost(String value) { this.maxCost = value; }
 
 
     public long getStartDate() { return startDate; }

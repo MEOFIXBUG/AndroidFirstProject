@@ -27,7 +27,7 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
 
     private Context context;
     ArrayList<Tour> tourArrayList;
-    AdapterView.OnItemClickListener mItemClickListener;
+    ItemAdapter.OnItemClickListener mItemClickListener;
     //constructor
     public TourAdapter(Context context, ArrayList<Tour> articleArrayList) {
         this.context = context;
@@ -62,7 +62,9 @@ public class TourAdapter extends RecyclerView.Adapter<TourAdapter.ViewHolder> {
         }
 
     }
-
+    public void setOnItemClicklListener(final ItemAdapter.OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
     @Override
     public int getItemCount() {
         return tourArrayList.size();
