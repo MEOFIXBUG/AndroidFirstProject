@@ -1,237 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.Fragment.StopPointFragment">
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
 
         <LinearLayout
-            android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_card_travel_orange_24dp" />
 
-                <TextView
-                    android:id="@+id/city_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-bold"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/trip_start_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/city_name"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentStart="false"
-                    android:layout_alignParentTop="false"
-                    android:layout_toRightOf="@+id/city_name"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-bold"
-                    android:gravity="top"
-                    android:paddingBottom="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content">
-
                 <EditText
-                    android:id="@+id/trip_name"
-                    android:layout_width="318dp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:cursorVisible="false"
-                    android:ellipsize="end"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="sans-serif-bold"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:visibility="invisible" />
-
-                <ProgressBar
-                    android:id="@+id/trip_name_progress_bar"
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/etTourName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/rounded_edittext"
                     android:layout_centerHorizontal="true"
-                    android:indeterminateDrawable="@drawable/progress_bar"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/edit_trip_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:padding="10dp"
-                    android:paddingBottom="13dp"
-                    android:src="@drawable/ic_edit_black_24dp" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/no_friend_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="5dp"
-                android:visibility="gone" />
-
-            <RelativeLayout
-                android:id="@+id/friend_whole_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/friend_title"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif-bold"
-                    android:padding="10dp"
-                    android:textColor="#000000"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/plus_icon"
-                    android:layout_width="38dp"
-                    android:layout_height="53dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-            </RelativeLayout>
-            <AutoCompleteTextView
-                android:id="@+id/friend_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/black"
-                android:ems="10"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="@string/com_facebook_loading"
-                android:padding="10dp"
-                android:popupBackground="@color/white"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:visibility="gone"
-                tools:targetApi="lollipop" />
-
-            <TextView
-                android:id="@+id/add_new_friend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/round_shape"
-                android:orientation="horizontal"
-                android:padding="15dp"
-                android:text="@string/action_settings"
-                android:textColor="@color/white"
-                android:visibility="gone" />
-
-
-            <RelativeLayout
-                android:visibility="gone"
-                android:id="@+id/public_trip_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/public_trip_message"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_toStartOf="@+id/ispublic_toggleButton"
-                    android:fontFamily="sans-serif-bold"
-                    android:padding="5dp"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-                <ToggleButton
-                    android:id="@+id/ispublic_toggleButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="53dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:background="@drawable/round_shape"
-                    android:textColor="@color/white"
-                    android:textOn="@string/public_trip_toggle_on"
-                    android:textOff="@string/public_trip_toggle_off" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:id="@+id/addme_to_trip"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@drawable/shadow_1"
-                    android:backgroundTint="@color/black"
-                    android:orientation="horizontal"
-                    android:padding="20dp"
-                    tools:targetApi="lollipop">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="123"
-                        android:src="@drawable/ic_add_circle_white_24dp"
-                        android:tint="@color/blue" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:text="213"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-            </LinearLayout>
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:textSize="@dimen/editTextSize"
+                    android:hint="Tour name" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:id="@+id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:background="@drawable/rounded_edittext"
+                android:editable="false"
+                android:clickable="true"
+                android:hint="Start date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:layout_centerHorizontal="true"
+                android:editable="false"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="End date" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_people_black_24dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etAdults"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:inputType="number"
+                android:hint="Adults" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_people_black_24dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etChilds"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Childs" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content" android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etMinCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="number"
+                android:hint="MinCost" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etMaxCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="MaxCost" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content" android:layout_margin="10dp">
+
+            <EditText
+                android:id="@+id/etAvatar"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:layout_weight="2"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="Avatar image of tour" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="change"
+                android:layout_weight="1"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="@drawable/bg_button"
+                android:id="@+id/updateAvatar"
+                android:textSize="13dp"
+                android:layout_marginLeft="23dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content" android:layout_margin="10dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/uInvite"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="Enter friend name here . . ."
+                android:singleLine="true"
+                android:textSize="@dimen/editTextSize" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btnInvite"
+                android:layout_weight="1"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="@drawable/bg_button"
+                android:text="Invite"
+                android:textSize="13dp"
+                android:layout_marginLeft="23dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+            <CheckBox
+                android:id="@+id/checkbox_id"
+                android:text="Make public"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginBottom="30dp"
+    android:layout_weight="2"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@color/bgBottomNavigation"
+        android:text="update"
+        android:textSize="20dp"
+        android:textColor="#FFFFFFFF"
+        android:gravity="center"
+android:layout_marginRight="30dp"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:textSize="20dp"
+        android:layout_weight="1"
+        android:layout_gravity="bottom|right"
+        android:text="REMOVE"
+        android:padding="4dp"
+        android:id="@+id/btnRemoveTour"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content">
+
+    </Button>
+</LinearLayout>
+
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

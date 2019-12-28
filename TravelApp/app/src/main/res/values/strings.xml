@@ -38,4 +38,8 @@
     <string name="map_api_key">AIzaSyC6fb1JAvbtfDd_pXWmff_PDdHs_0rOh1s</string>
     <string name="title_activity_tour_maps">Map</string>
     <string name="title_activity_list_stop_point">List Stop Point</string>
+    <string name="menuSP_list_stop_point">Information</string>
+    <string name="menuSP_rating_stop_point">Rating</string>
+    <string name="menuSP_delete_stop_point">Remove</string>
+    <string name="title_detail_tour">Detail tour</string>
 </resources>

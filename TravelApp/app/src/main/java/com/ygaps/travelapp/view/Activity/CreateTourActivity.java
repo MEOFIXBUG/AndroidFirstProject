@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
@@ -49,10 +51,6 @@ public class CreateTourActivity extends AppCompatActivity{
     public EditText etTourName;
     public EditText etStartDate;
     public EditText etEndDate;
-   /* public EditText etSourceLat;
-    public EditText etSourceLong;
-    public EditText etDesLong;
-    public EditText etDesLat;*/
     public EditText etAdults;
     public EditText etChilds;
     public EditText etMinCost;
@@ -65,12 +63,15 @@ public class CreateTourActivity extends AppCompatActivity{
     private TourAPI tourapi;
     private Tour reqTour;
     private long tourId;
+    private CheckBox isPrivateBox;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_create_tour);
 
         initialize();
+
+        SharePreferenceListStopPoint.clear(CreateTourActivity.this);
 
         btnCreate = findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +87,6 @@ public class CreateTourActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
                 }
-
                 }
             }
         );
@@ -112,6 +112,8 @@ public class CreateTourActivity extends AppCompatActivity{
                     SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
                     SplashActivity.appPreference.showToast(response.body().getID()+"id");
                     tourId=response.body().getID();
+
+                    SharePreferenceListStopPoint.saveTourIdFromCreateTour(tourId, CreateTourActivity.this);
                     openMapActivity();
 
                 } else {
@@ -121,7 +123,7 @@ public class CreateTourActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Tour> call, Throwable t) {
-                SplashActivity.appPreference.showToast("Create Failed");
+                SplashActivity.appPreference.showToast("Create Failed. Check your internet connection.");
             }
         });
     }
@@ -171,6 +173,7 @@ public class CreateTourActivity extends AppCompatActivity{
         etMinCost=findViewById(R.id.etMinCost);
         etMaxCost=findViewById(R.id.etMaxCost);
         etAvatar=findViewById(R.id.etAvatar);
+        isPrivateBox=findViewById(R.id.checkBoxIsPrivate);
     }
     public boolean checkRequiredField() {
         if (TextUtils.isEmpty(etTourName.getText())) {
@@ -241,8 +244,10 @@ public class CreateTourActivity extends AppCompatActivity{
         if (!TextUtils.isEmpty(etSourceLat.getText()))res.setSourceLat(Integer.parseInt(etSourceLat.getText().toString()));
         if (!TextUtils.isEmpty(etDesLong.getText()))res.setDesLong(Integer.parseInt(etDesLong.getText().toString()));
         if (!TextUtils.isEmpty(etDesLat.getText()))res.setDesLat(Integer.parseInt(etDesLat.getText().toString()));*/
-        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost(parseInt(etMinCost.getText().toString()));
-        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost(parseInt(etMaxCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMinCost.getText()))res.setMinCost((etMinCost.getText().toString()));
+        if(!TextUtils.isEmpty(etMaxCost.getText()))res.setMaxCost((etMaxCost.getText().toString()));
+        if(isPrivateBox.isChecked())isPrivate=true;
+        else isPrivate=false;
         res.setIsPrivate(isPrivate);
 
         return res;
@@ -273,7 +278,6 @@ public class CreateTourActivity extends AppCompatActivity{
 
     public void openMapActivity() {
         Intent intent=new Intent(CreateTourActivity.this, TourMapsActivity.class);
-        intent.putExtra("tourId", tourId);
         startActivity(intent);
     }
 

@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.StopListAdapter;
+import com.ygaps.travelapp.extras.OpenActivity;
+import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.model.StopPoint;
 import com.ygaps.travelapp.response.TourInfoResponse;
+import com.ygaps.travelapp.view.Activity.CreateTourActivity;
+import com.ygaps.travelapp.view.Activity.DetailStopPoint;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
@@ -46,10 +50,10 @@ public class StopPointFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<StopPoint> stopArrayList = new ArrayList<>();
     //private TourAdapter adapter;
-    private ProgressBar progress_bar;
     private StopListAdapter adapter;
     private RecyclerView my_recycler_view;
     private LinearLayoutManager layoutManager;
+    private FloatingActionButton btnAddSP;
     //TourViewModel tourViewModel;
     private static final String TAG = TravelFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
@@ -96,11 +100,22 @@ public class StopPointFragment extends Fragment {
         View view  = inflater.inflate(R.layout.fragment_stop_point, container, false);
         initialization(view);
         getstopPoint();
+
+        btnAddSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharePreferenceListStopPoint.clear(getActivity());
+                SharePreferenceListStopPoint.saveTourIdFromCreateTour(tourID, getActivity());
+                OpenActivity.openMapActivity(getActivity());
+            }
+        });
+
+
         return view;
     }
     private void initialization(View view) {
-        progress_bar = (ProgressBar) view.findViewById(R.id.progress_bar);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.rcv);
+        btnAddSP=view.findViewById(R.id.add_stop);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
@@ -115,6 +130,7 @@ public class StopPointFragment extends Fragment {
         adapter.setOnItemClickListener((stop) ->
         {
             SplashActivity.appPreference.showToast("123 Tour!!");
+            OpenActivity.openStopPointDetail(getActivity());
         });
 
         my_recycler_view.setAdapter(adapter);
@@ -130,11 +146,10 @@ public class StopPointFragment extends Fragment {
         if(data!= null)
         {
             data.observe(this,tourInfoResponse->{
-                progress_bar.setVisibility(View.GONE);
-                if (tourInfoResponse != null) {
 
+                if (tourInfoResponse != null) {
                     List<StopPoint> stop = tourInfoResponse.getStopPoints();
-                    if(stop.isEmpty())
+                    if(!stop.isEmpty())
                     {
                         stopArrayList.addAll(stop);
 

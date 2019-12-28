@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.ItemAdapter;
+import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.PaginationScrollListener;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
@@ -49,6 +50,7 @@ public class TravelFragment extends Fragment {
     private ProgressBar progress_circular_tour2;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
+    long total=0;
     private static final String TAG = TravelFragment.class.getSimpleName();
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -130,11 +132,13 @@ public class TravelFragment extends Fragment {
         adapter = new ItemAdapter(getActivity(), tourArrayList);
         adapter.setOnItemClicklListener((tour) ->
         {
-            SplashActivity.appPreference.showToast("onclick" + tour.getID());
+            /*SplashActivity.appPreference.showToast("onclick" + tour.getID());
             Intent intent = new Intent(getActivity(), DetailTourActivity.class);
             intent.putExtra("tourID",tour.getID());
             intent.putExtra("tourName",tour.getName());
-            startActivity(intent);
+            intent.putExtra("Editable",false);
+            startActivity(intent);*/
+            OpenActivity.openDetailActivity(getActivity(), tour.getID(),tour.getName(), false);
         });
 
         my_recycler_view.setAdapter(adapter);
@@ -176,9 +180,9 @@ public class TravelFragment extends Fragment {
     }
     private void loadData(long pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
-        LiveData<TourResponse> TourList= tourViewModel.getTours(7,pageIndex);
+        LiveData<TourResponse> TourList = tourViewModel.getTours(5,pageIndex);
         TourList.observe(this,tourResponse->{
-
+            total=tourResponse.getTotal();
             isLoading = false;
             if (tourResponse != null) {
                 progress_circular_tour2.setVisibility(View.GONE);

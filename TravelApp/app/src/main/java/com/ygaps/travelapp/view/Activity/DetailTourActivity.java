@@ -38,10 +38,6 @@ public class DetailTourActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tour);
-
-        //configPopUpWindow();
-
-
         tourViewModel= ViewModelProviders.of(this).get(TourViewModel.class);
         toolbar = findViewById(R.id.toolbar);
 
@@ -53,15 +49,8 @@ public class DetailTourActivity extends AppCompatActivity {
         Editable=intent.getBooleanExtra("Editable",false);
         String tourName=intent.getStringExtra("tourName");
         toolbar.setTitle(tourName);
-
-
-        //Intent intent= getIntent();
-        //int tourID=intent.getIntExtra("tourId",0);
-        //intialization();
-       // getTourInfo(tourID);
         Log.d(TAG,"xxx :" +tourID);
         Log.d(TAG,"EDIT :" +Editable);
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadFragment(new StopPointFragment());
@@ -99,22 +88,21 @@ public class DetailTourActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_stop:
+                case R.id.navigation_home:
                     toolbar.setTitle("[Tour Name]");
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_update:
-
-                    toolbar.setTitle("[Tour Name]");//so may tour ko co ten run
+                case R.id.navigation_mytrips:
+                    toolbar.setTitle("[Tour Name]");
                     fragment = new InviteFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_rating:
+                case R.id.navigation_friend:
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_comment:
+                case R.id.navigation_profile:
 
                     fragment = new InviteFragment();
                     loadFragment(fragment);
