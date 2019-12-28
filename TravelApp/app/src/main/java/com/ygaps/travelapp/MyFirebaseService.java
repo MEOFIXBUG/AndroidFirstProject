@@ -17,6 +17,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -30,6 +31,7 @@ import com.ygaps.travelapp.retrofit.retrofitRequest;
 import com.ygaps.travelapp.view.Activity.MainActivity;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
 import com.ygaps.travelapp.view.Fragment.ProfileFragment;
+import com.ygaps.travelapp.view.Fragment.RecoveryPassOTPFragment;
 
 import java.util.Map;
 import java.util.Random;
