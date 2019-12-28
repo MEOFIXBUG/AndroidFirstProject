@@ -25,30 +25,45 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/search"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:weightSum="8"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:visibility="gone">
+
 
         <EditText
             android:background="@drawable/rounded_edittext"
             android:id="@+id/id_search_EditText"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="7"
             android:singleLine="true"
             android:paddingRight="40dp"
             android:hint="Enter your key word..." />
 
-        <ImageButton android:id="@+id/id_search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/id_search_EditText"
-            android:layout_alignBottom="@+id/id_search_EditText"
-            android:layout_alignRight="@+id/id_search_EditText"
-            android:background="@android:drawable/ic_menu_search"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_height="match_parent">
+            <ImageButton android:id="@+id/id_search_button"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/white"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_search_black_24dp"/>
+        </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -62,13 +77,13 @@
 
 
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:src="@drawable/ic_add_black_24dp"-->
-<!--        android:layout_margin="20dp"/>-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|end"-->
+    <!--        android:src="@drawable/ic_add_black_24dp"-->
+    <!--        android:layout_margin="20dp"/>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -81,7 +96,7 @@
         app:itemTextColor="@android:color/white"
         app:menu="@menu/bt_navigation">
 
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>
 

@@ -88,21 +88,21 @@ public class DetailTourActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_stop:
                     toolbar.setTitle("[Tour Name]");
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_mytrips:
+                case R.id.navigation_update:
                     toolbar.setTitle("[Tour Name]");
                     fragment = new InviteFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_friend:
+                case R.id.navigation_rating:
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_profile:
+                case R.id.navigation_comment:
 
                     fragment = new InviteFragment();
                     loadFragment(fragment);

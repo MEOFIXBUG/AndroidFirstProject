@@ -206,7 +206,7 @@ public class MyTripFragment extends Fragment {
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-                    adapter.addItems(tourResponse.getTours());
+                    adapter.addItems(tourResponse.getUnDeletedTour());
                     if (page >= tourResponse.getTotal()/7) {
                         isLastPage = true;
                     } else {
@@ -232,13 +232,14 @@ public class MyTripFragment extends Fragment {
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-                    List<Tour> tours = tourResponse.getTours();
-                    //Log.d(TAG, "data:: " + tours.get(0).getName());
-                    for (Tour temp:tours) {
-                        if(temp.getStatus()!=-1){
-                            tourArrayList.add(temp);
-                        }
-                    }
+//                    List<Tour> tours = tourResponse.getTours();
+//                    //Log.d(TAG, "data:: " + tours.get(0).getName());
+//                    for (Tour temp:tours) {
+//                        if(temp.getStatus()!=-1){
+//                            tourArrayList.add(temp);
+//                        }
+//                    }
+                    adapter.updateData(tourResponse.getUnDeletedTour());
 
                     adapter.notifyDataSetChanged();
                 }

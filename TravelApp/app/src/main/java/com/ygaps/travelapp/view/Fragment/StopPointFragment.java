@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
@@ -55,6 +56,7 @@ public class StopPointFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private FloatingActionButton btnAddSP;
     //TourViewModel tourViewModel;
+    private ProgressBar progress_bar;
     private static final String TAG = TravelFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -116,6 +118,7 @@ public class StopPointFragment extends Fragment {
     private void initialization(View view) {
         my_recycler_view = (RecyclerView) view.findViewById(R.id.rcv);
         btnAddSP=view.findViewById(R.id.add_stop);
+        progress_bar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
@@ -147,6 +150,7 @@ public class StopPointFragment extends Fragment {
         {
             data.observe(this,tourInfoResponse->{
 
+                progress_bar.setVisibility(View.GONE);
                 if (tourInfoResponse != null) {
                     List<StopPoint> stop = tourInfoResponse.getStopPoints();
                     if(!stop.isEmpty())

@@ -14,8 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -33,16 +35,18 @@ import static android.view.View.VISIBLE;
 
 public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
-    public static RelativeLayout searchView;
+
     public static EditText searchText;
     public static ImageButton searchBtn;
+    public static LinearLayout searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour);
         toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        searchView= (RelativeLayout) findViewById(R.id.search);
+        searchView= (LinearLayout) findViewById(R.id.search);
         searchText = (EditText) findViewById(R.id.id_search_EditText);
         searchBtn= (ImageButton) findViewById(R.id.id_search_button);
         toolbar.setTitle("Home");
@@ -69,6 +73,7 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                 case R.id.navigation_home:
                     toolbar.setTitle("Home");
                     fragment = new TravelFragment();
+                    searchView.setVisibility(View.GONE);
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_mytrips:
@@ -79,11 +84,13 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                     return true;
                 case R.id.navigation_friend:
                     toolbar.setTitle("Friend");
+                    searchView.setVisibility(View.GONE);
                     fragment = new TravelFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_profile:
                     toolbar.setTitle("Profile");
+                    searchView.setVisibility(View.GONE);
                     fragment = new ProfileFragment();
                     loadFragment(fragment);
                     return true;
