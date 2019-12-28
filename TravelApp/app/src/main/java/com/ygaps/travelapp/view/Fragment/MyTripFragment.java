@@ -35,6 +35,8 @@ import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.ygaps.travelapp.view.Activity.TourActivity.searchBtn;
+import static com.ygaps.travelapp.view.Activity.TourActivity.searchText;
 import static com.ygaps.travelapp.view.Activity.TourActivity.searchView;
 
 /**
@@ -61,6 +63,7 @@ public class MyTripFragment extends Fragment {
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private int page = 1;
+    private long total = 0;
     //private TourInterface createTourFromTravelTour;
     private static final String TAG = MyTripFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
@@ -108,8 +111,6 @@ public class MyTripFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_trip, container, false);
         initialization(view);
         loadData(page);
-
-
 /*        ////Quyennnn
         add_fab=view.findViewById(R.id.add_trip);
         add_fab.setOnClickListener(new View.OnClickListener() {
@@ -181,19 +182,14 @@ public class MyTripFragment extends Fragment {
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,2);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
+            public void onClick(View v)
+            {
+                SplashActivity.appPreference.showToast("onclick btn " );
+                searchData(searchText.getText().toString(),1);
             }
         });
-
     }
     private void loadData(int pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
@@ -204,6 +200,7 @@ public class MyTripFragment extends Fragment {
                 isLoading = false;
 
                 if (tourResponse != null) {
+                    total=tourResponse.getTotal();
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
@@ -215,6 +212,30 @@ public class MyTripFragment extends Fragment {
                     }
                 }
                 else {
+                    noTrips.setVisibility(VISIBLE);
+                }
+            });
+        }
+
+    }
+    private void searchData(String keyWord,int pageIndex){
+        progress_circular_tour2.setVisibility(View.INVISIBLE);
+        LiveData<TourResponse> MyTrips= tourViewModel.searchMyTrips(keyWord,total,pageIndex);
+        if(MyTrips!= null)
+        {
+            MyTrips.observe(this,tourResponse->{
+                isLoading = false;
+
+                if (tourResponse != null) {
+                    progress_circular_tour2.setVisibility(View.GONE);
+                    progress_circular_tour1.setVisibility(View.GONE);
+                    noTrips.setVisibility(GONE);
+                    adapter.updateData(tourResponse.getTours());
+                    adapter.notifyDataSetChanged();
+                }
+                else {
+                    adapter.clear();
+                    adapter.notifyDataSetChanged();
                     noTrips.setVisibility(VISIBLE);
                 }
             });

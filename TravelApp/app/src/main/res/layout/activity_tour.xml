@@ -25,15 +25,31 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <SearchView
+    <RelativeLayout
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:queryHint="Search here"
-        android:iconifiedByDefault="false"
         android:visibility="gone">
 
-    </SearchView>
+        <EditText
+            android:background="@drawable/rounded_edittext"
+            android:id="@+id/id_search_EditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:paddingRight="40dp"
+            android:hint="Enter your key word..." />
+
+        <ImageButton android:id="@+id/id_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/id_search_EditText"
+            android:layout_alignBottom="@+id/id_search_EditText"
+            android:layout_alignRight="@+id/id_search_EditText"
+            android:background="@android:drawable/ic_menu_search"/>
+
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

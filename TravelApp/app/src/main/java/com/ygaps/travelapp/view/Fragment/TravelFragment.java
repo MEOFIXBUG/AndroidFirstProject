@@ -49,6 +49,7 @@ public class TravelFragment extends Fragment {
     private ProgressBar progress_circular_tour2;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
+    long total=0;
     private static final String TAG = TravelFragment.class.getSimpleName();
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -177,9 +178,9 @@ public class TravelFragment extends Fragment {
     }
     private void loadData(long pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
-        LiveData<TourResponse> TourList= tourViewModel.getTours(5,pageIndex);
+        LiveData<TourResponse> TourList = tourViewModel.getTours(5,pageIndex);
         TourList.observe(this,tourResponse->{
-
+            total=tourResponse.getTotal();
             isLoading = false;
             if (tourResponse != null) {
                 progress_circular_tour2.setVisibility(View.GONE);

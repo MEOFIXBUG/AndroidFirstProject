@@ -14,6 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -30,14 +33,18 @@ import static android.view.View.VISIBLE;
 
 public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
-    public static SearchView searchView;
+    public static RelativeLayout searchView;
+    public static EditText searchText;
+    public static ImageButton searchBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour);
         toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        searchView= (SearchView) findViewById(R.id.search);
+        searchView= (RelativeLayout) findViewById(R.id.search);
+        searchText = (EditText) findViewById(R.id.id_search_EditText);
+        searchBtn= (ImageButton) findViewById(R.id.id_search_button);
         toolbar.setTitle("Home");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

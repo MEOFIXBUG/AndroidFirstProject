@@ -105,4 +105,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Items.addAll(items);
         notifyDataSetChanged();;
     }
+    public void updateData(List<Tour> items){
+        Items.clear();
+        Items.addAll(items);
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        Items.clear();
+        notifyDataSetChanged();
+    }
+
 }
