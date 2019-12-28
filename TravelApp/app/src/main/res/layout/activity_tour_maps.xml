@@ -66,24 +66,22 @@
         android:layout_gravity="bottom|right"
         android:id="@+id/btnList"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
         android:src="@drawable/ic_format_list_bulleted_black_24dp"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigationSP"
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
             android:foreground="?attr/selectableItemBackground"
-            app:itemBackground="@color/colorPrimaryDark"
-            app:itemIconTint="@android:color/holo_orange_dark"
-            app:itemTextColor="@android:color/holo_orange_light"
-            android:layout_marginBottom="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-            app:menu="@menu/map_stoppoint_menu">
+            app:itemBackground="@color/bgBottomNavigation"
+            app:itemIconTint="@android:color/white"
+            app:itemTextColor="@android:color/white"
+            android:layout_margin="20dp"
+            app:menu="@menu/bt_navigation">
 
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

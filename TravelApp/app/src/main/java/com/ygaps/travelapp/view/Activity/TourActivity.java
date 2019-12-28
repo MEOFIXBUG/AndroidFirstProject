@@ -12,13 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 
 import com.ygaps.travelapp.R;
@@ -28,23 +22,15 @@ import com.ygaps.travelapp.view.Fragment.MyTripFragment;
 import com.ygaps.travelapp.view.Fragment.ProfileFragment;
 import com.ygaps.travelapp.view.Fragment.TravelFragment;
 
-import static android.view.View.VISIBLE;
-
 
 public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
-    public static RelativeLayout searchView;
-    public static EditText searchText;
-    public static ImageButton searchBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour);
         toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        searchView= (RelativeLayout) findViewById(R.id.search);
-        searchText = (EditText) findViewById(R.id.id_search_EditText);
-        searchBtn= (ImageButton) findViewById(R.id.id_search_button);
         toolbar.setTitle("Home");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -55,7 +41,7 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
-        //transaction.addToBackStack(null);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -73,7 +59,6 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                     return true;
                 case R.id.navigation_mytrips:
                     toolbar.setTitle("My Trips");
-                    searchView.setVisibility(VISIBLE);
                     fragment = new MyTripFragment();
                     loadFragment(fragment);
                     return true;

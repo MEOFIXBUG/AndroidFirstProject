@@ -52,20 +52,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity"
-<<<<<<< HEAD
-            android:label="@string/title_detail_tour">
-
-        </activity>
-
-        <activity android:name="com.ygaps.travelapp.view.Activity.DetailStopPoint"
-            android:theme="@style/AppTheme.NoActionBar">
-=======
-            android:theme="@style/AppThemeNoBar"
-            android:windowSoftInputMode="stateHidden">
->>>>>>> 68f69301307d04a843f8987215a448945cbad56c
-
-        </activity>
+        <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -84,19 +71,17 @@
         <activity
             android:name="com.ygaps.travelapp.view.Activity.TourMapsActivity"
             android:label="@string/title_activity_tour_maps"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBarMap">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBarMap"></activity>
         <activity android:name="com.ygaps.travelapp.view.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.ygaps.travelapp.view.Activity.TourActivity"
             android:label="@string/title_activity_tour"
-            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.ygaps.travelapp.view.Activity.MainActivity"
@@ -113,7 +98,6 @@
         <activity android:name="com.ygaps.travelapp.view.Activity.CreateTourActivity" />
         <activity
             android:name="com.ygaps.travelapp.view.Activity.AddStopPointActivity"
-
             android:theme="@style/AppTheme.CustomTheme" />
 
         <meta-data

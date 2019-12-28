@@ -5,14 +5,13 @@
     android:paddingRight="30dp"
     android:paddingLeft="30dp"
     android:layout_centerVertical="true"
-    android:background="#fff"
+    android:paddingBottom="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
@@ -204,7 +203,7 @@
                     android:background="@drawable/rounded_edittext"
                     android:editable="false"
                     android:clickable="true"
-                    android:hint="Choose time(*)" />
+                    android:hint="Choose time" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -271,7 +270,7 @@
                     android:background="@drawable/rounded_edittext"
                     android:editable="false"
                     android:clickable="true"
-                    android:hint="Choose time(*)" />
+                    android:hint="Choose time" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -313,7 +312,6 @@
             android:gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>
