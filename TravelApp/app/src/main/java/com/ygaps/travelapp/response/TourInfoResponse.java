@@ -54,6 +54,26 @@ public class TourInfoResponse {
     @Expose
     private List<UserInfo> members=null;
 
+    public void  Assign(TourInfoResponse a)
+    {
+        this.endDate=a.endDate;
+        this.adults=a.adults;
+        this.childs=a.childs;
+        this.comments.clear();
+        this.comments.addAll(a.comments);
+        this.hostId=a.hostId;
+        this.id=a.id;
+        this.isPrivate=a.isPrivate;
+        this.maxCost=a.maxCost;
+        this.minCost=a.minCost;
+        this.members.clear();
+        this.members.addAll(a.members);
+        this.stopPoints.clear();
+        this.stopPoints.addAll(a.stopPoints);
+        this.status=a.status;
+        this.name=a.name;
+    }
+
     public List<StopPoint> getStopPoints() {
         return stopPoints;
     }

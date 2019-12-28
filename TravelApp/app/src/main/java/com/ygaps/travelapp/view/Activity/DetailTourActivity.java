@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.view.Fragment.InviteFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
@@ -28,10 +29,12 @@ public class DetailTourActivity extends AppCompatActivity {
     public static boolean Editable;
 //    ImageView placeImageView;
     private Toolbar toolbar;
+    public static TourInfoResponse TourInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tour);
+        //getActionBar().hide();
         tourViewModel= ViewModelProviders.of(this).get(TourViewModel.class);
         Intent intent= getIntent();
         tourID=intent.getLongExtra("tourID",1);

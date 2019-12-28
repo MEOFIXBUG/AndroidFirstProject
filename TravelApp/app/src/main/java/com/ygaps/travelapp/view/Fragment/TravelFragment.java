@@ -177,7 +177,7 @@ public class TravelFragment extends Fragment {
     }
     private void loadData(long pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
-        LiveData<TourResponse> TourList= tourViewModel.getTours(7,pageIndex);
+        LiveData<TourResponse> TourList= tourViewModel.getTours(5,pageIndex);
         TourList.observe(this,tourResponse->{
 
             isLoading = false;

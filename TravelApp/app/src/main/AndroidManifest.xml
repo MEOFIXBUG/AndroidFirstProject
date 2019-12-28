@@ -42,7 +42,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity">
+        <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity"
+            android:theme="@style/AppThemeNoBar"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
         <!--

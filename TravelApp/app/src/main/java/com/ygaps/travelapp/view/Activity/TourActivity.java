@@ -12,7 +12,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 
 import com.ygaps.travelapp.R;
@@ -22,15 +25,19 @@ import com.ygaps.travelapp.view.Fragment.MyTripFragment;
 import com.ygaps.travelapp.view.Fragment.ProfileFragment;
 import com.ygaps.travelapp.view.Fragment.TravelFragment;
 
+import static android.view.View.VISIBLE;
+
 
 public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
+    public static SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour);
         toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        searchView= (SearchView) findViewById(R.id.search);
         toolbar.setTitle("Home");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -59,6 +66,7 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                     return true;
                 case R.id.navigation_mytrips:
                     toolbar.setTitle("My Trips");
+                    searchView.setVisibility(VISIBLE);
                     fragment = new MyTripFragment();
                     loadFragment(fragment);
                     return true;

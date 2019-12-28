@@ -10,17 +10,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.adapter.TourAdapter;
+import com.ygaps.travelapp.extras.PaginationScrollListener;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.view.Activity.DetailTourActivity;
@@ -32,6 +35,7 @@ import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.ygaps.travelapp.view.Activity.TourActivity.searchView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,10 +53,14 @@ public class MyTripFragment extends Fragment {
     private ArrayList<Tour> tourArrayList = new ArrayList<>();
     private ItemAdapter adapter;
     private RecyclerView my_recycler_view;
-    private ProgressBar progress_circular_tour;
+    private ProgressBar progress_circular_tour1;
+    private ProgressBar progress_circular_tour2;
     private LinearLayoutManager layoutManager;
     TourViewModel tourViewModel;
     TextView noTrips;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int page = 1;
     //private TourInterface createTourFromTravelTour;
     private static final String TAG = MyTripFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
@@ -99,7 +107,7 @@ public class MyTripFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_trip, container, false);
         initialization(view);
-        getMyTrips();
+        loadData(page);
 
 
 /*        ////Quyennnn
@@ -115,7 +123,9 @@ public class MyTripFragment extends Fragment {
         return view;
     }
     private void initialization(View view) {
-        progress_circular_tour = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
+
+        progress_circular_tour1 = (ProgressBar) view.findViewById(R.id.progress_circular_tour);
+        progress_circular_tour2 = (ProgressBar) view.findViewById(R.id.progress_circular_tour2);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
          //add_fab= (FloatingActionButton) view.findViewById(R.id.add_trip);
         noTrips =(TextView) view.findViewById(R.id.my_trips_no_items);
@@ -139,24 +149,70 @@ public class MyTripFragment extends Fragment {
             startActivity(intent);
         });
         my_recycler_view.setAdapter(adapter);
+        my_recycler_view.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                if (!isLastPage) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadData(page);
+                        }
+                    }, 300);
+                }
+            }
 
+            @Override
+            public int getTotalPageCount() {
+                return 0;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,2);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
 
     }
-    private void getMyTrips() {
-        LiveData<TourResponse> MyTrips= tourViewModel.getMyTrips(49,1);
+    private void loadData(int pageIndex) {
+        progress_circular_tour2.setVisibility(View.INVISIBLE);
+        LiveData<TourResponse> MyTrips= tourViewModel.getMyTrips(5,pageIndex);
         if(MyTrips!= null)
         {
             MyTrips.observe(this,tourResponse->{
-                progress_circular_tour.setVisibility(GONE);
+                isLoading = false;
+
                 if (tourResponse != null) {
+                    progress_circular_tour2.setVisibility(View.GONE);
+                    progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-                    List<Tour> tours = tourResponse.getTours();
-                    Log.d(TAG, "data:: " + tours.get(0).getName());
-                    tourArrayList.addAll(tours);
-                    adapter.notifyDataSetChanged();
+                    adapter.addItems(tourResponse.getTours());
+                    if (page >= tourResponse.getTotal()/7) {
+                        isLastPage = true;
+                    } else {
+                        page = page + 1;
+                    }
                 }
                 else {
                     noTrips.setVisibility(VISIBLE);

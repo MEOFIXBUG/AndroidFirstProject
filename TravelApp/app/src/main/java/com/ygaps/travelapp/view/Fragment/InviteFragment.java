@@ -222,7 +222,7 @@ public class InviteFragment extends Fragment {
                         a.setInvited(false);
                         }
                     }
-                    tourViewModel.Invite_Join(a);
+                    //tourViewModel.Invite_Join(a);
             }
         });
 
