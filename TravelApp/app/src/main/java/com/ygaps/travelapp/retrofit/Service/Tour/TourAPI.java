@@ -30,6 +30,9 @@ public interface TourAPI {
     @POST("/tour/create")
     Call<Tour> createTour(@Body Tour tourCreate);
 
+    @POST("tour/update-tour")
+    Call<Tour> updateTour(@Body Tour tour);
+
     @POST("/tour/set-stop-points")
     Call<MessageResponse> createListStopPoint(@Body StopPointsOfTour listStopPoints);
 

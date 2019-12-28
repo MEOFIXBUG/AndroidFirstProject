@@ -290,7 +290,7 @@ public class AddStopPointActivity extends AppCompatActivity {
             longitudeFromMap=intent.getDoubleExtra("longitude", 0);//danh dau day la su kien edit
             latitudeFromMap=intent.getDoubleExtra("latitude", 0);
 
-            SplashActivity.appPreference.showToast(longitudeFromMap+"--"+latitudeFromMap);
+            //SplashActivity.appPreference.showToast(longitudeFromMap+"--"+latitudeFromMap);
         }
     }
 

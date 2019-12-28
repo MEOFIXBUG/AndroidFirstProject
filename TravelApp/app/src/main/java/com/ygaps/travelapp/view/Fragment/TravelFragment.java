@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.ItemAdapter;
+import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.PaginationScrollListener;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
@@ -130,12 +131,13 @@ public class TravelFragment extends Fragment {
         adapter = new ItemAdapter(getActivity(), tourArrayList);
         adapter.setOnItemClicklListener((tour) ->
         {
-            SplashActivity.appPreference.showToast("onclick" + tour.getID());
+            /*SplashActivity.appPreference.showToast("onclick" + tour.getID());
             Intent intent = new Intent(getActivity(), DetailTourActivity.class);
             intent.putExtra("tourID",tour.getID());
             intent.putExtra("tourName",tour.getName());
             intent.putExtra("Editable",false);
-            startActivity(intent);
+            startActivity(intent);*/
+            OpenActivity.openDetailActivity(getActivity(), tour.getID(),tour.getName(), false);
         });
 
         my_recycler_view.setAdapter(adapter);

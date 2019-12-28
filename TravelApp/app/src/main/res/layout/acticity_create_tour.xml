@@ -368,40 +368,20 @@
             android:textSize="@dimen/editTextSize"
             android:hint="Avatar image of tour" />
     </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-        <RadioGroup
-            android:id="@+id/radioSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        <RadioButton
-            android:id="@+id/rdoBtnIsPrivate"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Is this your private trip?"
-            android:onClick="onRadioButtonClicked"
-            android:checked="false" />
-        </RadioGroup>
-
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:text="Is private(*)">
-        </TextView>
-        <ToggleButton
-            android:id="@+id/togglebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="TRUE"
-            android:textOff="FALSE"
-            android:onClick="onToggleClicked"/>-->
-
-    </LinearLayout>
-
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+            <CheckBox
+                android:id="@+id/checkBoxIsPrivate"
+                android:text="Is this your private trip?"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     <Button
         android:id="@+id/btnCreate"

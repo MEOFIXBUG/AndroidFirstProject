@@ -1,7 +1,9 @@
 package com.ygaps.travelapp.view.Activity;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,10 +24,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ygaps.travelapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.model.StopPoint;
+import com.ygaps.travelapp.view.Fragment.InviteFragment;
+import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 
 import java.util.ArrayList;
 
@@ -41,7 +47,7 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -55,8 +61,9 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
-        //listStopPoint=SharePreferenceListStopPoint.loadData(TourMapsActivity.this);//doc tu file len
-        //recieveFromCreateToutActivity();
+        tourId=SharePreferenceListStopPoint.loadTourId(this);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationSP);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -153,7 +160,28 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         markerOptions.title(newStopPoint.getName());
         mMap.addMarker(markerOptions);
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menuSP_list_stop_point:
+                    Intent intent = new Intent(TourMapsActivity.this, DetailTourActivity.class);
+
+                    intent.putExtra("tourID",tourId);
+                    intent.putExtra("Editable",true);
+                    startActivity(intent);
+                    return true;
+                case R.id.menuSP_rating_stop_point:
+                    return true;
+                case R.id.menuSP_delete_stop_point:
+                    return true;
+
+            }
+            return false;
+        }
+    };
     public void openAddStopPointActivity() {
         Intent intent=new Intent(TourMapsActivity.this, AddStopPointActivity.class);
         intent.putExtra("longitude", longitude);
@@ -171,9 +199,6 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
     {
         if(getIntent()!=null && getIntent().getSerializableExtra("newStopPoint")!=null) {
             newStopPoint = (StopPoint) getIntent().getSerializableExtra("newStopPoint");
-            //SplashActivity.appPreference.showToast(newStopPoint.getName());
-            //listStopPoint.add(newStopPoint);
-            //SharePreferenceListStopPoint.saveData(listStopPoint, TourMapsActivity.this);
             makeMarker();
         }
     }

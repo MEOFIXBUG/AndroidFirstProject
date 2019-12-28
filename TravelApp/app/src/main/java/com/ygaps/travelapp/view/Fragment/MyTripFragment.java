@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.adapter.TourAdapter;
+import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.view.Activity.DetailTourActivity;
@@ -131,11 +132,13 @@ public class MyTripFragment extends Fragment {
         adapter = new ItemAdapter(getActivity(), tourArrayList);
         adapter.setOnItemClicklListener((tour) ->
         {
-            SplashActivity.appPreference.showToast("onclick" + tour.getID());
+            OpenActivity.openDetailActivity(getActivity(), tour.getID(),tour.getName(), true);
+           /* SplashActivity.appPreference.showToast("onclick" + tour.getID());
             Intent intent = new Intent(getActivity(), DetailTourActivity.class);
             intent.putExtra("tourID",tour.getID());
             intent.putExtra("tourName",tour.getName());
-            startActivity(intent);
+            intent.putExtra("Editable",true);
+            startActivity(intent);*/
         });
         my_recycler_view.setAdapter(adapter);
 
@@ -153,8 +156,13 @@ public class MyTripFragment extends Fragment {
                 if (tourResponse != null) {
                     noTrips.setVisibility(GONE);
                     List<Tour> tours = tourResponse.getTours();
-                    Log.d(TAG, "data:: " + tours.get(0).getName());
-                    tourArrayList.addAll(tours);
+                    //Log.d(TAG, "data:: " + tours.get(0).getName());
+                    for (Tour temp:tours) {
+                        if(temp.getStatus()!=-1){
+                            tourArrayList.add(temp);
+                        }
+                    }
+
                     adapter.notifyDataSetChanged();
                 }
                 else {

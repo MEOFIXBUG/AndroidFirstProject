@@ -41,4 +41,5 @@
     <string name="menuSP_list_stop_point">Information</string>
     <string name="menuSP_rating_stop_point">Rating</string>
     <string name="menuSP_delete_stop_point">Remove</string>
+    <string name="title_detail_tour">Detail tour</string>
 </resources>
