@@ -7,9 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.repository.TourRepository;
-import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 
@@ -60,30 +58,11 @@ public class TourViewModel extends AndroidViewModel {
         }
         return tourResponseLiveData;
     }
-    public LiveData<TourResponse> searchMyTrips(String keyWord, long perpage,long page) {
-        try {
-            tourResponseLiveData = tourRepository.searchMyTrips(keyWord,perpage,page);
-        }
-        catch (Exception ex){
-            tourResponseLiveData= null;
-        }
-        return tourResponseLiveData;
-    }
     public LiveData<TourInfoResponse> getTourInfo(long id){
         try {
             Log.d(TAG," re: " + id);
             tourInfoResponseLiveData= tourRepository.getTourInfoByID(id);
              return tourInfoResponseLiveData;
-        }
-        catch (Exception ex){
-            Log.d(TAG," re: " + ex);
-            return null;
-        }
-    }
-    public LiveData<StatusResponse> Invite_Join(toInvited req){
-        try {
-            Log.d(TAG," re: " + req.getInvitedUserId());
-            return  tourRepository.Invite_Join(req);
         }
         catch (Exception ex){
             Log.d(TAG," re: " + ex);

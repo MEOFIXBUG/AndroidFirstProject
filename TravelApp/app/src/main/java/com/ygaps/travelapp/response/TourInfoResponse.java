@@ -18,7 +18,7 @@ public class TourInfoResponse {
     private int adults;
     @SerializedName("hostId")
     @Expose
-    private String hostId;
+    private int hostId;
     @SerializedName("isPrivate")
     @Expose
     private boolean isPrivate;
@@ -30,13 +30,13 @@ public class TourInfoResponse {
     private String name;
     @SerializedName("maxCost")
     @Expose
-    private String maxCost;
+    private long maxCost;
     @SerializedName("id")
     @Expose
     private long id;
     @SerializedName("minCost")
     @Expose
-    private String minCost;
+    private long minCost;
     @SerializedName("startDate")
     @Expose
     private long startDate;
@@ -53,26 +53,6 @@ public class TourInfoResponse {
     @SerializedName("members")
     @Expose
     private List<UserInfo> members=null;
-
-    public void  Assign(TourInfoResponse a)
-    {
-        this.endDate=a.endDate;
-        this.adults=a.adults;
-        this.childs=a.childs;
-        this.comments.clear();
-        this.comments.addAll(a.comments);
-        this.hostId=a.hostId;
-        this.id=a.id;
-        this.isPrivate=a.isPrivate;
-        this.maxCost=a.maxCost;
-        this.minCost=a.minCost;
-        this.members.clear();
-        this.members.addAll(a.members);
-        this.stopPoints.clear();
-        this.stopPoints.addAll(a.stopPoints);
-        this.status=a.status;
-        this.name=a.name;
-    }
 
     public List<StopPoint> getStopPoints() {
         return stopPoints;
@@ -115,12 +95,12 @@ public class TourInfoResponse {
     {
         this.adults = adults;
     }
-    public String getHostId ()
+    public int getHostId ()
     {
         return hostId;
     }
 
-    public void setHostId (String hostId)
+    public void setHostId (int hostId)
     {
         this.hostId = hostId;
     }
@@ -154,12 +134,12 @@ public class TourInfoResponse {
         this.name = name;
     }
 
-    public String getMaxCost ()
+    public long getMaxCost ()
     {
         return maxCost;
     }
 
-    public void setMaxCost (String maxCost)
+    public void setMaxCost (long maxCost)
     {
         this.maxCost = maxCost;
     }
@@ -174,12 +154,12 @@ public class TourInfoResponse {
         this.id = id;
     }
 
-    public String getMinCost ()
+    public long getMinCost ()
     {
         return minCost;
     }
 
-    public void setMinCost (String minCost)
+    public void setMinCost (long minCost)
     {
         this.minCost = minCost;
     }

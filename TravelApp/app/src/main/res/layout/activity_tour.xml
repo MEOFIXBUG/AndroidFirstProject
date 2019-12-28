@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:orientation="vertical"
-    android:weightSum="10"
     tools:context=".view.Activity.TourActivity"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -25,6 +22,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+<<<<<<< HEAD
     <LinearLayout
         android:id="@+id/search"
         android:orientation="horizontal"
@@ -62,11 +60,13 @@
 
     </LinearLayout>
 
+=======
+>>>>>>> 04e401d6d648dc9feabc307d0acf6b2c6f821560
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_height="526dp"
+        android:layout_marginTop="70dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="32dp">
 
@@ -84,9 +84,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/bgBottomNavigation"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
         app:itemBackground="@color/bgBottomNavigation"
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@android:color/white"
@@ -95,7 +95,7 @@
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 

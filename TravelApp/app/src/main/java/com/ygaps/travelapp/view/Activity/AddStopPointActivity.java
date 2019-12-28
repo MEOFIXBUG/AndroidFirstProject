@@ -20,14 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.extras.ReadExcel;
-import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Province;
 import com.ygaps.travelapp.model.ServiceType;
 import com.ygaps.travelapp.model.StopPoint;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +55,6 @@ public class AddStopPointActivity extends AppCompatActivity {
     private List<String>provinces;
     private List<Province>listProvinces;
     private List<ServiceType>listServiceType;
-    ArrayList<StopPoint> listStopPoint=new ArrayList<StopPoint>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,8 +76,6 @@ public class AddStopPointActivity extends AppCompatActivity {
         timePicker(etTimeLeave);
         setAdapterSpinner(spinnerProvince, provinces);
         setAdapterSpinner(spinnerService, serviceName);
-
-        listStopPoint= SharePreferenceListStopPoint.loadData(this);//doc tu file len
 
         recieveDataFromMapAvtivity();
 
@@ -256,8 +251,6 @@ public class AddStopPointActivity extends AppCompatActivity {
 
         StopPoint newStopPoint =makeStopPointRequest();
         intent.putExtra("newStopPoint",newStopPoint);
-        listStopPoint.add(newStopPoint);
-        SharePreferenceListStopPoint.saveData(listStopPoint, this);
 
         startActivity(intent);
     }
@@ -289,8 +282,6 @@ public class AddStopPointActivity extends AppCompatActivity {
 
             longitudeFromMap=intent.getDoubleExtra("longitude", 0);//danh dau day la su kien edit
             latitudeFromMap=intent.getDoubleExtra("latitude", 0);
-
-            //SplashActivity.appPreference.showToast(longitudeFromMap+"--"+latitudeFromMap);
         }
     }
 

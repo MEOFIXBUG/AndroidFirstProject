@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+<<<<<<< HEAD
         android:id="@+id/navigation_stop"
         android:icon="@drawable/ic_account_balance_black_24dp"
         android:title="Stop Points" />
@@ -20,6 +21,25 @@
         android:title="Comment" />
 
 
+=======
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_directions_car_black"
+        android:title="@string/navigation_drawer_travel" />
 
+    <item
+        android:id="@+id/navigation_mytrips"
+        android:icon="@drawable/ic_card_travel_black_24dp"
+        android:title="@string/my_trip"  />
+
+    <item
+        android:id="@+id/navigation_friend"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="@string/navigation_drawer_my_friends" />
+>>>>>>> 04e401d6d648dc9feabc307d0acf6b2c6f821560
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/navigation_drawer_settings" />
 
 </menu>
