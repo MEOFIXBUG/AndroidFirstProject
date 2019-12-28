@@ -43,17 +43,12 @@
             </intent-filter>
         </service>
         <activity android:name="com.ygaps.travelapp.view.Activity.DetailTourActivity"
-<<<<<<< HEAD
             android:label="@string/title_detail_tour">
 
         </activity>
 
         <activity android:name="com.ygaps.travelapp.view.Activity.DetailStopPoint"
             android:theme="@style/AppTheme.NoActionBar">
-=======
-            android:theme="@style/AppThemeNoBar"
-            android:windowSoftInputMode="stateHidden">
->>>>>>> 68f69301307d04a843f8987215a448945cbad56c
 
         </activity>
         <!--

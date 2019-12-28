@@ -1,7 +1,9 @@
 package com.ygaps.travelapp.view.Fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -58,6 +60,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -166,16 +169,18 @@ public class InviteFragment extends Fragment {
         Done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Tour tourupdate=makeTourRequest();
-                    updateTour(tourupdate);
+                if(checkRequiredField()) {
+                    try {
+                        Tour tourupdate = makeTourRequest();
+                        updateTour(tourupdate);
 
-                    //tro ve fragment stop point
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, new StopPointFragment());
-                    transaction.commit();
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                        //tro ve fragment stop point
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, new StopPointFragment());
+                        transaction.commit();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -184,22 +189,96 @@ public class InviteFragment extends Fragment {
         btnRemoveTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tour tourupdate= null;
-                try {
-                    tourupdate = makeTourRequest();
-                    tourupdate.setStatus(-1);
-                    updateTour(tourupdate);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                    //tro ve home
-                    OpenActivity.openHomeActivity(getActivity());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Tour tourupdate= null;
+                        try {
+                            tourupdate = makeTourRequest();
+                            tourupdate.setStatus(-1);
+                            updateTour(tourupdate);
+
+                            //tro ve home
+                            OpenActivity.openHomeActivity(getActivity());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
 
             }
         });
 
         return view;
+    }
+    public boolean checkRequiredField() {
+        if (TextUtils.isEmpty(etTourName.getText())) {
+            etTourName.setError("Tour  Name is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etStartDate.getText())) {
+            etStartDate.setError("Start Date is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etEndDate.getText())) {
+            etEndDate.setError("End Date is required");
+            return false;
+        }
+        /*if (TextUtils.isEmpty(etSourceLat.getText())) {
+            etSourceLat.setError("Source Latitude is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etSourceLong.getText())) {
+            etSourceLong.setError("Source Longitude is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etDesLat.getText())) {
+            etDesLat.setError("Destination Latitude is required");
+            return false;
+        }
+        if (TextUtils.isEmpty(etDesLong.getText())) {
+            etDesLong.setError("Destination Longitude is required");
+            return false;
+        }*/
+
+        String startDate = etStartDate.getText().toString();
+        String endDate=etEndDate.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date strStartDate = null;
+        Date strEndDate=null;
+
+        try{
+            strStartDate = sdf.parse(startDate);
+            strEndDate=sdf.parse(endDate);
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (strEndDate.getTime() < strStartDate.getTime()) {
+            etStartDate.setError("End date must be after start date");
+            etEndDate.setError("End date must be after start date");
+            return false;
+        }
+
+        return true;
     }
     private void initialization(View view) {
         etTourName=view.findViewById(R.id.etTourName);
@@ -228,6 +307,7 @@ public class InviteFragment extends Fragment {
             disableEditText(textCountry);
             inviteBtn.setText("JOIN");
             updateAvatar.setVisibility(GONE);
+            btnRemoveTour.setVisibility(GONE);
             //Done.setEnabled(false);
             Done.setVisibility(GONE);
             checkBox.setEnabled(false);

@@ -1,12 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/browser_actions_bg_grey"
     android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="general"
-    >
 
-</TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_weight="1"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp">
+            <TextView
+                android:layout_toRightOf="@+id/icon_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:text="HO CHI MINH - "
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/locationDescription"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+            <TextView
+                android:layout_toRightOf="@id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/dateDescription"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icon_people"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_people_black_24dp"/>
+            <TextView
+                android:layout_toRightOf="@+id/icon_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/peopleDescription" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icon_money"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+            <TextView
+                android:layout_toRightOf="@+id/icon_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/moneyDescription" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RatingBar
+        android:id="@+id/simpleRatingBar"
+        style="@android:style/Widget.Material.Light.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:max="5"
+        android:numStars="5"
+        android:paddingLeft="5dp"
+        android:progressTint="#FFC107"
+        android:rating="3" />
+
 </LinearLayout>

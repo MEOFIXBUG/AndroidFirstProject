@@ -23,11 +23,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.adapter.TourAdapter;
-<<<<<<< HEAD
 import com.ygaps.travelapp.extras.OpenActivity;
-=======
+
 import com.ygaps.travelapp.extras.PaginationScrollListener;
->>>>>>> 68f69301307d04a843f8987215a448945cbad56c
+
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.view.Activity.DetailTourActivity;
@@ -154,9 +153,8 @@ public class MyTripFragment extends Fragment {
             intent.putExtra("Editable",true);
 <<<<<<< HEAD
             startActivity(intent);*/
-=======
-            startActivity(intent);
->>>>>>> 68f69301307d04a843f8987215a448945cbad56c
+
+
         });
         my_recycler_view.setAdapter(adapter);
         my_recycler_view.addOnScrollListener(new PaginationScrollListener(layoutManager) {
@@ -213,7 +211,12 @@ public class MyTripFragment extends Fragment {
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-                    adapter.addItems(tourResponse.getTours());
+                    for (Tour temp:tourResponse.getTours()) {
+                        if(temp.getStatus()!=-1){
+                            tourArrayList.add(temp);
+                        }
+                    }
+                    adapter.addItems(tourArrayList);
                     if (page >= tourResponse.getTotal()/7) {
                         isLastPage = true;
                     } else {
@@ -239,18 +242,18 @@ public class MyTripFragment extends Fragment {
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-<<<<<<< HEAD
-                    List<Tour> tours = tourResponse.getTours();
-                    //Log.d(TAG, "data:: " + tours.get(0).getName());
-                    for (Tour temp:tours) {
-                        if(temp.getStatus()!=-1){
-                            tourArrayList.add(temp);
-                        }
-                    }
 
-=======
-                    adapter.updateData(tourResponse.getTours());
->>>>>>> 68f69301307d04a843f8987215a448945cbad56c
+//                    List<Tour> tours = tourResponse.getTours();
+//                    //Log.d(TAG, "data:: " + tours.get(0).getName());
+//                    for (Tour temp:tours) {
+//                        if(temp.getStatus()!=-1){
+//                            //tourArrayList.add(temp);
+//                        }
+//                    }
+
+
+                    adapter.updateData(tourResponse.getUnDeletedTour());
+
                     adapter.notifyDataSetChanged();
                 }
                 else {
