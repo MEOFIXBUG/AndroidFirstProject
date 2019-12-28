@@ -60,6 +60,15 @@ public class TourViewModel extends AndroidViewModel {
         }
         return tourResponseLiveData;
     }
+    public LiveData<TourResponse> searchMyTrips(String keyWord, long perpage,long page) {
+        try {
+            tourResponseLiveData = tourRepository.searchMyTrips(keyWord,perpage,page);
+        }
+        catch (Exception ex){
+            tourResponseLiveData= null;
+        }
+        return tourResponseLiveData;
+    }
     public LiveData<TourInfoResponse> getTourInfo(long id){
         try {
             Log.d(TAG," re: " + id);

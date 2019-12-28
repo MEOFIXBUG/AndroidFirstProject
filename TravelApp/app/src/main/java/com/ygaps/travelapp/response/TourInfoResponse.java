@@ -18,7 +18,7 @@ public class TourInfoResponse {
     private int adults;
     @SerializedName("hostId")
     @Expose
-    private int hostId;
+    private String hostId;
     @SerializedName("isPrivate")
     @Expose
     private boolean isPrivate;
@@ -53,6 +53,26 @@ public class TourInfoResponse {
     @SerializedName("members")
     @Expose
     private List<UserInfo> members=null;
+
+    public void  Assign(TourInfoResponse a)
+    {
+        this.endDate=a.endDate;
+        this.adults=a.adults;
+        this.childs=a.childs;
+        this.comments.clear();
+        this.comments.addAll(a.comments);
+        this.hostId=a.hostId;
+        this.id=a.id;
+        this.isPrivate=a.isPrivate;
+        this.maxCost=a.maxCost;
+        this.minCost=a.minCost;
+        this.members.clear();
+        this.members.addAll(a.members);
+        this.stopPoints.clear();
+        this.stopPoints.addAll(a.stopPoints);
+        this.status=a.status;
+        this.name=a.name;
+    }
 
     public List<StopPoint> getStopPoints() {
         return stopPoints;
@@ -95,12 +115,12 @@ public class TourInfoResponse {
     {
         this.adults = adults;
     }
-    public int getHostId ()
+    public String getHostId ()
     {
         return hostId;
     }
 
-    public void setHostId (int hostId)
+    public void setHostId (String hostId)
     {
         this.hostId = hostId;
     }

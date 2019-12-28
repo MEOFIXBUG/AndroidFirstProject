@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ygaps.travelapp.R;
+import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.view.Fragment.InviteFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
@@ -32,11 +33,16 @@ public class DetailTourActivity extends AppCompatActivity {
     public Button btnRemoveTour;
 //    ImageView placeImageView;
     private Toolbar toolbar;
+    public static TourInfoResponse TourInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tour);
+<<<<<<< HEAD
         //configPopUpWindow();
+=======
+        //getActionBar().hide();
+>>>>>>> 68f69301307d04a843f8987215a448945cbad56c
         tourViewModel= ViewModelProviders.of(this).get(TourViewModel.class);
         toolbar = findViewById(R.id.toolbar);
 
@@ -48,7 +54,16 @@ public class DetailTourActivity extends AppCompatActivity {
         Editable=intent.getBooleanExtra("Editable",false);
         String tourName=intent.getStringExtra("tourName");
         toolbar.setTitle(tourName);
+<<<<<<< HEAD
 
+=======
+        //Intent intent= getIntent();
+        //int tourID=intent.getIntExtra("tourId",0);
+        //intialization();
+       // getTourInfo(tourID);
+        Log.d(TAG,"xxx :" +tourID);
+        Log.d(TAG,"EDIT :" +Editable);
+>>>>>>> 68f69301307d04a843f8987215a448945cbad56c
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadFragment(new StopPointFragment());
@@ -87,24 +102,29 @@ public class DetailTourActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+<<<<<<< HEAD
                     toolbar.setTitle("[Tour Name]");
+=======
+>>>>>>> 68f69301307d04a843f8987215a448945cbad56c
                     fragment = new StopPointFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_mytrips:
+<<<<<<< HEAD
                     toolbar.setTitle("[Tour Name]");
+=======
+>>>>>>> 68f69301307d04a843f8987215a448945cbad56c
                     fragment = new InviteFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_friend:
-                    toolbar.setTitle("3");
-                    fragment = new StopPointFragment();
-                    loadFragment(fragment);
+//                    fragment = new StopPointFragment();
+//                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_profile:
-                    toolbar.setTitle("4");
-                    fragment = new InviteFragment();
-                    loadFragment(fragment);
+
+//                    fragment = new InviteFragment();
+//                    loadFragment(fragment);
                     return true;
             }
             return false;

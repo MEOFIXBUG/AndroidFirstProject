@@ -11,6 +11,7 @@
         android:title="Update" />
     <item
         android:id="@+id/navigation_mytrips"
+<<<<<<< HEAD
         android:icon="@drawable/ic_rate_review_black_24dp"
         android:title="Rating"  />
 
@@ -19,6 +20,15 @@
         android:icon="@drawable/ic_mode_comment_black_24dp"
         android:title="Comment" />
 
+=======
+        android:icon="@drawable/ic_card_travel_black_24dp"
+        android:title="Reiview"  />
+
+    <item
+        android:id="@+id/navigation_friend"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="Comment" />
+>>>>>>> 68f69301307d04a843f8987215a448945cbad56c
 
 
 </menu>

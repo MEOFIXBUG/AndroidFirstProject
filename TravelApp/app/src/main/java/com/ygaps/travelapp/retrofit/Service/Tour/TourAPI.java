@@ -26,6 +26,11 @@ public interface TourAPI {
     Call<TourResponse> getMyTrips(@Query("pageIndex") long page,
                                   @Query("pageSize") String perpage
     );
+    @GET("/tour/search-history-user")
+    Call<TourResponse> searchMyTrips(@Query("searchKey") String searchKey,
+                                @Query("pageIndex") long page,
+                                  @Query("pageSize") long perpage
+    );
 
     @POST("/tour/create")
     Call<Tour> createTour(@Body Tour tourCreate);
@@ -40,4 +45,5 @@ public interface TourAPI {
     Call<TourInfoResponse> getTourInfo(@Query("tourId") long tourId);
     @POST("/tour/add/member")
     Call<StatusResponse> Invite_Join(@Body toInvited toInvited);
+
 }
