@@ -36,15 +36,17 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
 
     private Context mContext;
     List<StopPoint> modellist;
-    private final ArrayList<StopPoint> mStopPoint;
+    private  ArrayList<StopPoint> mStopPoint;
     private static ClickListener mClickListener;
     public StopListAdapter(Context context, List<StopPoint> StopPoint) {
         this.mContext = context;
         modellist =StopPoint;
-        mStopPoint = new ArrayList<StopPoint>(modellist.size());
-        for (StopPoint a: StopPoint
+       final List<StopPoint> a =new ArrayList<>();
+        a.addAll(modellist);
+        mStopPoint = new ArrayList<StopPoint>(a.size());
+        for (StopPoint i: a
              ) {
-            mStopPoint.add(a);
+            mStopPoint.add(i);
         }
 
     }
@@ -82,20 +84,25 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
 
         }
     }
-
+    List<StopPoint> a =new ArrayList<>();
     //filter
     public void filter(String charText){
         charText = charText.toLowerCase(Locale.getDefault());
         Log.d(TAG,"1"+modellist.toString());
+
+        if(a.size()< modellist.size())
+        {
+            a.addAll(modellist);
+        }
         modellist.clear();
-        Log.d(TAG,"2:"+mStopPoint.size()+mStopPoint.toString());
+        Log.d(TAG, "0:"+a.toString());
         if (charText.length()==0){
-            modellist.addAll(mStopPoint);
-            Log.d(TAG, "2"+modellist.toString());
+            modellist.addAll(a);
+            Log.d(TAG, "1:"+modellist.toString());
         }
         else {
-            for (StopPoint model : mStopPoint){
-                Log.d(TAG,"3"+model.getName());
+            for (StopPoint model : a){
+                Log.d(TAG, "2:"+modellist.toString());
                 if (model.getName().toLowerCase(Locale.getDefault())
                         .contains(charText)){
 
@@ -103,7 +110,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
                 }
 
             }
-            Log.d(TAG,modellist.toString());
+            Log.d(TAG,"finish:"+modellist.toString());
         }
         notifyDataSetChanged();
     }
