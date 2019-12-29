@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/browser_actions_bg_grey">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:background="@color/browser_actions_bg_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@color/backgroundDefault">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="2dp">
+            <TextView
+                android:layout_toRightOf="@+id/icon_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:text="HO CHI MINH - HA NOI"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/tourName"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_date_range_black_24dp" />
+            <TextView
+                android:layout_toRightOf="@id/icon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/dateDescription"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icon_people"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_people_black_24dp"/>
+            <TextView
+                android:layout_toRightOf="@+id/icon_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/peopleDescription" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icon_money"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+
+            <TextView
+                android:id="@+id/moneyDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/icon_money"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate this tour"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-thin"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp">
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/simpleRatingBar"
+            style="@android:style/Widget.Material.Light.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="20dp"
+            android:max="5"
+            android:numStars="5"
+            android:progressTint="#FFC107"
+            android:rating="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Leave a review"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="16dp">
+        </TextView>
+            <EditText
+                android:id="@+id/etReview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/background_spinner"
+                android:gravity="top"
+                android:textSize="14dp"
+
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:hint="Enter your review ..."
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical" />
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bgBottomNavigation"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:text="SUBMIT"
+            android:textSize="20dp"
+android:layout_gravity="right"
+            android:textColor="#FFFFFFFF" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</ScrollView>

@@ -244,22 +244,6 @@ public class InviteFragment extends Fragment {
             etEndDate.setError("End Date is required");
             return false;
         }
-        /*if (TextUtils.isEmpty(etSourceLat.getText())) {
-            etSourceLat.setError("Source Latitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etSourceLong.getText())) {
-            etSourceLong.setError("Source Longitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etDesLat.getText())) {
-            etDesLat.setError("Destination Latitude is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(etDesLong.getText())) {
-            etDesLong.setError("Destination Longitude is required");
-            return false;
-        }*/
 
         String startDate = etStartDate.getText().toString();
         String endDate=etEndDate.getText().toString();

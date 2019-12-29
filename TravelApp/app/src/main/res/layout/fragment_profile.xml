@@ -49,16 +49,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-thin"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:gravity="center"
-                        android:hint="Name"
-                        android:textSize="20sp" />
+                        android:hint="Name" />
                 </RelativeLayout>
 
                 <ImageButton
                     android:id="@+id/sendFirebaseReg"
                     android:layout_width="30dip"
                     android:layout_height="30dip"
-
                     android:textSize="20sp" />
 
                 <ImageButton
@@ -85,7 +84,6 @@
                     android:fontFamily="sans-serif-thin"
                     android:text="Account Information"
                     android:textSize="20sp" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -94,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:text="Email : " />
 
                     <EditText
@@ -101,6 +100,7 @@
                         android:id="@+id/emailProEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_marginBottom="16dp"
                         android:hint="Email : " />
                 </RelativeLayout>
@@ -112,9 +112,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:text="SDT : " />
                     <EditText
                     android:visibility="gone"
+                        android:textSize="@dimen/editTextSizeProfile"
                     android:id="@+id/phoneProEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,12 +129,14 @@
                     <TextView
                         android:id="@+id/addPro"
                         android:layout_width="match_parent"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="Địa chỉ : " />
                     <EditText
                         android:visibility="gone"
                         android:id="@+id/addProEdit"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
@@ -146,6 +150,7 @@
                         android:id="@+id/genPro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_marginBottom="16dp"
                         android:text="Giới tính : " />
                     <EditText
@@ -153,12 +158,11 @@
                         android:id="@+id/genProEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_marginBottom="16dp"
                         android:hint="Giới tính : " />
                 </RelativeLayout>
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Giới tính : " />
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -168,10 +172,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:text="Ngày sinh : " />
                     <EditText
                         android:visibility="gone"
                         android:id="@+id/dobProEdit"
+                        android:textSize="@dimen/editTextSizeProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
@@ -190,26 +196,31 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="1dp"
         android:background="@drawable/ic_edit_black_24dp" />
-
-    <ImageButton
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btnCancelEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:layout_toLeftOf="@+id/btnEditDone"
+        android:background="@color/red"
+        android:text="CANCEL"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/btnEditDone" />
+    <Button
         android:visibility="gone"
         android:id="@+id/btnEditDone"
-        android:layout_width="30dip"
+        android:layout_width="wrap_content"
         android:layout_height="30dip"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="42dp"
-        android:background="@drawable/ok" />
+        android:text="UPDATE"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@color/bgBottomNavigation" />
 
-    <ImageButton
-        android:visibility="gone"
-        android:id="@+id/btnCancelEdit"
-        android:layout_width="30dip"
-        android:layout_height="30dip"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="270dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@+id/btnEditDone"
-        android:background="@drawable/cancel" />
+
 
 </RelativeLayout>
                 <TextView
@@ -231,12 +242,16 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:textSize="@dimen/editTextSizeProfile"
         android:text="Xác thực email  :  [Chưa xác thực]" />
     <Button
         android:id="@+id/emailVeriBtn"
         android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"
+        android:gravity="center"
+        android:background="@drawable/bg_button"
         android:text="Xác thực">
     </Button>
 </LinearLayout>
@@ -244,17 +259,22 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="left">
                 <TextView
                     android:id="@+id/phoneVeri"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:text="Xác thực phone : [Chưa xác thực]" />
                     <Button
                         android:id="@+id/phoneVeriBtn"
                     android:layout_marginStart="30dp"
                     android:layout_width="wrap_content"
+                        android:textColor="#FFFFFFFF"
+                        android:gravity="center"
+                        android:background="@drawable/bg_button"
                     android:layout_height="wrap_content"
                     android:text="Xác thực">
                     </Button>
@@ -291,7 +311,7 @@
                 <EditText
                     android:hint="Current password"
                     android:id="@+id/currentpass"
-
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -309,6 +329,7 @@
                 <EditText
                     android:hint="New password"
                     android:id="@+id/newpass"
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -327,6 +348,7 @@
                 <EditText
                     android:hint="Confirm password"
                     android:id="@+id/newpass2"
+                    android:textSize="@dimen/editTextSizeProfile"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -338,7 +360,9 @@
                     android:layout_marginLeft="140dp"
                     android:layout_marginRight="60dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/circle"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="@drawable/bg_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </Button>

@@ -34,4 +34,5 @@ public class OpenActivity {
         Intent intent=new Intent(context, DetailStopPoint.class);
         context.startActivity(intent);
     }
+
 }

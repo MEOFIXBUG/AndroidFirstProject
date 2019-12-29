@@ -56,8 +56,8 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ImageButton editPro;
-    private ImageButton editOk;
-    private ImageButton editCancel;
+    private Button editOk;
+    private Button editCancel;
     private  ImageButton sendregFB;
     private Button btnChangepass;
     private OnFragmentInteractionListener mListener;

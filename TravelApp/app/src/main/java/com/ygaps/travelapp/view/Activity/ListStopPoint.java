@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.StopListAdapter;
+import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.model.MessageResponse;
 import com.ygaps.travelapp.model.StopPoint;
@@ -22,6 +23,7 @@ import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,7 +79,8 @@ public class ListStopPoint extends AppCompatActivity {
                     SplashActivity.appPreference.showToast(response.body().getMessage());
                     listStopPoint.clear();
                     SharePreferenceListStopPoint.saveData(listStopPoint, ListStopPoint.this);
-                    openMapActivity();
+                    //openMapActivity();
+                    OpenActivity.openHomeActivity(ListStopPoint.this);
                 }
                 else
                 {
@@ -89,30 +92,7 @@ public class ListStopPoint extends AppCompatActivity {
 
             }
         });
-        /*callTour.enqueue(new Callback<Tour>() {
-            @Override
-            public void onResponse(Call<Tour> call, Response<Tour> response) {
-                if (response.isSuccessful()){
-                    SplashActivity.appPreference.showToast("Create Successful");
-                    //SplashActivity.appPreference.showToast(response.body().getName());
-                    //SplashActivity.appPreference.showToast(response.body().getStartDate()+"");
-                    SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
-                    SplashActivity.appPreference.showToast(response.body().getID()+"id");
-                    tourId=response.body().getID();
 
-                    SharePreferenceListStopPoint.saveTourIdFromCreateTour(tourId, CreateTourActivity.this);
-                    openMapActivity();
-
-                } else {
-                    SplashActivity.appPreference.showToast("Create tour failed in some fields");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Tour> call, Throwable t) {
-                SplashActivity.appPreference.showToast("Create Failed");
-            }
-        });*/
     }
 
     private void openMapActivity() {

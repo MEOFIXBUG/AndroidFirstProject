@@ -2,6 +2,7 @@ package com.ygaps.travelapp.retrofit.Service.Tour;
 
 
 import com.ygaps.travelapp.model.MessageResponse;
+import com.ygaps.travelapp.model.ReviewTour;
 import com.ygaps.travelapp.model.StopPointsOfTour;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.toInvited;
@@ -45,5 +46,8 @@ public interface TourAPI {
     Call<TourInfoResponse> getTourInfo(@Query("tourId") long tourId);
     @POST("/tour/add/member")
     Call<StatusResponse> Invite_Join(@Body toInvited toInvited);
+
+    @POST("/tour/add/review")
+    Call<MessageResponse> sendReviewToPublicTour(@Body ReviewTour review);
 
 }
