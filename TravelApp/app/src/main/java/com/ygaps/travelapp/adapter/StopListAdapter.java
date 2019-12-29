@@ -1,6 +1,7 @@
 package com.ygaps.travelapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +19,34 @@ import com.ygaps.travelapp.extras.ReadExcel;
 import com.ygaps.travelapp.model.ServiceType;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
+import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 
 import java.util.ArrayList;
 
 import static com.ygaps.travelapp.extras.converter.createDate;
 
 import java.util.List;
+import java.util.Locale;
 
 import static com.ygaps.travelapp.extras.converter.createDate;
 
 public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.TimelineViewHolder> {
     private static final int VIEW_TYPE_HEADER = 100;
+    private static final String TAG = StopListAdapter.class.getSimpleName();
 
     private Context mContext;
-    private ArrayList<StopPoint> mStopPoint;
+    List<StopPoint> modellist;
+    private final ArrayList<StopPoint> mStopPoint;
     private static ClickListener mClickListener;
-    public StopListAdapter(Context context, ArrayList<StopPoint> StopPoint) {
+    public StopListAdapter(Context context, List<StopPoint> StopPoint) {
         this.mContext = context;
-        this.mStopPoint = StopPoint;
+        modellist =StopPoint;
+        mStopPoint = new ArrayList<StopPoint>(modellist.size());
+        for (StopPoint a: StopPoint
+             ) {
+            mStopPoint.add(a);
+        }
+
     }
     @NonNull
     @Override
@@ -48,7 +59,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
 
     @Override
     public void onBindViewHolder(@NonNull StopListAdapter.TimelineViewHolder holder, int position) {
-        StopPoint stop = mStopPoint.get(position);
+        StopPoint stop = modellist.get(position);
         holder.mstop=stop;
         holder.cityname.setText(stop.getName());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
@@ -72,10 +83,33 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.Timeli
         }
     }
 
+    //filter
+    public void filter(String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        Log.d(TAG,"1"+modellist.toString());
+        modellist.clear();
+        Log.d(TAG,"2:"+mStopPoint.size()+mStopPoint.toString());
+        if (charText.length()==0){
+            modellist.addAll(mStopPoint);
+            Log.d(TAG, "2"+modellist.toString());
+        }
+        else {
+            for (StopPoint model : mStopPoint){
+                Log.d(TAG,"3"+model.getName());
+                if (model.getName().toLowerCase(Locale.getDefault())
+                        .contains(charText)){
 
+                    modellist.add(model);
+                }
+
+            }
+            Log.d(TAG,modellist.toString());
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
-        return mStopPoint.size();
+        return modellist.size();
     }
 
     public void setOnItemClickListener(ClickListener clickListener) { StopListAdapter.mClickListener = clickListener;

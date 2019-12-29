@@ -101,11 +101,6 @@ public class StopPoint implements Serializable {
 
 
 
-
-
-
-
-
     public String getName() {
         return name;
     }

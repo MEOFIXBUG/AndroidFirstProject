@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
+import static com.ygaps.travelapp.view.Activity.TourActivity.searchText;
 
 
 /**
@@ -144,7 +148,27 @@ public class StopPointFragment extends Fragment {
         // View Model
         tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,1);
+        if(fromActivity==1)
+        {
+            searchText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        adapter.filter(s.toString());
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
     }
     private void getstopPoint() {
         if(fromActivity==2){
