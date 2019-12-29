@@ -45,6 +45,7 @@ import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.repository.UserRepository;
+import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.response.UserListRp;
@@ -392,6 +393,7 @@ public class InviteFragment extends Fragment {
     }
     private void getTourBaseInfo(){
         LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
+        //LiveData<ReviewTourResponse> data2= tourViewModel.get(tourID);
         if(data!= null)
         {
             data.observe(this,tourInfo->{

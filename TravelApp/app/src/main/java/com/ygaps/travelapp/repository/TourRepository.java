@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
@@ -36,10 +37,31 @@ public class TourRepository {
                         if (response.body() != null) {
                             data.setValue(response.body());
                             Log.d(TAG, "tours total result:: " + response.body().getTotal());
+
                         }
                     }
                     @Override
                     public void onFailure(Call<TourResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
+    public LiveData<ReviewTourResponse> getReviewOftour(long tourId, long page, long perpage) {
+        final MutableLiveData<ReviewTourResponse> data = new MutableLiveData<>();
+        apiRequest.getListReviewTour(tourId,page, perpage)
+                .enqueue(new Callback<ReviewTourResponse>() {
+                    @Override
+                    public void onResponse(Call<ReviewTourResponse> call, Response<ReviewTourResponse> response) {
+
+                        if(response.code()==200) {
+                            if (response.body() != null) {
+                                data.setValue(response.body());
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ReviewTourResponse> call, Throwable t) {
                         data.setValue(null);
                     }
                 });
@@ -101,29 +123,20 @@ public class TourRepository {
     }
     public LiveData<TourInfoResponse> getTourInfoByID(long id){
         final MutableLiveData<TourInfoResponse> data = new MutableLiveData<>();
-        Log.d(TAG, "toi da vao day");
         apiRequest.getTourInfo(id)
                 .enqueue(new Callback<TourInfoResponse>() {
 
                     @Override
                     public void onResponse(Call<TourInfoResponse> call, Response<TourInfoResponse> response) {
-
-                        //Log.d(TAG, "trips total result:: " + response.body().getTotal());
                         if(response.body()!=null){
-                            Log.d(TAG, "Name:: " + response.body().getName());
-                            Log.d(TAG, "t met nhan:: " + response.body());
                            data.setValue(response.body());
                         }
                         else {
-                            Log.d(TAG, "null1: ");
                             data.setValue(null);
                         }
-
-
                     }
                     @Override
                     public void onFailure(Call<TourInfoResponse> call, Throwable t) {
-                        Log.d(TAG, "null2: ");
                         data.setValue(null);
                     }
                 });

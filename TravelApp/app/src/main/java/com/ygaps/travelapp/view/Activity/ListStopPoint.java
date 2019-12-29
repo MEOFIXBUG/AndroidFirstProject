@@ -63,7 +63,7 @@ public class ListStopPoint extends AppCompatActivity {
                 setStopPoint(stopPointsReq);
             }
         });
-        SplashActivity.appPreference.showToast(tourId+" tourId");
+       // SplashActivity.appPreference.showToast(tourId+" tourId");
     }
 
 
@@ -84,12 +84,12 @@ public class ListStopPoint extends AppCompatActivity {
                 }
                 else
                 {
-                    SplashActivity.appPreference.showToast("Add stop point failed..");
+                    SplashActivity.appPreference.showToast("Add stop point failed in some fields..");
                 }
             }
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-
+                SplashActivity.appPreference.showToast("Add stop point failed. Try again.");
             }
         });
 
@@ -116,7 +116,7 @@ public class ListStopPoint extends AppCompatActivity {
 
         adapter.setOnItemClickListener((stop) ->
         {
-            SplashActivity.appPreference.showToast("hehe!!");
+            //SplashActivity.appPreference.showToast("hehe!!");
         });
         my_recycler_view.setAdapter(adapter);
     }

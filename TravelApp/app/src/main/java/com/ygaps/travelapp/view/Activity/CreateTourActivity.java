@@ -109,8 +109,8 @@ public class CreateTourActivity extends AppCompatActivity{
                     SplashActivity.appPreference.showToast("Create Successful");
                     //SplashActivity.appPreference.showToast(response.body().getName());
                     //SplashActivity.appPreference.showToast(response.body().getStartDate()+"");
-                    SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
-                    SplashActivity.appPreference.showToast(response.body().getID()+"id");
+                    //SplashActivity.appPreference.showToast(response.body().getHostId()+" host id");
+                    //SplashActivity.appPreference.showToast(response.body().getID()+"id");
                     tourId=response.body().getID();
 
                     SharePreferenceListStopPoint.saveTourIdFromCreateTour(tourId, CreateTourActivity.this);
@@ -267,7 +267,7 @@ public class CreateTourActivity extends AppCompatActivity{
             ((RadioButton) view).setSelected(false);
             isPrivate=false;
         }
-        SplashActivity.appPreference.showToast(isPrivate+"");
+        //SplashActivity.appPreference.showToast(isPrivate+"");
     }
 
 

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.repository.TourRepository;
+import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
@@ -18,6 +19,7 @@ public class TourViewModel extends AndroidViewModel {
     private TourRepository tourRepository;
     private LiveData<TourResponse> tourResponseLiveData;
     private LiveData<TourInfoResponse> tourInfoResponseLiveData;
+    private LiveData<ReviewTourResponse> ReviewTourResponseLiveData;
     public TourViewModel(@NonNull Application application) {
         super(application);
         tourRepository = new TourRepository();
@@ -50,6 +52,15 @@ public class TourViewModel extends AndroidViewModel {
             tourResponseLiveData= null;
         }
         return tourResponseLiveData;
+    }
+    public LiveData<ReviewTourResponse> getReviewOfTour(long tourId,long page, long perpage) {
+        try {
+            ReviewTourResponseLiveData = tourRepository.getReviewOftour(tourId, page,perpage);
+        }
+        catch (Exception ex){
+            ReviewTourResponseLiveData= null;
+        }
+        return ReviewTourResponseLiveData;
     }
     public LiveData<TourResponse> getMyTrips(long perpage,long page) {
         try {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -97,6 +97,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ratingTourLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -128,6 +129,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/reviewLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -167,9 +169,61 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:text="SUBMIT"
-            android:textSize="20dp"
+            android:textSize="14dp"
 android:layout_gravity="right"
             android:textColor="#FFFFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Review"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="16dp">
+        </TextView>
+        <RelativeLayout
+            android:id="@+id/my_review_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true">
+            </ProgressBar>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="10dp"
+                tools:listitem="@layout/item_list_review" />
+
+
+            <TextView
+                android:id="@+id/my_review_no_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|center_horizontal"
+                android:text="No review for this tour"
+                android:visibility="gone" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 

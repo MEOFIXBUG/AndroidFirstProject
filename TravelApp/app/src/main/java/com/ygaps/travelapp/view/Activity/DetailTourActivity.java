@@ -46,7 +46,7 @@ public class DetailTourActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tourID=intent.getLongExtra("tourID",1);
-        SplashActivity.appPreference.showToast(tourID+"");
+        //SplashActivity.appPreference.showToast(tourID+"");
         Editable=intent.getBooleanExtra("Editable",false);
         String tourName=intent.getStringExtra("tourName");
         toolbar.setTitle(tourName);

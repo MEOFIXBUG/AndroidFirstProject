@@ -23,6 +23,7 @@ import com.ygaps.travelapp.adapter.ItemAdapter;
 import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.PaginationScrollListener;
 import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.retrofit.Service.TourInterface;
 import com.ygaps.travelapp.view.Activity.DetailTourActivity;
@@ -99,7 +100,7 @@ public class TravelFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SplashActivity.appPreference.showToast("Create Tour!!");
+                //SplashActivity.appPreference.showToast("Create Tour!!");
                 createTourFromTravelTour.openCreateTourActivity();
             }
         });
@@ -181,6 +182,8 @@ public class TravelFragment extends Fragment {
     private void loadData(long pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
         LiveData<TourResponse> TourList = tourViewModel.getTours(5,pageIndex);
+        //LiveData<ReviewTourResponse> TourList2 = tourViewModel.getReviewOfTour(4209, 1,50);
+
         TourList.observe(this,tourResponse->{
             total=tourResponse.getTotal();
             isLoading = false;

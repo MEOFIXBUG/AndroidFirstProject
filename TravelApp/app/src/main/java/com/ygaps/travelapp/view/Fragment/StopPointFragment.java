@@ -132,7 +132,7 @@ public class StopPointFragment extends Fragment {
         adapter = new StopListAdapter(getActivity(),stopArrayList);
         adapter.setOnItemClickListener((stop) ->
         {
-            SplashActivity.appPreference.showToast("123 Tour!!");
+            //.appPreference.showToast("123 Tour!!");
             OpenActivity.openStopPointDetail(getActivity());
         });
 

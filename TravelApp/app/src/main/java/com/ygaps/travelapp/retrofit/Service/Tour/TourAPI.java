@@ -6,6 +6,7 @@ import com.ygaps.travelapp.model.ReviewTour;
 import com.ygaps.travelapp.model.StopPointsOfTour;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
@@ -32,6 +33,11 @@ public interface TourAPI {
                                 @Query("pageIndex") long page,
                                   @Query("pageSize") long perpage
     );
+
+    @GET("/tour/get/review-list")
+    Call<ReviewTourResponse> getListReviewTour(@Query("tourId") long tourId,
+                                               @Query("pageIndex") long page,
+                                               @Query("pageSize") long perpage);
 
     @POST("/tour/create")
     Call<Tour> createTour(@Body Tour tourCreate);

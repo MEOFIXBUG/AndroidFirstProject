@@ -188,7 +188,7 @@ public class MyTripFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                SplashActivity.appPreference.showToast("onclick btn " );
+                //SplashActivity.appPreference.showToast("onclick btn " );
                 searchData(searchText.getText().toString(),1);
             }
         });
