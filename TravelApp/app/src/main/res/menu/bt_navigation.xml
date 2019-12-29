@@ -10,6 +10,10 @@
         android:id="@+id/navigation_mytrips"
         android:icon="@drawable/ic_card_travel_black_24dp"
         android:title="@string/my_trip"  />
+    <item
+        android:id="@+id/navigation_stop"
+        android:icon="@drawable/ic_account_balance_black_24dp"
+        android:title="Stop Point" />
 
     <item
         android:id="@+id/navigation_friend"

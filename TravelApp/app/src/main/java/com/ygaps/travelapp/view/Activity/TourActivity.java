@@ -28,6 +28,7 @@ import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.retrofit.Service.TourInterface;
 import com.ygaps.travelapp.view.Fragment.MyTripFragment;
 import com.ygaps.travelapp.view.Fragment.ProfileFragment;
+import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 import com.ygaps.travelapp.view.Fragment.TravelFragment;
 
 import static android.view.View.VISIBLE;
@@ -35,7 +36,7 @@ import static android.view.View.VISIBLE;
 
 public class TourActivity extends AppCompatActivity implements TourInterface {
     private Toolbar toolbar;
-
+    public static int from =1;
     public static EditText searchText;
     public static ImageButton searchBtn;
     public static LinearLayout searchView;
@@ -88,6 +89,15 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                     fragment = new TravelFragment();
                     loadFragment(fragment);
                     return true;
+                case R.id.navigation_stop:
+                    toolbar.setTitle("Stop Point");
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("fromActivity",1);
+                    searchView.setVisibility(VISIBLE);
+                    fragment = new StopPointFragment();
+                    fragment.setArguments(bundle);
+                    loadFragment(fragment);
+                    return true;
                 case R.id.navigation_profile:
                     toolbar.setTitle("Profile");
                     searchView.setVisibility(View.GONE);
@@ -102,4 +112,5 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
         Intent intent=new Intent(TourActivity.this, CreateTourActivity.class);
         startActivity(intent);
     }
+
 }

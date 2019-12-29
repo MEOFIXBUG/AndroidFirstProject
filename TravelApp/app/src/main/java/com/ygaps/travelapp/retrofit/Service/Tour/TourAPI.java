@@ -3,13 +3,18 @@ package com.ygaps.travelapp.retrofit.Service.Tour;
 
 import com.ygaps.travelapp.model.MessageResponse;
 import com.ygaps.travelapp.model.ReviewTour;
+import com.ygaps.travelapp.model.StopPoint;
 import com.ygaps.travelapp.model.StopPointsOfTour;
 import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
+import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -55,5 +60,6 @@ public interface TourAPI {
 
     @POST("/tour/add/review")
     Call<MessageResponse> sendReviewToPublicTour(@Body ReviewTour review);
-
+    @POST("/tour/suggested-destination-list")
+    Call<StopPointList> getSuggestDestination(@Body coordRequest a);
 }

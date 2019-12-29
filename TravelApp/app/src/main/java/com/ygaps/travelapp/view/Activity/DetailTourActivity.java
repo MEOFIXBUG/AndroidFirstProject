@@ -54,7 +54,11 @@ public class DetailTourActivity extends AppCompatActivity {
         Log.d(TAG,"EDIT :" +Editable);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        loadFragment(new StopPointFragment());
+        Bundle bundle = new Bundle();
+        bundle.putInt("fromActivity",2);
+        Fragment fragment = new StopPointFragment();
+        fragment.setArguments(bundle);
+        loadFragment(fragment);
 
         /*btnRemoveTour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +95,10 @@ public class DetailTourActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_stop:
                     toolbar.setTitle("[Tour Name]");
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("fromActivity",2);
                     fragment = new StopPointFragment();
+                    fragment.setArguments(bundle);
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_update:

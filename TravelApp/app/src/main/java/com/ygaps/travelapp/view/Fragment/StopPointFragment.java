@@ -6,9 +6,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +21,18 @@ import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.adapter.StopListAdapter;
 import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
+import com.ygaps.travelapp.model.Coord;
+import com.ygaps.travelapp.model.CoordSet;
 import com.ygaps.travelapp.model.StopPoint;
+import com.ygaps.travelapp.model.coordRequest;
+import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
-import com.ygaps.travelapp.view.Activity.CreateTourActivity;
-import com.ygaps.travelapp.view.Activity.DetailStopPoint;
-import com.ygaps.travelapp.view.Activity.SplashActivity;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
-import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourViewModel;
 
 
 /**
@@ -55,9 +55,10 @@ public class StopPointFragment extends Fragment {
     private RecyclerView my_recycler_view;
     private LinearLayoutManager layoutManager;
     private FloatingActionButton btnAddSP;
-    //TourViewModel tourViewModel;
+    TourViewModel tourViewModel;
     private ProgressBar progress_bar;
-    private static final String TAG = TravelFragment.class.getSimpleName();
+    private  int fromActivity=0;
+    private static final String TAG = StopPointFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -99,6 +100,7 @@ public class StopPointFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        fromActivity=getArguments().getInt("fromActivity");
         View view  = inflater.inflate(R.layout.fragment_stop_point, container, false);
         initialization(view);
         getstopPoint();
@@ -140,31 +142,77 @@ public class StopPointFragment extends Fragment {
 
 
         // View Model
-        //tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
+        tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         //tourViewModel.init(49,1,1);
 
     }
     private void getstopPoint() {
-        LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
-        if(data!= null)
-        {
-            data.observe(this,tourInfoResponse->{
+        if(fromActivity==2){
+            LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
+            if(data!= null)
+            {
+                data.observe(this,tourInfoResponse->{
 
-                progress_bar.setVisibility(View.GONE);
-                if (tourInfoResponse != null) {
-                    List<StopPoint> stop = tourInfoResponse.getStopPoints();
-                    if(!stop.isEmpty())
-                    {
-                        stopArrayList.addAll(stop);
+                    progress_bar.setVisibility(View.GONE);
+                    if (tourInfoResponse != null) {
+                        List<StopPoint> stop = tourInfoResponse.getStopPoints();
+                        if(!stop.isEmpty())
+                        {
+                            stopArrayList.addAll(stop);
+
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
 
                     }
-                    adapter.notifyDataSetChanged();
-                }
-                else {
-
-                }
-            });
+                });
+            }
         }
+        if(fromActivity==1)
+        {
+            coordRequest a= new coordRequest();
+            a.setHasOneCoordinate(false);
+            Coord p1= new Coord();
+            p1.setLat(23.980056);
+            p1.setLong(85.577677);
+            Coord p2= new Coord();
+            p1.setLat(23.588665);
+            p1.setLong(163.065945);
+            CoordSet line1= new CoordSet(p1,p2);
+            Coord p3= new Coord();
+            p1.setLat(-12.098356);
+            p1.setLong(163.707522);
+            Coord p4= new Coord();
+            p1.setLat(-13.928084);
+            p1.setLong(75.526301);
+            CoordSet line2= new CoordSet(p3,p4);
+            List<CoordSet> t =new ArrayList<>();
+            t.add(line1); t.add(line2);
+            a.setCoordList(t);
+            Log.d(TAG,a.toString());
+            LiveData<StopPointList> data= tourViewModel.getSuggestDestination(a);
+            if(data!= null)
+            {
+                data.observe(this,StopPointList->{
+
+                    progress_bar.setVisibility(View.GONE);
+                    if (StopPointList != null) {
+                        List<StopPoint> stop = StopPointList.getStopPoints();
+                        if(!stop.isEmpty())
+                        {
+                            stopArrayList.addAll(stop);
+
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
+
+                    }
+                });
+            }
+        }
+
 
     }
     // TODO: Rename method, update argument and hook method into UI event

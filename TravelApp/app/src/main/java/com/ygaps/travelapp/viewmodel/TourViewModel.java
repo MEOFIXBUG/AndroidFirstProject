@@ -7,10 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.repository.TourRepository;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
+import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 
@@ -95,6 +97,16 @@ public class TourViewModel extends AndroidViewModel {
         try {
             Log.d(TAG," re: " + req.getInvitedUserId());
             return  tourRepository.Invite_Join(req);
+        }
+        catch (Exception ex){
+            Log.d(TAG," re: " + ex);
+            return null;
+        }
+    }
+    public LiveData<StopPointList> getSuggestDestination(coordRequest req){
+        try {
+            Log.d(TAG," re: " + req.toString());
+            return  tourRepository.getSuggestDestination(req);
         }
         catch (Exception ex){
             Log.d(TAG," re: " + ex);

@@ -5,9 +5,11 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
+import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.response.UserListRp;
@@ -157,6 +159,25 @@ public class TourRepository {
                     }
                     @Override
                     public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
+    public LiveData<StopPointList> getSuggestDestination(coordRequest req){
+        final MutableLiveData<StopPointList> data = new MutableLiveData<>();
+        apiRequest.getSuggestDestination(req)
+                .enqueue(new Callback<StopPointList>() {
+                    @Override
+                    public void onResponse(Call<StopPointList> call, Response<StopPointList> response) {
+
+                        if (response.body() != null) {
+                            data.setValue(response.body());
+                            Log.d(TAG, "tours total result:: " + response.body().toString());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<StopPointList> call, Throwable t) {
                         data.setValue(null);
                     }
                 });
