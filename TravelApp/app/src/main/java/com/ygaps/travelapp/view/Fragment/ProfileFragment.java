@@ -27,6 +27,7 @@ import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.UserInfo;
 import com.ygaps.travelapp.model.PasswordUpdate;
 import com.ygaps.travelapp.model.RegistrationFirebase;
+import com.ygaps.travelapp.model.removeFireBase;
 import com.ygaps.travelapp.response.ActiveResponse;
 import com.ygaps.travelapp.response.RecoveryResponse;
 import com.ygaps.travelapp.retrofit.Service.User.UserAPI;
@@ -58,7 +59,8 @@ public class ProfileFragment extends Fragment {
     private ImageButton editPro;
     private Button editOk;
     private Button editCancel;
-    private  ImageButton sendregFB;
+    private Button sendregFB;
+    private Button sendunregFB;
     private Button btnChangepass;
     private OnFragmentInteractionListener mListener;
     public ProfileFragment() {
@@ -101,55 +103,110 @@ public class ProfileFragment extends Fragment {
         editOk = view.findViewById(R.id.btnEditDone);
         editCancel = view.findViewById(R.id.btnCancelEdit);
         //
-        sendregFB = view.findViewById(R.id.sendFirebaseReg);
+        sendregFB = view.findViewById(R.id.regFB);
+        sendunregFB = view.findViewById(R.id.unregFB);
+        if (SplashActivity.appPreference.getFirebaseSTT()==false)
+        {
+            sendunregFB.setVisibility(View.GONE);
+            sendregFB.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            sendregFB.setVisibility(View.GONE);
+            sendunregFB.setVisibility(View.VISIBLE);
+        }
         sendregFB.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              FirebaseInstanceId.getInstance().getInstanceId()
-                      .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                          @Override
-                          public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                              if (!task.isSuccessful()) {
+            @Override
+            public void onClick(View view) {
+                FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                if (!task.isSuccessful()) {
 
-                                  SplashActivity.appPreference.showToast("Failed");
-                                  return;
-                              }
-                              // Get new Instance ID token
-                              String token = task.getResult().getToken();
-                              SplashActivity.appPreference.setFirebaseToken(token);
-                              String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                              UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
-                              RegistrationFirebase reg = new RegistrationFirebase();
-                              reg.setFcmToken(token);
-                              reg.setDeviceId(androidId);
-                              reg.setPlatform(1);
-                              reg.setAppVersion("1.0");
-                              Call<RecoveryResponse> regFB = user.regFirebase(SplashActivity.appPreference.getToken(),reg);
-                              regFB.enqueue(new Callback<RecoveryResponse>() {
-                                  @Override
-                                  public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
-                                      if (response.isSuccessful()) {
-                                          if (response.code() == 200) {
-                                              SplashActivity.appPreference.showToast("Reg Firebase Ok");
-                                              Log.d("Firebaselog","Reg Firebase Ok");
-                                          } else if (response.code() == 404) {
-                                          } else {
-                                          }
-                                      }
-                                  }
-                                  @Override
-                                  public void onFailure(Call<RecoveryResponse> call, Throwable t) {
-                                  }
-                              });
+                                    SplashActivity.appPreference.showToast("Failed");
+                                    return;
+                                }
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
+                                SplashActivity.appPreference.setFirebaseToken(token);
+                                String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                                UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
+                                RegistrationFirebase reg = new RegistrationFirebase();
+                                reg.setFcmToken(token);
+                                reg.setDeviceId(androidId);
+                                reg.setPlatform(1);
+                                reg.setAppVersion("1.0");
+                                Call<RecoveryResponse> regFB = user.regFirebase(SplashActivity.appPreference.getToken(),reg);
+                                regFB.enqueue(new Callback<RecoveryResponse>() {
+                                    @Override
+                                    public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (response.code() == 200) {
+                                                SplashActivity.appPreference.showToast("Đăng ký nhận tin thành công");
+                                                SplashActivity.appPreference.setFirebaseSTT(true);
+                                                sendregFB.setVisibility(View.GONE);
+                                                sendunregFB.setVisibility(View.VISIBLE);
+                                            } else if (response.code() == 404) {
+                                            } else {
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<RecoveryResponse> call, Throwable t) {
+                                    }
+                                });
+                            }
+                        });
 
-                              Log.d("IDne",androidId);
-                              Log.d("ccc",token);
-                              Log.d("ccc",SplashActivity.appPreference.getToken());
-                          }
-                      });
+            }
+        });
+        //
+        sendunregFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SplashActivity.appPreference.setFirebaseSTT(false);
+                FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                if (!task.isSuccessful()) {
 
-          }
-      });
+                                    SplashActivity.appPreference.showToast("Failed");
+                                    return;
+                                }
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
+                                SplashActivity.appPreference.setFirebaseToken(token);
+                                String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                                UserAPI user = retrofitRequest.getRetrofitInstance().create(UserAPI.class);
+                                removeFireBase reg = new removeFireBase();
+                                reg.setFcmToken(token);
+                                reg.setDeviceId(androidId);
+                                Call<RecoveryResponse> unregFB = user.unregFirebase(SplashActivity.appPreference.getToken(),reg);
+                                unregFB.enqueue(new Callback<RecoveryResponse>() {
+                                    @Override
+                                    public void onResponse(Call<RecoveryResponse> call, Response<RecoveryResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (response.code() == 200) {
+                                                SplashActivity.appPreference.showToast("Hủy đăng ký nhận tin thành công");
+                                                sendunregFB.setVisibility(View.GONE);
+                                                sendregFB.setVisibility(View.VISIBLE);
+                                            } else if (response.code() == 404) {
+                                            } else {
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<RecoveryResponse> call, Throwable t) {
+                                    }
+                                });
+
+                            }
+                        });
+
+            }
+        });
         //
         TextView fullName = view.findViewById(R.id.txtFullName);
         TextView email = view.findViewById(R.id.emailPro);
@@ -194,14 +251,21 @@ public class ProfileFragment extends Fragment {
                      SplashActivity.appPreference.showToast("Phone Invalid");
                      condition = false;
                  }
-                if (genEdit.getText().toString().compareTo("")==0)
+                if (genEdit.getText().toString().compareTo("")==0 && (genEdit.getText().toString().compareTo("Nam")!=0 || genEdit.getText().toString().compareTo("Nữ")!=0))
                 {
                     SplashActivity.appPreference.showToast("Invalid Gender");
+                    SplashActivity.appPreference.showToast("Giới tính Nam hoặc Nữ");
                     condition=false;
                 }
                 else
                 {
-                    newGen = Integer.parseInt(genEdit.getText().toString());
+                    if (genEdit.getText().toString().compareTo("Nam")==0)
+                    {
+                        newGen = 1;
+                    }
+                    else{
+                        newGen = 0;
+                    }
                 }
                 if (newDob.compareTo("")==0)
                 {

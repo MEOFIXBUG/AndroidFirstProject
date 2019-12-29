@@ -5,6 +5,7 @@ import com.ygaps.travelapp.model.OTPreq;
 import com.ygaps.travelapp.model.OTPres;
 import com.ygaps.travelapp.model.PasswordUpdate;
 import com.ygaps.travelapp.model.RegistrationFirebase;
+import com.ygaps.travelapp.model.removeFireBase;
 import com.ygaps.travelapp.response.ActiveResponse;
 import com.ygaps.travelapp.response.ActiveResultResponse;
 import com.ygaps.travelapp.response.RecoveryOTP;
@@ -37,6 +38,8 @@ public interface UserAPI {
  Call<RecoveryResponse> updatePassword(@Header("Authorization") String author, @Body PasswordUpdate updatePass);
 @POST("/user/notification/put-token")
  Call<RecoveryResponse> regFirebase(@Header("Authorization") String author, @Body RegistrationFirebase reg);
+@POST("/user/notification/remove-token")
+ Call<RecoveryResponse> unregFirebase(@Header("Authorization") String author, @Body removeFireBase reg);
 @GET("/user/search")
  Call<UserListRp> searchUser(@Query("searchKey") String searchKey, @Query("pageIndex") long pageIndex,
                              @Query("pageSize") String pageSize);

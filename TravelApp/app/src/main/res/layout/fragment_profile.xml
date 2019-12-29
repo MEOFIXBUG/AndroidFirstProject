@@ -55,12 +55,6 @@
                 </RelativeLayout>
 
                 <ImageButton
-                    android:id="@+id/sendFirebaseReg"
-                    android:layout_width="30dip"
-                    android:layout_height="30dip"
-                    android:textSize="20sp" />
-
-                <ImageButton
                     android:id="@+id/btnEditProfilePicture"
                     android:layout_width="20dip"
                     android:layout_height="20dip"
@@ -367,14 +361,46 @@
                     android:layout_height="wrap_content">
                 </Button>
             </LinearLayout>
-
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Nhận thông báo ứng dụng"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <Button
+                    android:id="@+id/regFB"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Đăng Ký"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="@drawable/bg_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/unregFB"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Hủy Đăng Ký"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="@drawable/bg_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+            </LinearLayout>
             <Button
                 android:id="@+id/signOutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="40dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/circle"
                 android:gravity="center"
                 android:text="Sign Out"

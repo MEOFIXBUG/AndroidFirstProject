@@ -34,6 +34,15 @@ public class MyApplication {
     public boolean getLoginStatus(){
         return sharedPreferences.getBoolean(String.valueOf(R.string.s_pref_login_status), false);
     }
+    public void setFirebaseSTT(boolean isReg)
+    {
+        editor.putBoolean("FirebaseSTT", isReg);
+        editor.commit();
+    }
+    public Boolean getFirebaseSTT()
+    {
+        return sharedPreferences.getBoolean("FirebaseSTT", true);
+    }
     //Setting Token
     public void setToken(String token){
         editor.putString(String.valueOf(R.string.s_pref_token), token);
