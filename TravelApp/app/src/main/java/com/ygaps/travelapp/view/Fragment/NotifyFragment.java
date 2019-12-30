@@ -27,6 +27,7 @@ import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -170,8 +171,13 @@ public class NotifyFragment extends Fragment {
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
-                    adapter.addItems(tourResponse.getUnDeletedTour());
-                    if (page >= tourResponse.getTotal()/5) {
+                    List<Tour> a=tourResponse.getUnDeletedTour();
+                    for (int i =a.size()-1;i>=0;i--)
+                    {
+                        adapter.add(a.get(i));
+                    }
+//                    adapter.addItems(tourResponse.getUnDeletedTour());
+                    if (page >= Math.ceil((double)tourResponse.getTotal()/5)) {
                         isLastPage = true;
                     } else {
                         page = page + 1;

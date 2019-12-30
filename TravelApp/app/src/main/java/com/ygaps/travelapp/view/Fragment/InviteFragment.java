@@ -317,18 +317,19 @@ public class InviteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SplashActivity.appPreference.showToast("onclick invite" );
-                selectedID=Integer.parseInt(IdList.get(countries.indexOf(textCountry.getText().toString())));
+
                     Log.d(TAG,""+selectedID);
                     toInvited a= new toInvited();
                     a.setTourId(Long.toString(tourID));
                     if(!Editable){
                         a.setInvitedUserId(UserID);
-                        a.setInvited(false);
+                        a.setInvited(false); //join
                     }
                     else{
+                        selectedID=Integer.parseInt(IdList.get(countries.indexOf(textCountry.getText().toString())));
                         if(selectedID>0){
                         a.setInvitedUserId(Integer.toString(selectedID));
-                        a.setInvited(false);
+                        a.setInvited(true); // invite
                         }
                     }
                     tourViewModel.Invite_Join(a);
