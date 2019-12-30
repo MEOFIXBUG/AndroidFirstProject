@@ -9,6 +9,7 @@ import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.response.ReviewTourResponse;
+import com.ygaps.travelapp.response.ServiceResponse;
 import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
@@ -55,6 +56,10 @@ public interface TourAPI {
 
     @GET("tour/info")
     Call<TourInfoResponse> getTourInfo(@Query("tourId") long tourId);
+
+    @GET("tour/get/service-detail")
+    Call<ServiceResponse> getDetailService(@Query("serviceId") long serviceId);
+
     @POST("/tour/add/member")
     Call<StatusResponse> Invite_Join(@Body toInvited toInvited);
 

@@ -1,5 +1,6 @@
 package com.ygaps.travelapp.view.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -139,7 +140,10 @@ public class StopPointFragment extends Fragment {
         adapter.setOnItemClickListener((stop) ->
         {
             //.appPreference.showToast("123 Tour!!");
-            OpenActivity.openStopPointDetail(getActivity());
+            if(fromActivity==1)
+            OpenActivity.openStopPointDetail(getActivity(),stop.getId());
+            if(fromActivity==2)
+                OpenActivity.openStopPointDetail(getActivity(),stop.getServiceId());
         });
 
         my_recycler_view.setAdapter(adapter);
@@ -170,6 +174,7 @@ public class StopPointFragment extends Fragment {
             });
         }
     }
+    @SuppressLint("RestrictedApi")
     private void getstopPoint() {
         if(fromActivity==2){
             LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourID);
@@ -195,26 +200,35 @@ public class StopPointFragment extends Fragment {
         }
         if(fromActivity==1)
         {
+            btnAddSP.setVisibility(View.GONE);
             coordRequest a= new coordRequest();
             a.setHasOneCoordinate(false);
+
+            ////
             Coord p1= new Coord();
             p1.setLat(23.980056);
             p1.setLong(85.577677);
+
             Coord p2= new Coord();
-            p1.setLat(23.588665);
-            p1.setLong(163.065945);
+            p2.setLat(23.588665);
+            p2.setLong(163.065945);
             CoordSet line1= new CoordSet(p1,p2);
+
+            ////
             Coord p3= new Coord();
-            p1.setLat(-12.098356);
-            p1.setLong(163.707522);
+            p3.setLat(-12.098356);
+            p3.setLong(163.707522);
+
             Coord p4= new Coord();
-            p1.setLat(-13.928084);
-            p1.setLong(75.526301);
+            p4.setLat(-13.928084);
+            p4.setLong(75.526301);
             CoordSet line2= new CoordSet(p3,p4);
+
             List<CoordSet> t =new ArrayList<>();
             t.add(line1); t.add(line2);
             a.setCoordList(t);
-            Log.d(TAG,a.toString());
+
+            //Log.d(TAG,a.toString());
             LiveData<StopPointList> data= tourViewModel.getSuggestDestination(a);
             if(data!= null)
             {

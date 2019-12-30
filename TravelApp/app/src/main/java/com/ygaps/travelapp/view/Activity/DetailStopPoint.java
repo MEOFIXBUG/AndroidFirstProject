@@ -1,5 +1,6 @@
 package com.ygaps.travelapp.view.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import com.ygaps.travelapp.view.Fragment.ReviewSPFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 
 public class DetailStopPoint extends AppCompatActivity {
+    public static long serviceId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,9 @@ public class DetailStopPoint extends AppCompatActivity {
         setContentView(R.layout.activity_detail_stop_point);
 
         configPopUpWindow();
+
+        Intent intent = getIntent();
+        serviceId=intent.getLongExtra("serviceId",1);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_SP_details);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

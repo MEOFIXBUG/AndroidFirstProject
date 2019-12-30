@@ -1,102 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/browser_actions_bg_grey"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:layout_centerVertical="true"
+    android:background="#fff"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:layout_weight="1"
-        >
-        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--            <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:src="@drawable/ic_card_travel_orange_24dp" />-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/etSPName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/rounded_edittext"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+
+                    android:textSize="@dimen/editTextSize"
+                    android:hint="[Stop point name]" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Service type"
+            android:textSize="14dp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp">
+            android:background="@drawable/background_spinner"
+            android:orientation="horizontal">
             <TextView
-                android:layout_toRightOf="@+id/icon_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="14dp"
-                android:text="HO CHI MINH - "
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/locationDescription"/>
-        </RelativeLayout>
+                android:id="@+id/service_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/icon_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_date_range_black_24dp" />
-            <TextView
-                android:layout_toRightOf="@id/icon_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="14dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/dateDescription"/>
-        </RelativeLayout>
-        <RelativeLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etSPAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/rounded_edittext"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:textSize="@dimen/editTextSize"
+                android:hint="[Address]" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Contact"
+            android:textSize="14dp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_spinner"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/province_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/icon_people"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_people_black_24dp"/>
-            <TextView
-                android:layout_toRightOf="@+id/icon_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="14dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/peopleDescription" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/icon_money"
-                android:layout_width="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_monetization_on_black_24dp"/>
-            <TextView
-                android:layout_toRightOf="@+id/icon_money"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="14dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/moneyDescription" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
 
-    <RatingBar
-        android:id="@+id/simpleRatingBar"
-        style="@android:style/Widget.Material.Light.RatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:max="5"
-        android:numStars="5"
-        android:paddingLeft="5dp"
-        android:progressTint="#FFC107"
-        android:rating="3" />
-//t sua giao dien do
-</LinearLayout>
+                <EditText
+                    android:id="@+id/etMinCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="@dimen/editTextSize"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:background="@drawable/rounded_edittext"
+                    android:inputType="number"
+                    android:hint="[MinCost]" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_monetization_on_black_24dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etMaxCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="@dimen/editTextSize"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/rounded_edittext"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="[MaxCost]" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <RatingBar
+            android:id="@+id/simpleRatingBar"
+            style="@android:style/Widget.Material.Light.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:max="5"
+            android:numStars="5"
+            android:progressTint="#FFC107"
+            android:rating="4" />
+
+
+    </LinearLayout>
+</ScrollView>

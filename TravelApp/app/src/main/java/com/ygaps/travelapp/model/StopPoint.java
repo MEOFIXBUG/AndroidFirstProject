@@ -20,6 +20,18 @@ public class StopPoint implements Serializable {
     private String avatar;
     @SerializedName("minCost")
     private long minCost;
+
+    public long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(long serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    @SerializedName("serviceId")
+    private long serviceId;
+
     @SerializedName("lat")
     private double lat;
     @SerializedName("long")

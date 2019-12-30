@@ -149,6 +149,8 @@ public class AddStopPointActivity extends AppCompatActivity {
         etTimeLeave=findViewById(R.id.etTimeLeave);
         spinnerService=findViewById(R.id.service_spinner);
         spinnerProvince=findViewById(R.id.province_spinner);
+
+
     }
     public boolean checkRequiredField() {
         if (TextUtils.isEmpty(etSPName.getText())) {

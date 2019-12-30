@@ -14,7 +14,7 @@ public class OpenActivity {
 
     public static void openDetailActivity(Context context,  long tourId, String tourName,  boolean isEditable)
     {
-        SplashActivity.appPreference.showToast("onclick " + tourId);
+        //SplashActivity.appPreference.showToast("onclick " + tourId);
         Intent intent = new Intent(context, DetailTourActivity.class);
         intent.putExtra("tourID",tourId);
         intent.putExtra("tourName",tourName);
@@ -30,8 +30,9 @@ public class OpenActivity {
         context.startActivity(intent);
     }
 
-    public static void openStopPointDetail(Context context) {
+    public static void openStopPointDetail(Context context, long serviceId) {
         Intent intent=new Intent(context, DetailStopPoint.class);
+        intent.putExtra("serviceId",serviceId);
         context.startActivity(intent);
     }
 
