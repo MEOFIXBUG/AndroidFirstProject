@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,10 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -30,31 +25,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.ygaps.travelapp.R;
-import com.ygaps.travelapp.UserInfo;
-import com.ygaps.travelapp.adapter.ItemAdapter;
-import com.ygaps.travelapp.adapter.TourAdapter;
+import com.ygaps.travelapp.model.UserInfo;
 import com.ygaps.travelapp.extras.OpenActivity;
-import com.ygaps.travelapp.extras.PaginationScrollListener;
-import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.extras.converter;
 import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.toInvited;
-import com.ygaps.travelapp.repository.UserRepository;
-import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.TourInfoResponse;
-import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.response.UserListRp;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
-import com.ygaps.travelapp.view.Activity.CreateTourActivity;
-import com.ygaps.travelapp.view.Activity.DetailTourActivity;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
-import com.ygaps.travelapp.viewmodel.TourViewModel;
 import com.ygaps.travelapp.viewmodel.UserViewModel;
 
 import java.text.ParseException;
@@ -64,14 +46,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 import static com.ygaps.travelapp.extras.converter.createDate;
 import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
 import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourViewModel;

@@ -15,7 +15,7 @@
         android:title="Rating"  />
 
     <item
-        android:id="@+id/navigation_comment"
+        android:id="@+id/navigation_member"
         android:icon="@drawable/ic_mode_comment_black_24dp"
         android:title="Comment" />
 

@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.response.TourInfoResponse;
 import com.ygaps.travelapp.view.Fragment.InviteFragment;
+import com.ygaps.travelapp.view.Fragment.MemberFragment;
 import com.ygaps.travelapp.view.Fragment.ReviewTourFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
@@ -110,8 +111,8 @@ public class DetailTourActivity extends AppCompatActivity {
                     fragment = new ReviewTourFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_comment:
-                    fragment = new InviteFragment();
+                case R.id.navigation_member:
+                    fragment = new MemberFragment();
                     loadFragment(fragment);
                     return true;
             }

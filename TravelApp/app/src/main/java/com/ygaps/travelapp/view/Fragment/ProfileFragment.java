@@ -2,14 +2,12 @@ package com.ygaps.travelapp.view.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.ygaps.travelapp.BuildConfig;
 import com.ygaps.travelapp.R;
-import com.ygaps.travelapp.UserInfo;
+import com.ygaps.travelapp.model.UserInfo;
 import com.ygaps.travelapp.model.PasswordUpdate;
 import com.ygaps.travelapp.model.RegistrationFirebase;
 import com.ygaps.travelapp.model.removeFireBase;

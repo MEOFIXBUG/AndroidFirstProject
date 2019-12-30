@@ -2,8 +2,7 @@ package com.ygaps.travelapp.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.ygaps.travelapp.UserInfo;
-import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.model.UserInfo;
 
 import java.util.List;
 

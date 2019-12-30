@@ -1,6 +1,6 @@
 package com.ygaps.travelapp.retrofit.Service.User;
 
-import com.ygaps.travelapp.UserInfo;
+import com.ygaps.travelapp.model.UserInfo;
 import com.ygaps.travelapp.model.OTPreq;
 import com.ygaps.travelapp.model.OTPres;
 import com.ygaps.travelapp.model.PasswordUpdate;

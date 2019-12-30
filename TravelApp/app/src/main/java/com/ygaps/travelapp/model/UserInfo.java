@@ -1,4 +1,4 @@
-package com.ygaps.travelapp;
+package com.ygaps.travelapp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -121,6 +121,22 @@ public class UserInfo {
     @SerializedName("gender")
     @Expose
     private int gender;
-
-
+    @SerializedName("isHost")
+    @Expose
+    private boolean isHost;
+    @SerializedName("avatar")
+    @Expose
+    private String avatar;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    public String getName() {
+        return name;
+    }
+    public boolean getIsHost() {
+        return isHost;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
 }
