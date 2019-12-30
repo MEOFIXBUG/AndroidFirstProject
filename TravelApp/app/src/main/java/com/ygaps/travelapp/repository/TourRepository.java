@@ -15,6 +15,7 @@ import com.ygaps.travelapp.response.TourResponse;
 import com.ygaps.travelapp.response.UserListRp;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
+import com.ygaps.travelapp.view.Activity.SplashActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -152,9 +153,9 @@ public class TourRepository {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
 
-                        if (response.body() != null) {
+                        if (response.code()==200) {
                             data.setValue(response.body());
-                            Log.d(TAG, "tours total result:: " + response.body().getMessage());
+                            SplashActivity.appPreference.showToast("invite result:: " + response.body().getMessage());
                         }
                     }
                     @Override
@@ -183,5 +184,31 @@ public class TourRepository {
                 });
         return data;
     }
+    public LiveData<TourResponse> getInvitation(long perpage,long page) {
+        final MutableLiveData<TourResponse> data = new MutableLiveData<>();
+        apiRequest.getInvitation(page, Long.toString(perpage))
+                .enqueue(new Callback<TourResponse>() {
 
+                    @Override
+                    public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
+
+                        if (response.body() != null) {
+                            //Log.d(TAG, "trips total result:: " + response.body().getTotal());
+                            if(response.body().getTotal()!=0){
+                                Log.d(TAG, "trips total result:: " + response.body().getTotal());
+                                data.setValue(response.body());
+                            }
+                            else {
+                                data.setValue(null);
+                            }
+
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<TourResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
 }

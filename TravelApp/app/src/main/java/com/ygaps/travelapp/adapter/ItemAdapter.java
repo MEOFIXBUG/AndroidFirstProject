@@ -69,7 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.mPriceTv.setText(tour.getMinCost()+ " - "+ tour.getMaxCost());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
         holder.mPeopleTv.setText(tour.getAdults()+"  adults"+ "           "+tour.getChilds() + " childs");
-        holder.mLocationTv.setText(tour.getName());
+        holder.mLocationTv.setText(tour.getName()+" -   "+tour.getID());
         holder.mTimeTv.setText(createDate(tour.getStartDate())+ "  -  "+ createDate(tour.getEndDate()));
         if(tour.getAvatar()!= null)
         {

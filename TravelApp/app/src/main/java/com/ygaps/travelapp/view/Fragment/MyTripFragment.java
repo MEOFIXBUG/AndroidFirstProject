@@ -196,18 +196,19 @@ public class MyTripFragment extends Fragment {
     private void loadData(int pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
         LiveData<TourResponse> MyTrips= tourViewModel.getMyTrips(5,pageIndex);
+
         if(MyTrips!= null)
         {
             MyTrips.observe(this,tourResponse->{
                 isLoading = false;
-
                 if (tourResponse != null) {
                     total=tourResponse.getTotal();
                     progress_circular_tour2.setVisibility(View.GONE);
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
                     adapter.addItems(tourResponse.getUnDeletedTour());
-                    if (page >= tourResponse.getTotal()/7) {
+                    Log.d(TAG,""+Math.ceil((double)tourResponse.getTotal()/5));
+                    if (page >= Math.ceil((double)tourResponse.getTotal()/5)) {
                         isLastPage = true;
                     } else {
                         page = page + 1;

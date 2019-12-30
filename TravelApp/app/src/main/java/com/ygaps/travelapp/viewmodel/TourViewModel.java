@@ -95,11 +95,11 @@ public class TourViewModel extends AndroidViewModel {
     }
     public LiveData<StatusResponse> Invite_Join(toInvited req){
         try {
-            Log.d(TAG," re: " + req.getInvitedUserId());
+            Log.d(TAG," reInvite: " + req.getInvitedUserId());
             return  tourRepository.Invite_Join(req);
         }
         catch (Exception ex){
-            Log.d(TAG," re: " + ex);
+            Log.d(TAG," reInvite: " + ex);
             return null;
         }
     }
@@ -112,5 +112,14 @@ public class TourViewModel extends AndroidViewModel {
             Log.d(TAG," re: " + ex);
             return null;
         }
+    }
+    public LiveData<TourResponse> getInvitation(long perpage,long page) {
+        try {
+            tourResponseLiveData = tourRepository.getInvitation(perpage,page);
+        }
+        catch (Exception ex){
+            tourResponseLiveData= null;
+        }
+        return tourResponseLiveData;
     }
 }

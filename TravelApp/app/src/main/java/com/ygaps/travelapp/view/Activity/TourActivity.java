@@ -27,6 +27,7 @@ import com.ygaps.travelapp.R;
 
 import com.ygaps.travelapp.retrofit.Service.TourInterface;
 import com.ygaps.travelapp.view.Fragment.MyTripFragment;
+import com.ygaps.travelapp.view.Fragment.NotifyFragment;
 import com.ygaps.travelapp.view.Fragment.ProfileFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
 import com.ygaps.travelapp.view.Fragment.TravelFragment;
@@ -84,9 +85,9 @@ public class TourActivity extends AppCompatActivity implements TourInterface {
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_friend:
-                    toolbar.setTitle("Friend");
+                    toolbar.setTitle("Notify");
                     searchView.setVisibility(View.GONE);
-                    fragment = new TravelFragment();
+                    fragment = new NotifyFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_stop:

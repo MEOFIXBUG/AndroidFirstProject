@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,6 +38,8 @@ import com.ygaps.travelapp.response.UserListRp;
 import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
 import com.ygaps.travelapp.retrofit.retrofitRequest;
 import com.ygaps.travelapp.view.Activity.SplashActivity;
+import com.ygaps.travelapp.view.Activity.TourActivity;
+import com.ygaps.travelapp.view.Activity.TourMapsActivity;
 import com.ygaps.travelapp.viewmodel.UserViewModel;
 
 import java.text.ParseException;
@@ -154,11 +157,12 @@ public class InviteFragment extends Fragment {
                     try {
                         Tour tourupdate = makeTourRequest();
                         updateTour(tourupdate);
-
-                        //tro ve fragment stop point
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, new StopPointFragment());
-                        transaction.commit();
+                        Intent intent=new Intent(getActivity(), TourActivity.class);
+                        getActivity().startActivity(intent);
+//                        //tro ve fragment stop point
+//                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                        transaction.replace(R.id.fragment_container, new StopPointFragment());
+//                        transaction.commit();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -327,7 +331,7 @@ public class InviteFragment extends Fragment {
                         a.setInvited(false);
                         }
                     }
-                    //tourViewModel.Invite_Join(a);
+                    tourViewModel.Invite_Join(a);
             }
         });
 

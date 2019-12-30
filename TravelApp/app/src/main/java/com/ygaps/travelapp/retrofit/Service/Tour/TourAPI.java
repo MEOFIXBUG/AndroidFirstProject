@@ -67,4 +67,6 @@ public interface TourAPI {
     Call<MessageResponse> sendReviewToPublicTour(@Body ReviewTour review);
     @POST("/tour/suggested-destination-list")
     Call<StopPointList> getSuggestDestination(@Body coordRequest a);
+    @GET("/tour/get/invitation")
+    Call<TourResponse> getInvitation(@Query("pageIndex") long pageIndex,@Query("pageSize") String pageSize);
 }

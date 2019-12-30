@@ -31,6 +31,7 @@ import com.ygaps.travelapp.model.StopPoint;
 import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.response.StopPointList;
 import com.ygaps.travelapp.response.TourInfoResponse;
+import com.ygaps.travelapp.view.Activity.DetailTourActivity;
 import com.ygaps.travelapp.viewmodel.TourViewModel;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import java.util.List;
 
 import static com.ygaps.travelapp.view.Activity.DetailTourActivity.tourID;
 import static com.ygaps.travelapp.view.Activity.TourActivity.searchText;
+import static com.ygaps.travelapp.view.Activity.DetailTourActivity.Editable;
 
 
 /**
@@ -122,10 +124,18 @@ public class StopPointFragment extends Fragment {
 
         return view;
     }
+    @SuppressLint("RestrictedApi")
     private void initialization(View view) {
+
+
+
         my_recycler_view = (RecyclerView) view.findViewById(R.id.rcv);
         btnAddSP=view.findViewById(R.id.add_stop);
         progress_bar = (ProgressBar) view.findViewById(R.id.progress_bar);
+
+        if(!Editable) {
+            btnAddSP.setVisibility(View.GONE);
+        }
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
