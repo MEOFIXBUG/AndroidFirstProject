@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 
 import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.model.toResponse;
 import com.ygaps.travelapp.repository.TourRepository;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
@@ -121,5 +122,29 @@ public class TourViewModel extends AndroidViewModel {
             tourResponseLiveData= null;
         }
         return tourResponseLiveData;
+    }
+    public boolean AgreeInvation(long tourId ){
+        try {
+           toResponse req = new toResponse();
+           req.setTourId(Long.toString( tourId));
+            req.setIsAccept(Boolean.TRUE);
+            return  tourRepository.responseInvation(req);
+        }
+        catch (Exception ex){
+            Log.d(TAG," re Invite: " + ex);
+            return false;
+        }
+    }
+    public boolean DenyInvation(long tourId){
+        try {
+            toResponse req = new toResponse();
+            req.setTourId(Long.toString( tourId));
+            req.setIsAccept(Boolean.FALSE);
+            return  tourRepository.responseInvation(req);
+        }
+        catch (Exception ex){
+            Log.d(TAG," re Invite: " + ex);
+            return false;
+        }
     }
 }

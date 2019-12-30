@@ -53,7 +53,7 @@ public class NotifyFragment extends Fragment {
     private ProgressBar progress_circular_tour1;
     private ProgressBar progress_circular_tour2;
     private LinearLayoutManager layoutManager;
-    TourViewModel tourViewModel;
+    public static TourViewModel tourViewModel;
     TextView noTrips;
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -109,6 +109,7 @@ public class NotifyFragment extends Fragment {
     }
     private void initialization(View view) {
 
+        tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
         progress_circular_tour1 = (ProgressBar) view.findViewById(R.id.progress_circular_tour1);
         progress_circular_tour2 = (ProgressBar) view.findViewById(R.id.progress_circular_tour2);
         my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
@@ -155,7 +156,7 @@ public class NotifyFragment extends Fragment {
             }
         });
         // View Model
-        tourViewModel = ViewModelProviders.of(this).get(TourViewModel.class);
+
         //tourViewModel.init(49,1,2);
     }
     private void loadData(int pageIndex) {

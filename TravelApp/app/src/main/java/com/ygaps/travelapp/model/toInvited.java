@@ -5,10 +5,7 @@ public class toInvited {
     private String invitedUserId ;
     private boolean isInvited;
 
-    public boolean isInvited() {
-        return isInvited;
-    }
-
+    public boolean  getIsInvited(){return isInvited;}
     public void setInvited(boolean IsInvited) {
         isInvited = IsInvited;
     }
@@ -18,6 +15,7 @@ public class toInvited {
     public String getInvitedUserId() { return invitedUserId; }
 
     public void setInvitedUserId(String value) { this.invitedUserId = value; }
+
 
 
 }
