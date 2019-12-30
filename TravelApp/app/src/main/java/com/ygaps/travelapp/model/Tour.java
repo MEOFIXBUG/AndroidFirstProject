@@ -17,6 +17,7 @@ public class Tour {
     private long desLat;
     private long desLong;
     private String hostId;
+    private String hostName;
 //    @SerializedName("stopPoints")
 //    @Expose
 //    private List<StopPoint> stopPoints=null;
@@ -128,4 +129,6 @@ public class Tour {
 
     public String getAvatar() { return avatar; }
     public void setAvatar(String value) { this.avatar = value; }
+    public String getHostName() { return this.hostName; }
+    public void setHostName(String value) { this.hostName = value; }
 }

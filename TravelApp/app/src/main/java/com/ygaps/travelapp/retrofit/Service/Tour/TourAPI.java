@@ -9,6 +9,7 @@ import com.ygaps.travelapp.model.Tour;
 import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.isAccept;
 import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.model.toResponse;
 import com.ygaps.travelapp.response.RecoveryResponse;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.ServiceResponse;
@@ -75,4 +76,6 @@ public interface TourAPI {
     Call<StopPointList> getSuggestDestination(@Body coordRequest a);
     @GET("/tour/get/invitation")
     Call<TourResponse> getInvitation(@Query("pageIndex") long pageIndex,@Query("pageSize") String pageSize);
+    @POST("/tour/response/invitation")
+    Call<StatusResponse> responseInvation(@Body toResponse param );
 }

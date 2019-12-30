@@ -1,9 +1,11 @@
 package com.ygaps.travelapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.model.toInvited;
 import com.ygaps.travelapp.response.TourResponse;
+import com.ygaps.travelapp.viewmodel.TourViewModel;
+import  static  com.ygaps.travelapp.view.Fragment.NotifyFragment.tourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +26,6 @@ import java.util.List;
 public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Tour> mTourList;
-
     public NotifyAdapter(Context context, ArrayList<Tour> param)
     {
         this.mContext=context;
@@ -41,7 +45,7 @@ public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolde
         viewHolder.mNameTv.setText(tour.getName());
         //holder.mDescTv.setText(modellist.get(i).getDesc());
         viewHolder.mHiddenTv.setText(Long.toString(tour.getID()));
-        viewHolder.mMessageTv.setText("đừng đi chuyến này haha");
+        viewHolder.mMessageTv.setText("from"+ tour.getHostName());
         if(tour.getAvatar()!= null)
         {
 
@@ -54,6 +58,22 @@ public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolde
             }
 
         }
+        viewHolder.mAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean data=tourViewModel.AgreeInvation(tour.getID());
+                mTourList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+        viewHolder.mAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean data=tourViewModel.DenyInvation(tour.getID());
+                mTourList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -77,6 +97,8 @@ public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolde
         private final TextView mNameTv;
         private final TextView mMessageTv;
         private final TextView mHiddenTv;
+        private final Button mAccept;
+        private final Button mDenied;
         //private final TextView mHiddenID;
 
         public ViewHolder(@NonNull View itemView) {
@@ -88,6 +110,8 @@ public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolde
             mMessageTv=(TextView) itemView.findViewById(R.id.message);
 //            mHiddenID = itemView.findViewById(R.id.hiddenID);
             mHiddenTv=(TextView) itemView.findViewById(R.id.hiddenID);
+            mAccept=(Button) itemView.findViewById(R.id.btnAccept);
+            mDenied=(Button) itemView.findViewById(R.id.btnDenied);
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.ygaps.travelapp.model.coordRequest;
 import com.ygaps.travelapp.model.toInvited;
+import com.ygaps.travelapp.model.toResponse;
 import com.ygaps.travelapp.response.ReviewTourResponse;
 import com.ygaps.travelapp.response.StatusResponse;
 import com.ygaps.travelapp.response.StopPointList;
@@ -211,4 +212,25 @@ public class TourRepository {
                 });
         return data;
     }
+    public boolean responseInvation(toResponse req){
+        final boolean[] data = {false};
+        Log.d(TAG,""+req.getIsAccept());
+        apiRequest.responseInvation(req)
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+
+                        if (response.code()==200) {
+                            data[0] =true;
+                            SplashActivity.appPreference.showToast("response result:: " + response.body().getMessage());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        data[0] =false;
+                    }
+                });
+        return data[0];
+    }
+
 }
