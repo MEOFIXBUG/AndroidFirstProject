@@ -63,7 +63,13 @@ public class NotifyAdapter  extends RecyclerView.Adapter<NotifyAdapter.ViewHolde
     }
     public void addItems(List<Tour> items){
         mTourList.addAll(items);
-        notifyDataSetChanged();;
+        notifyDataSetChanged();
+    }
+    public  void add(Tour item)
+    {
+        mTourList.add(0,item);
+        notifyDataSetChanged();
+
     }
     // class ViewHOlder la item_list_tour
     public class ViewHolder extends RecyclerView.ViewHolder {
