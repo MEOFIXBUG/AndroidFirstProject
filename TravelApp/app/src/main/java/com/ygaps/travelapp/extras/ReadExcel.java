@@ -72,7 +72,7 @@ public class ReadExcel {
                 }
                 rowno++;
             }
-            SplashActivity.appPreference.showToast(listProvinces.size()+"");
+            //SplashActivity.appPreference.showToast(listProvinces.size()+"");
         } catch (Exception e) {
             Log.e("myTag", "error "+ e.toString());
         }

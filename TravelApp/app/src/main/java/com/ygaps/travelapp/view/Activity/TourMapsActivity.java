@@ -5,14 +5,19 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,26 +32,40 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ygaps.travelapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ygaps.travelapp.extras.OpenActivity;
 import com.ygaps.travelapp.extras.SharePreferenceListStopPoint;
 import com.ygaps.travelapp.model.StopPoint;
+import com.ygaps.travelapp.model.Tour;
+import com.ygaps.travelapp.response.TourInfoResponse;
+import com.ygaps.travelapp.retrofit.Service.Tour.TourAPI;
+import com.ygaps.travelapp.retrofit.retrofitRequest;
 import com.ygaps.travelapp.view.Fragment.InviteFragment;
 import com.ygaps.travelapp.view.Fragment.StopPointFragment;
+import com.ygaps.travelapp.viewmodel.TourViewModel;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TourMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FloatingActionButton btnListSP;
     private double longitude;
+    public static  TourViewModel tourViewModel;
     private double latitude;
     private long tourId;
     StopPoint newStopPoint;
+    private TourAPI tourapi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_maps);
+        tourViewModel= ViewModelProviders.of(this).get(TourViewModel.class);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -62,6 +81,7 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
         });
 
         tourId=SharePreferenceListStopPoint.loadTourId(this);
+        Log.d("tourrr", tourId+"");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationSP);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -176,12 +196,83 @@ public class TourMapsActivity extends FragmentActivity implements OnMapReadyCall
                 case R.id.menuSP_rating_stop_point:
                     return true;
                 case R.id.menuSP_delete_stop_point:
+                    removeTour();
                     return true;
 
             }
             return false;
         }
     };
+    public void removeTour(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(TourMapsActivity.this);
+
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+
+                Log.d("tourrr22", tourId+"");
+                LiveData<TourInfoResponse> data= tourViewModel.getTourInfo(tourId);
+                //LiveData<ReviewTourResponse> data2= tourViewModel.get(tourID);
+                if(data!= null)
+                {
+                    data.observe(TourMapsActivity.this,tourInfo-> {
+                        tourInfo.setStatus(-1);
+                        Tour temp=new Tour();
+                        temp.setID(tourInfo.getId());
+                        temp.setStatus(tourInfo.getStatus());
+                        updateTour(temp);
+                    });
+                }
+
+                           /* tourupdate[0] = makeTourRequest();
+                    tourupdate[0].setStatus(-1);
+                    updateTour(tourupdate[0]);*/
+
+                    //tro ve home
+                    OpenActivity.openHomeActivity(TourMapsActivity.this);
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+    private void updateTour(Tour reqTour)
+    {
+        tourapi= retrofitRequest.getRetrofitInstance().create(TourAPI.class);
+        Call<Tour> callTour= tourapi.updateTour(reqTour);
+        callTour.enqueue(new Callback<Tour>() {
+            @Override
+            public void onResponse(Call<Tour> call, Response<Tour> response) {
+                if (response.isSuccessful()){
+                    SplashActivity.appPreference.showToast("Update Successful");
+                    //OpenActivity.openDetailActivity(getActivity(),response.body().getID() ,response.body().getName(), true);
+
+                } else {
+                    SplashActivity.appPreference.showToast("Create tour failed in some fields");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Tour> call, Throwable t) {
+                SplashActivity.appPreference.showToast("Create Failed. Check your internet connection.");
+            }
+        });
+    }
     public void openAddStopPointActivity() {
         Intent intent=new Intent(TourMapsActivity.this, AddStopPointActivity.class);
         intent.putExtra("longitude", longitude);
