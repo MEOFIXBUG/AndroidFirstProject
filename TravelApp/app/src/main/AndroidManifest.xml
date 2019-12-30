@@ -36,6 +36,17 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/app_name" />
+        <receiver android:name=".MyFirebaseService$DenyAction" android:exported="false">
+            <intent-filter>
+                <action android:name="Deny_action" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".MyFirebaseService$ViewAction" android:exported="false">
+            <intent-filter>
+                <action android:name="View_action" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".MyFirebaseService">
             <intent-filter>
