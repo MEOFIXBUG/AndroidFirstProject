@@ -160,7 +160,7 @@ public class NotifyFragment extends Fragment {
     }
     private void loadData(int pageIndex) {
         progress_circular_tour2.setVisibility(View.INVISIBLE);
-        LiveData<TourResponse> MyInvite= tourViewModel.getInvitation(5,pageIndex);
+        LiveData<TourResponse> MyInvite= tourViewModel.getInvitation(1000,pageIndex);
         if(MyInvite!= null)
         {
             MyInvite.observe(this,tourResponse->{
@@ -172,12 +172,12 @@ public class NotifyFragment extends Fragment {
                     progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(GONE);
                     List<Tour> a=tourResponse.getUnDeletedTour();
-                    for (int i =a.size()-1;i>=0;i--)
+                    for (int i =0;i<=a.size()-1;i++)
                     {
                         adapter.add(a.get(i));
                     }
 //                    adapter.addItems(tourResponse.getUnDeletedTour());
-                    if (page >= Math.ceil((double)tourResponse.getTotal()/5)) {
+                    if (page >= Math.ceil((double)tourResponse.getTotal()/1000)) {
                         isLastPage = true;
                     } else {
                         page = page + 1;

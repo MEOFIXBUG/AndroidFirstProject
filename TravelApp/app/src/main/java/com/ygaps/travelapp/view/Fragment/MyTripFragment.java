@@ -215,6 +215,7 @@ public class MyTripFragment extends Fragment {
                     }
                 }
                 else {
+                    progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(VISIBLE);
                 }
             });
@@ -247,6 +248,7 @@ public class MyTripFragment extends Fragment {
                 else {
                     adapter.clear();
                     adapter.notifyDataSetChanged();
+                    progress_circular_tour1.setVisibility(View.GONE);
                     noTrips.setVisibility(VISIBLE);
                 }
             });
