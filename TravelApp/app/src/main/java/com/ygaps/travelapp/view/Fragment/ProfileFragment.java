@@ -387,7 +387,7 @@ public class ProfileFragment extends Fragment {
                     else
                     {
                         emailVeri.setText("Xác thực email : Chưa xác thực");
-                        btnEmailVeri.setVisibility(View.GONE);
+                        btnEmailVeri.setVisibility(View.VISIBLE);
                     }
                     if (response.body().isPhoneVerified()== true)
                     {
